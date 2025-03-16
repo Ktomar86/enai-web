@@ -379,7 +379,7 @@ function App() {
                       </a>
                     </div>
                     <div className="flex items-center text-sm text-gray-400">
-                      <span className="mr-2">CRO</span>
+                      <span className="mr-2">Co-founder</span>
                       <a href="mailto:madhav@enai.ai" className="truncate hover:text-primary-400 transition-colors">
                         madhav@enai.ai
                       </a>
