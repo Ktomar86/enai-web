@@ -760,7 +760,7 @@ function AboutUs() {
             >
               <div className="p-8 text-center">
                 <div className="w-24 h-24 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-4xl font-bold text-orange-400">M</span>
+                  <span className="text-4xl font-bold text-orange-400">K</span>
                 </div>
                 <h3 className="text-xl font-bold text-white">Ketan Tomar</h3>
                 <p className="text-orange-500 font-medium">Software Engineer</p>
