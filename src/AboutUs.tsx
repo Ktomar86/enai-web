@@ -714,7 +714,7 @@ function AboutUs() {
                 <div className="w-24 h-24 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-4xl font-bold text-orange-400">M</span>
                 </div>
-                <h3 className="text-xl font-bold text-white">Madhav Mohan</h3>
+                <h3 className="text-xl font-bold text-white">Madhav M Katarya</h3>
                 <p className="text-orange-500 font-medium">Co-Founder</p>
                 <p className="mt-3 text-gray-300">
                   Revenue strategist focused on scaling Enai's market presence and client success.
