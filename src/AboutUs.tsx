@@ -715,7 +715,7 @@ function AboutUs() {
                   <span className="text-4xl font-bold text-orange-400">M</span>
                 </div>
                 <h3 className="text-xl font-bold text-white">Madhav Mohan</h3>
-                <p className="text-orange-500 font-medium">CRO</p>
+                <p className="text-orange-500 font-medium">Co-Founder</p>
                 <p className="mt-3 text-gray-300">
                   Revenue strategist focused on scaling Enai's market presence and client success.
                 </p>
@@ -746,6 +746,28 @@ function AboutUs() {
                 <a href="mailto:zeeshan@enai.ai" className="inline-block mt-4 text-orange-400 hover:text-orange-300 transition-colors">
                   zeeshan@enai.ai
                 </a>
+              </div>
+            </motion.div>
+
+            {/* Team Member 4 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="bg-gradient-to-br from-dark-800 to-dark border border-dark-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+              whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(249, 115, 22, 0.2)" }}
+            >
+              <div className="p-8 text-center">
+                <div className="w-24 h-24 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <span className="text-4xl font-bold text-orange-400">M</span>
+                </div>
+                <h3 className="text-xl font-bold text-white">Ketan Tomar</h3>
+                <p className="text-orange-500 font-medium">Software Engineer</p>
+                <p className="mt-3 text-gray-300">
+                  Design, develop, and enhance our CRM platform to optimize customer relationship and business operation.
+                </p>
+                
               </div>
             </motion.div>
           </div>
