@@ -193,7 +193,7 @@ function App() {
             Empower your business with our AI workers. Get a dedicated team of <span className="font-semibold text-white">AI agents</span> that understand your business and help you <span className="font-semibold text-white">scale efficiently</span>.
           </p>
           <a 
-            href="https://login.enai.ai"
+            href = "/"        // href="https://login.enai.ai"
             target="_blank"
             rel="noopener noreferrer"
             className="start-free-btn bg-gradient-to-r from-orange-500 to-red-500 text-white px-10 py-5 rounded-lg text-xl font-semibold inline-flex items-center group transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30 hover:scale-105 border border-orange-400/20 pulse-subtle"
