@@ -201,7 +201,7 @@ function App() {
           <ChevronRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform bounce-subtle" />
           </a>
 
-        //  <a 
+{/*         //<a 
          //   href = "/"        // href="https://login.enai.ai"
           //  target="_blank"
            // rel="noopener noreferrer"
@@ -209,7 +209,7 @@ function App() {
          // >
            // Start Free
            // <ChevronRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform bounce-subtle" />
-          //</a>
+          //</a> */}
         </div>
       </section>
 
