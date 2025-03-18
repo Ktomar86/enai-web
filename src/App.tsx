@@ -192,14 +192,18 @@ function App() {
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-14 leading-relaxed">
             Empower your business with our AI workers. Get a dedicated team of <span className="font-semibold text-white">AI agents</span> that understand your business and help you <span className="font-semibold text-white">scale efficiently</span>.
           </p>
-          <a
-          href="about:blank"
-          target="_self" // Ensures it opens in the same tab
+         <a
+          href="#"  // Keeps the default behavior neutral
+          onClick={(e) => { 
+          e.preventDefault(); // Prevents default link action
+          window.location.href = 'about:blank'; // Redirects to a blank page
+          }}
           className="start-free-btn bg-gradient-to-r from-orange-500 to-red-500 text-white px-10 py-5 rounded-lg text-xl font-semibold inline-flex items-center group transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30 hover:scale-105 border border-orange-400/20 pulse-subtle"
-          >
+        >
           Start Free
           <ChevronRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform bounce-subtle" />
-          </a>
+        </a>
+
 
 {/*         //<a 
          //   href = "/"        // href="https://login.enai.ai"
