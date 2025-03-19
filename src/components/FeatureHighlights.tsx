@@ -568,6 +568,22 @@ export default function FeatureHighlights() {
           className="mt-16 text-center"
         >
           <div className="inline-block">
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group"
+    onClick={() => window.open("https://calendly.com/enai-ai2024", "_blank")} // ✅ Opens Calendly in new tab
+  >
+    <span className="relative z-10">Get Your Personalized Demo</span>
+    <motion.div 
+      className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/20 to-primary-500/0"
+      animate={{ x: ['-100%', '200%'] }}
+      transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 1 }}
+    />
+  </motion.button>
+</div>
+
+{/*           <div className="inline-block">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -586,7 +602,7 @@ export default function FeatureHighlights() {
                 }}
               />
             </motion.button>
-          </div>
+          </div> */}
           <p className="text-gray-400 mt-3 text-sm">Experience how these tools can work for your specific business needs</p>
         </motion.div>
       </div>
