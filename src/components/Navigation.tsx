@@ -205,13 +205,13 @@ export default function Navigation() {
                 )}
               </button>
             ))}
-            <button 
+{/*             <button 
               onClick={scrollToContact}
               className="button-glow text-white px-6 py-2 rounded-full transform transition-all duration-300 hover:scale-105 hover:shadow-glow mobile-touch-target"
               aria-label="Start Free Trial"
             >
               Start Free
-            </button>
+            </button> */}
           </div>
 
           {/* Mobile menu button */}
