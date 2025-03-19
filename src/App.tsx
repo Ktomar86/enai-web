@@ -192,6 +192,23 @@ function App() {
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-14 leading-relaxed">
             Empower your business with our AI workers. Get a dedicated team of <span className="font-semibold text-white">AI agents</span> that understand your business and help you <span className="font-semibold text-white">scale efficiently</span>.
           </p>
+
+          <div className="inline-block">
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group"
+    onClick={() => window.open("https://calendly.com/enai-ai2024", "_blank")} // ✅ Opens Calendly in new tab
+  >
+    <span className="relative z-10">Get Demo</span>
+    <motion.div 
+      className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/20 to-primary-500/0"
+      animate={{ x: ['-100%', '200%'] }}
+      transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 1 }}
+    />
+  </motion.button>
+</div>
+
 {/*          <button
   onClick={() => window.open('about:blank', '_self')}
   className="start-free-btn bg-gradient-to-r from-orange-500 to-red-500 text-white px-10 py-5 rounded-lg text-xl font-semibold inline-flex items-center group transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30 hover:scale-105 border border-orange-400/20 pulse-subtle"
