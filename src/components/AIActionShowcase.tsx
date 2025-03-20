@@ -516,7 +516,7 @@ const AIWidget = () => {
 
   return <elevenlabs-convai agent-id="FeDHh9EmNfMMKCvrYZyn"></elevenlabs-convai>;
 }
-];
+
 
 const AIActionShowcase: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
