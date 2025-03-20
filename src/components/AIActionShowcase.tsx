@@ -425,7 +425,97 @@ const showcaseItems = [
         </div>
       </div>
     )
-  }
+  },
+  {
+    id: "email-outreach",
+    title: "AI Crafts & Sends Personalized Emails",
+    description:
+      "Watch as Enai analyzes prospect data, writes tailored messages, and automatically sends them at the optimal time.",
+    mockup: (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* ✅ New Outreach Sequence Box (No Changes) */}
+        <motion.div
+          className="bg-dark-800 rounded-lg overflow-hidden shadow-2xl max-w-md border border-dark-700"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="bg-dark-900 text-white px-4 py-2 flex items-center justify-between">
+            <div className="flex items-center">
+              <Mail className="w-4 h-4 mr-2" />
+              <span className="text-sm font-medium">New Outreach Sequence</span>
+            </div>
+            <span className="bg-green-500 px-2 py-0.5 rounded text-xs">Active</span>
+          </div>
+          <div className="p-5">
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 rounded-full bg-primary-400/20 flex items-center justify-center text-primary-400 font-semibold mr-3">
+                AI
+              </div>
+              <div>
+                <h4 className="text-white font-medium">Enai Assistant</h4>
+                <p className="text-xs text-gray-400">Working on your campaign</p>
+              </div>
+            </div>
+
+            {/* Target Recipients */}
+            <div className="mb-4">
+              <label className="text-sm font-medium text-gray-300">Target Recipients</label>
+              <div className="bg-dark-900 rounded-md p-2 flex items-center justify-between border border-dark-700">
+                <div className="flex items-center">
+                  <Users className="w-4 h-4 text-gray-400 mr-2" />
+                  <span className="text-sm text-gray-300">VP of Operations in SaaS Companies</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ✅ AI Voice Interaction Box (Fixed & Renamed) */}
+        <motion.div
+          className="bg-dark-800 rounded-lg overflow-hidden shadow-2xl max-w-md border border-dark-700 relative"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <div className="bg-dark-900 text-white px-4 py-2 flex items-center justify-between">
+            <div className="flex items-center">
+              <Mic className="w-4 h-4 mr-2" />
+              <span className="text-sm font-medium">AI Voice Interaction</span>
+            </div>
+            <span className="bg-blue-500 px-2 py-0.5 rounded text-xs">Live</span>
+          </div>
+
+          <div className="p-5">
+            <div className="relative w-full h-60 bg-black flex items-center justify-center rounded-md border border-dark-700">
+              {/* ✅ ElevenLabs AI Widget Loaded Correctly */}
+              <AIWidget />
+            </div>
+
+            <div className="mt-4 text-gray-300 text-sm">
+              <p>Experience real-time AI conversation and get insights instantly.</p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    ),
+  },
+];
+
+/* ✅ Fix: Load ElevenLabs Script Only Once */
+const AIWidget = () => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://elevenlabs.io/convai-widget/index.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  return <elevenlabs-convai agent-id="FeDHh9EmNfMMKCvrYZyn"></elevenlabs-convai>;
+}
 ];
 
 const AIActionShowcase: React.FC = () => {
