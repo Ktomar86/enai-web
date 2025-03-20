@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { 
   Brain, 
   Zap, 
@@ -23,7 +23,6 @@ import {
 import { Link } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Insights from './components/SuccessStories';
-import SalesProcessGuide from './components/SalesProcessGuide';
 import AIAgentShowcase from './components/AIAgentShowcase';
 import Testimonials from './components/Testimonials';
 import FeatureHighlights from './components/FeatureHighlights';
@@ -368,7 +367,7 @@ function App() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-dark-800/80 backdrop-blur-sm border border-dark-700 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:border-dark-600 transition-all duration-500"
+              className="bg-dark-800/80 backdrop-blur-sm border border-dark-700 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500"
             >
               <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-400/20 to-purple-400/20 rounded-xl mb-6 mx-auto md:mx-0">
                 <Mail className="w-8 h-8 text-primary-400" />

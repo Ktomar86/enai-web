@@ -234,8 +234,6 @@ export default function Navigation() {
           </div>
         </div>
       </div>
-
-      {/* Mobile menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -301,8 +299,7 @@ export default function Navigation() {
                           className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors w-full text-left flex items-center justify-between mobile-touch-target py-2 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
                           aria-current={isActive(item) ? 'page' : undefined}
                         >
-                          <span className="mobile-active-indicator">{item}</span>
-                          <ChevronRight className="w-5 h-5 ml-2 mobile-icon mobile-transition" />
+                          {item}
                         </button>
                       )}
                     </motion.div>
