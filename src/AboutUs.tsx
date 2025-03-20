@@ -4,16 +4,36 @@ import {
   Target,
   MessageSquare,
   BarChart3,
+  Calendar,
+  Zap,
+  Users
 } from 'lucide-react';
 import Navigation from './components/Navigation';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 
-// SEO data for the About Us page
+// Enhanced SEO data for the About Us page
 const SEO_DATA = {
-  title: "About Enai - AI-Powered Sales Automation Platform",
-  description: "Learn about Enai, the AI sales automation platform that helps sales teams scale faster by eliminating manual prospecting and streamlining outreach.",
-  keywords: "AI sales automation, Enai AI, sales platform, sales outreach, lead generation, AI sales assistant"
+  title: "About Enai | AI-Powered Sales Automation & Lead Generation Platform",
+  description: "Discover how Enai's AI sales automation platform helps sales teams eliminate manual prospecting, qualify leads, and scale outreach. Learn about our mission, values, and the technology behind our platform.",
+  keywords: "AI sales automation, Enai AI, sales platform, sales outreach, lead generation, AI sales assistant, B2B sales automation, AI prospecting tools, sales team efficiency, automated lead qualification",
+  structuredData: {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Enai",
+    "url": "https://enai.ai",
+    "logo": "https://i.postimg.cc/5j48qtcH/logo.png",
+    "description": "Enai is an AI-powered sales automation platform that helps sales teams scale faster by eliminating manual prospecting and streamlining outreach.",
+    "foundingDate": "2024",
+    "founders": [{
+      "@type": "Person",
+      "name": "Enai Founding Team"
+    }],
+    "sameAs": [
+      "https://linkedin.com/company/enai-ai",
+      "https://twitter.com/enai_ai"
+    ]
+  }
 };
 
 function AboutUs() {
@@ -49,18 +69,34 @@ function AboutUs() {
 
   return (
     <div className="min-h-screen bg-dark text-white relative">
-      {/* SEO Optimization */}
+      {/* Enhanced SEO Optimization */}
       <Helmet>
         <title>{SEO_DATA.title}</title>
         <meta name="description" content={SEO_DATA.description} />
         <meta name="keywords" content={SEO_DATA.keywords} />
+        
+        {/* Open Graph tags for social sharing */}
         <meta property="og:title" content={SEO_DATA.title} />
         <meta property="og:description" content={SEO_DATA.description} />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://enai.ai/about-us" />
+        <meta property="og:image" content="https://i.postimg.cc/5j48qtcH/logo.png" />
+        <meta property="og:site_name" content="Enai" />
+        
+        {/* Twitter Card data */}
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@enai_ai" />
         <meta name="twitter:title" content={SEO_DATA.title} />
         <meta name="twitter:description" content={SEO_DATA.description} />
+        <meta name="twitter:image" content="https://i.postimg.cc/5j48qtcH/logo.png" />
+        
+        {/* Canonical URL */}
         <link rel="canonical" href="https://enai.ai/about-us" />
+        
+        {/* Structured data for better search engine understanding */}
+        <script type="application/ld+json">
+          {JSON.stringify(SEO_DATA.structuredData)}
+        </script>
       </Helmet>
       <Navigation />
       
@@ -282,6 +318,107 @@ function AboutUs() {
         </div>
       </section>
 
+      {/* Company Timeline Section */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-dark-800 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-400 to-red-400">
+                  Our Journey
+                </span>
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                From idea to innovation: how we've transformed the sales automation landscape
+              </p>
+            </motion.div>
+          </div>
+          
+          {/* Timeline */}
+          <div className="relative">
+            {/* Timeline center line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-orange-500/50 via-yellow-500/50 to-red-500/50 rounded-full"></div>
+            
+            {/* Timeline items */}
+            <div className="space-y-16">
+              {/* 2024 - Founding */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="relative"
+              >
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="md:w-1/2 md:pr-12 mb-8 md:mb-0 md:text-right">
+                    <div className="bg-dark-900 border border-dark-700 rounded-xl p-8 hover:border-orange-500/30 transition-colors duration-300 shadow-xl">
+                      <span className="inline-block text-orange-400 font-bold text-xl mb-2">2024</span>
+                      <h3 className="text-2xl font-bold text-white mb-4">🚀 Founding & Vision</h3>
+                      <p className="text-gray-300">Enai was founded with a mission to transform sales automation through AI-driven innovation. Our team recognized the inefficiencies in traditional sales processes, where businesses lose valuable time on manual prospecting and unqualified leads. Enai was built to automate, optimize, and accelerate sales workflows using cutting-edge AI technology.</p>
+                    </div>
+                  </div>
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center">
+                    <Calendar className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="md:w-1/2 md:pl-12 md:text-left hidden md:block"></div>
+                </div>
+              </motion.div>
+              
+              {/* 2024 - Beta Launch */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="relative"
+              >
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="md:w-1/2 md:pr-12 mb-8 md:mb-0 hidden md:block"></div>
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center">
+                    <Zap className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="md:w-1/2 md:pl-12 md:text-left">
+                    <div className="bg-dark-900 border border-dark-700 rounded-xl p-8 hover:border-orange-500/30 transition-colors duration-300 shadow-xl">
+                      <span className="inline-block text-orange-400 font-bold text-xl mb-2">2025</span>
+                      <h3 className="text-2xl font-bold text-white mb-4">🔬 Beta Launch & Early Success</h3>
+                      <p className="text-gray-300">In our first year, we launched a closed beta with select clients, testing our AI-driven approach to lead qualification and outreach. Our models quickly demonstrated a significant increase in engagement rates and precision in targeting high-intent leads—proving that AI-powered sales automation can outperform conventional methods.</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              
+              {/* 2025 & Beyond */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative"
+              >
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="md:w-1/2 md:pr-12 mb-8 md:mb-0 md:text-right">
+                    <div className="bg-dark-900 border border-dark-700 rounded-xl p-8 hover:border-orange-500/30 transition-colors duration-300 shadow-xl">
+                      <span className="inline-block text-orange-400 font-bold text-xl mb-2">2025 & Beyond</span>
+                      <h3 className="text-2xl font-bold text-white mb-4">📈 Expanding Capabilities</h3>
+                      <p className="text-gray-300">Enai is growing, refining its AI models, and expanding integrations with CRM systems and outreach platforms. As we scale, our focus remains on enhancing accuracy in lead qualification, optimizing outreach timing, and improving workflow automation to support sales teams in various industries.</p>
+                    </div>
+                  </div>
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="md:w-1/2 md:pl-12 md:text-left hidden md:block"></div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* "Who We Are" Section with AI Assistant Visualization */}
       <section className="py-24 relative">
         {/* Dynamic background with pulsing elements */}
@@ -339,33 +476,82 @@ function AboutUs() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative h-[400px] md:h-[500px] bg-dark-800 rounded-2xl overflow-hidden border border-dark-700 p-6"
+              className="relative h-[400px] md:h-[500px] bg-dark-900 rounded-2xl overflow-hidden border border-dark-700 p-6 shadow-2xl shadow-orange-500/10"
             >
               {/* Chat Interface Simulation */}
-              <div className="absolute inset-0 flex flex-col p-4">
+              <div className="absolute inset-0 flex flex-col p-4 z-10">
                 {/* Chat Header */}
-                <div className="flex items-center justify-between mb-4 border-b border-dark-700 pb-3">
+                <div className="flex items-center justify-between mb-4 border-b border-dark-700/80 pb-3">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
-                      <span className="text-sm font-bold text-white">ENAI</span>
-                    </div>
+                    <motion.div 
+                      className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center border border-orange-400/30 shadow-lg shadow-orange-500/20"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+                        className="w-8 h-8 rounded-full border border-dashed border-white/40 flex items-center justify-center"
+                      >
+                        <span className="text-sm font-bold text-white">ENAI</span>
+                      </motion.div>
+                    </motion.div>
                     <div className="ml-3">
-                      <h3 className="text-white font-semibold">Enai</h3>
+                      <h3 className="text-white font-semibold">Enai Assistant</h3>
                       <div className="flex items-center">
-                        <span className="h-2 w-2 rounded-full bg-green-500 mr-2"></span>
-                        <span className="text-xs text-green-500">Online</span>
+                        <motion.span 
+                          className="h-2 w-2 rounded-full bg-green-500 mr-2"
+                          animate={{ opacity: [1, 0.5, 1] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        />
+                        <span className="text-xs text-green-500">Online & Ready</span>
                       </div>
                     </div>
                   </div>
                   <div className="flex space-x-2">
-                    <div className="w-2 h-2 rounded-full bg-gray-500"></div>
-                    <div className="w-2 h-2 rounded-full bg-gray-500"></div>
-                    <div className="w-2 h-2 rounded-full bg-gray-500"></div>
+                    <motion.div 
+                      whileHover={{ backgroundColor: '#f97316' }}
+                      className="w-2 h-2 rounded-full bg-gray-500 cursor-pointer"
+                    />
+                    <motion.div 
+                      whileHover={{ backgroundColor: '#f97316' }}
+                      className="w-2 h-2 rounded-full bg-gray-500 cursor-pointer"
+                    />
+                    <motion.div 
+                      whileHover={{ backgroundColor: '#f97316' }}
+                      className="w-2 h-2 rounded-full bg-gray-500 cursor-pointer"
+                    />
                   </div>
                 </div>
                 
                 {/* Chat Messages */}
-                <div className="flex-1 overflow-y-auto space-y-4 mb-4">
+                <div className="flex-1 overflow-y-auto space-y-4 mb-4 relative">
+                  {/* Dynamic background elements */}
+                  <motion.div
+                    className="absolute -top-10 -right-10 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"
+                    animate={{ 
+                      scale: [1, 1.2, 1],
+                      opacity: [0.3, 0.5, 0.3]
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 8,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  <motion.div
+                    className="absolute -bottom-10 -left-10 w-40 h-40 bg-red-500/10 rounded-full blur-3xl"
+                    animate={{ 
+                      scale: [1, 1.3, 1],
+                      opacity: [0.2, 0.4, 0.2]
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 10,
+                      delay: 1,
+                      ease: "easeInOut"
+                    }}
+                  />
+                  
                   {/* User Message */}
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }}
@@ -373,8 +559,13 @@ function AboutUs() {
                     transition={{ duration: 0.5 }}
                     className="flex justify-end"
                   >
-                    <div className="max-w-[80%] bg-orange-500/20 text-white p-3 rounded-lg rounded-tr-none">
-                      <p className="text-sm">Hi Enai, I need to find some new leads for our SaaS product</p>
+                    <div className="flex items-end gap-2 max-w-[85%]">
+                      <div className="max-w-full bg-orange-500/20 text-white p-3 rounded-lg rounded-tr-none border border-orange-500/10 shadow-md">
+                        <p className="text-sm">Hi Enai, I need to find some new <span className="text-orange-300 font-medium">leads</span> for our SaaS product</p>
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0 border border-gray-600/30">
+                        <span className="text-xs font-bold text-gray-300">JD</span>
+                      </div>
                     </div>
                   </motion.div>
                   
@@ -429,15 +620,30 @@ function AboutUs() {
                     transition={{ delay: 3.8, duration: 0.5 }}
                     className="flex"
                   >
-                    <div className="max-w-[80%] bg-dark-700 p-3 rounded-lg rounded-tl-none text-white">
-                      <motion.p 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 4, duration: 0.5 }}
-                        className="text-sm"
-                      >
-                        I'll help you find ideal leads for your SaaS product. Based on your ICP:
-                      </motion.p>
+                    <div className="max-w-[80%] bg-gradient-to-r from-dark-700 to-dark-700/90 p-3 rounded-lg rounded-tl-none text-white border border-dark-600/50 shadow-lg">
+                      <div className="flex items-start gap-2">
+                        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0 border border-orange-300/20">
+                          <span className="text-[10px] font-bold">AI</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center mb-1">
+                            <p className="text-xs text-orange-300 font-medium">Enai Assistant</p>
+                            <motion.span 
+                              className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 ml-2"
+                              animate={{ opacity: [1, 0.3, 1] }}
+                              transition={{ duration: 1.5, repeat: Infinity }}
+                            />
+                          </div>
+                          <motion.p 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 4, duration: 0.5 }}
+                            className="text-sm"
+                          >
+                            I've analyzed your market and identified <span className="text-orange-400 font-medium">high-conversion opportunities</span> for your SaaS product. Based on your <span className="text-orange-400 font-medium">ICP data</span>:
+                          </motion.p>
+                        </div>
+                      </div>
                       
                       {/* Animated typing effect for the message */}
                       <motion.div 
@@ -455,7 +661,16 @@ function AboutUs() {
                             transition={{ delay: 4.3 + (i * 0.7), duration: 0.3 }}
                             className="flex items-start"
                           >
-                            <span className="text-orange-500 mr-2">→</span>
+                            <div className="text-orange-500 mr-2 flex-shrink-0">
+                              <motion.div
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ delay: 4.3 + (i * 0.7), duration: 0.4, type: "spring" }}
+                                className="flex items-center justify-center w-4 h-4 bg-orange-500/20 rounded-full"
+                              >
+                                <span className="text-[10px]">→</span>
+                              </motion.div>
+                            </div>
                             <motion.span
                               initial={{ width: 0 }}
                               animate={{ width: '100%' }}
@@ -463,7 +678,13 @@ function AboutUs() {
                               className="whitespace-nowrap overflow-hidden"
                               style={{ display: 'block' }}
                             >
-                              {item}
+                              {item.split('key decision-makers').join(
+                                '<span class="text-orange-400 font-medium">key decision-makers</span>'
+                              ).split('high-growth companies').join(
+                                '<span class="text-orange-400 font-medium">high-growth companies</span>'
+                              ).split('intent and product-fit signals').join(
+                                '<span class="text-orange-400 font-medium">intent and product-fit signals</span>'
+                              )}
                             </motion.span>
                           </motion.div>
                         ))}
@@ -475,8 +696,23 @@ function AboutUs() {
                         transition={{ delay: 6.5, duration: 0.5 }}
                         className="mt-3 text-sm"
                       >
-                        Ready to start personalized outreach to these leads now?
+                        I can launch <span className="text-orange-400 font-medium">multi-channel campaigns</span> with <span className="text-orange-400 font-medium">personalized messaging</span> to these prospects today. Shall we proceed?
                       </motion.p>
+                      <motion.div 
+                        className="flex mt-1 space-x-1"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: [0, 1, 0] }}
+                        transition={{ 
+                          delay: 7.5,
+                          duration: 1.5, 
+                          repeat: Infinity, 
+                          repeatDelay: 2
+                        }}
+                      >
+                        <span className="w-1 h-1 bg-orange-400 rounded-full"/>
+                        <span className="w-1 h-1 bg-orange-400 rounded-full"/>
+                        <span className="w-1 h-1 bg-orange-400 rounded-full"/>
+                      </motion.div>
                     </div>
                   </motion.div>
                 </div>
@@ -495,23 +731,60 @@ function AboutUs() {
                 
                 {/* AI Processing indicator */}
                 <motion.div
-                  initial={{ opacity: 0 }}
+                  initial={{ opacity: 0, y: -5 }}
                   animate={{ 
-                    opacity: [0, 0.8, 0],
+                    opacity: [0, 0.9, 0],
+                    y: [-5, 0, -5]
                   }}
                   transition={{ 
                     repeat: Infinity, 
-                    duration: 2,
-                    repeatDelay: 1
+                    duration: 2.5,
+                    repeatDelay: 1.5
                   }}
-                  className="absolute right-6 top-20 bg-dark-700/80 backdrop-blur-sm border border-orange-500/30 text-xs text-white px-3 py-1.5 rounded-lg"
+                  className="absolute right-6 top-20 bg-dark-700/90 backdrop-blur-sm border border-orange-500/30 text-xs text-white px-3 py-1.5 rounded-lg shadow-lg shadow-orange-500/10"
                 >
-                  Processing customer data...
+                  <div className="flex items-center gap-2">
+                    <motion.div 
+                      animate={{ rotate: 360 }}
+                      transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                      className="w-3 h-3 border-2 border-orange-500 border-t-transparent rounded-full"
+                    />
+                    <span>Processing customer data<motion.span
+                      animate={{ opacity: [0, 1, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5 }}
+                    >...</motion.span></span>
+                  </div>
                 </motion.div>
               </div>
               
               {/* Background processing effects */}
-              <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute inset-0 pointer-events-none z-0">
+                {/* Additional subtle animated background gradients */}
+                <motion.div
+                  className="absolute -top-20 right-0 w-40 h-40 bg-gradient-to-br from-orange-500/5 to-red-500/5 rounded-full blur-3xl"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.5, 0.7, 0.5]
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 6,
+                    ease: "easeInOut"
+                  }}
+                />
+                <motion.div
+                  className="absolute bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-red-500/5 to-orange-500/5 rounded-full blur-3xl"
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.4, 0.6, 0.4]
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 8,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                />
                 {/* Data Processing Beams */}
                 {[...Array(5)].map((_, i) => {
                   const delay = i * 2;
@@ -550,7 +823,7 @@ function AboutUs() {
                         }}
                         className="absolute w-1.5 h-1.5 rounded-full bg-orange-500 blur-[1px]"
                         style={{
-                          boxShadow: '0 0 8px 2px rgba(249, 115, 22, 0.3)',
+                          boxShadow: '0 0 12px 3px rgba(249, 115, 22, 0.4)',
                         }}
                       />
                     </motion.div>

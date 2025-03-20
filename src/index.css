@@ -36,6 +36,83 @@
   animation: textPulse 4s ease-in-out infinite;
 }
 
+/* Slow pulsing animation for the AI assistant orb */
+@keyframes ping-slow {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}
+
+/* Mobile navigation enhancements */
+@media (max-width: 768px) {
+  .mobile-safe-area {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  .mobile-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .mobile-icon {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .mobile-menu-backdrop {
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(4px);
+  }
+
+  .mobile-active {
+    position: relative;
+  }
+
+  .mobile-active-indicator::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 16px;
+    background: linear-gradient(to bottom, #F7B733, #FC4A1A);
+    border-radius: 2px;
+  }
+
+  .mobile-transition {
+    transition: all 0.3s ease;
+  }
+
+  .mobile-nav-item:active {
+    transform: scale(0.98);
+  }
+}
+
+.animate-ping-slow {
+  animation: ping-slow 3s ease-in-out infinite;
+}
+
+/* New styled text with corrected CSS syntax error */
+.your-selector-class {
+  text-shadow: 
+    0px 2px 4px rgba(0, 0, 0, 0.3),
+    0px 1px 1px rgba(255, 255, 255, 0.05);
+  display: inline-block;
+  filter: drop-shadow(0 5px 15px rgba(249, 115, 22, 0.25));
+  animation: textPulse 4s ease-in-out infinite;
+}
+
 @keyframes textPulse {
   0%, 100% {
     filter: drop-shadow(0 5px 15px rgba(249, 115, 22, 0.25));

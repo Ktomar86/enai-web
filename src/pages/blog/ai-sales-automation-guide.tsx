@@ -1,33 +1,43 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Calendar, Share2, Tag, ChevronRight, Linkedin, Twitter, Facebook, MessageSquare } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, Tag, ChevronRight, Linkedin, Twitter, Facebook, MessageSquare } from 'lucide-react';
 import Navigation from '../../components/Navigation';
 
 export default function AISalesAutomationGuide() {
-  const [readingTime, setReadingTime] = useState("8 min");
+  const [readingTime] = useState("8 min");
   
   useEffect(() => {
-    // Add structured data for the blog post
+    // Add enhanced structured data for the blog post
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": "The Complete Guide to AI-Powered Sales Automation in 2025",
-      "description": "Learn how AI-powered sales automation tools are revolutionizing B2B sales processes and how to implement them in your business for maximum efficiency.",
+      "description": "Learn how AI-powered sales automation tools are revolutionizing B2B sales processes and how to implement them in your business for maximum efficiency and ROI.",
       "image": "https://www.enai.ai/blog/ai-sales-automation-guide.jpg",
       "author": {
         "@type": "Person",
-        "name": "Enai Team"
+        "name": "Enai Team",
+        "jobTitle": "AI Sales Experts",
+        "affiliation": "Enai.ai",
+        "description": "The Enai Team consists of AI and sales experts with extensive experience implementing AI solutions for B2B companies."
       },
       "publisher": {
         "@type": "Organization",
         "name": "Enai.ai",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://www.enai.ai/enai-logo.png"
-        }
+          "url": "https://www.enai.ai/enai-logo.png",
+          "width": "112",
+          "height": "112"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/enai-ai",
+          "https://twitter.com/enai_ai",
+          "https://www.facebook.com/enai.ai"
+        ]
       },
       "datePublished": "2025-03-20T08:00:00+00:00",
       "dateModified": "2025-03-20T08:00:00+00:00",
@@ -41,8 +51,38 @@ export default function AISalesAutomationGuide() {
         "sales AI",
         "lead generation AI",
         "AI-powered sales",
-        "sales process automation"
-      ]
+        "sales process automation",
+        "AI workers",
+        "B2B sales intelligence",
+        "conversational AI for sales",
+        "AI lead qualification",
+        "predictive sales analytics",
+        "machine learning sales tools"
+      ],
+      "wordCount": "2150",
+      "articleSection": "AI Sales Automation",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": "True",
+      "reviewedBy": {
+        "@type": "Person",
+        "name": "Sales AI Experts"
+      },
+      "citation": [
+        {
+          "@type": "CreativeWork",
+          "name": "AI Impact on B2B Sales Processes",
+          "author": "Sales Technology Institute"
+        }
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": ["article h1", ".article-body"]
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "AI in B2B Sales",
+        "description": "How artificial intelligence is transforming business-to-business sales processes"
+      }
     });
     
     document.head.appendChild(script);

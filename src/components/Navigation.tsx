@@ -156,6 +156,7 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-safe-area">
         <div className="flex justify-between items-center h-16 nav-container">
+          {/* Mobile navigation styles are in index.css */}
           {/* Logo */}
           <Link 
             to="/" 
