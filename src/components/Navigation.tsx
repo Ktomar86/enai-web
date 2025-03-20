@@ -135,16 +135,16 @@ export default function Navigation() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3,
+        duration: 0.4,
         staggerChildren: 0.1,
-        delayChildren: 0.05
+        delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
     closed: { opacity: 0, x: -20 },
-    open: { opacity: 1, x: 0 }
+    open: { opacity: 1, x: 0, transition: { duration: 0.3 } }
   };
 
   return (
@@ -249,13 +249,13 @@ export default function Navigation() {
           >
             <div className="fixed inset-0 mobile-menu-backdrop">
               <motion.div 
-                className="flex flex-col h-full py-20 px-4 overflow-y-auto mobile-safe-area"
+                className="flex flex-col h-full w-full py-20 px-6 overflow-y-auto mobile-safe-area bg-dark-900 bg-opacity-95"
                 variants={menuVariants}
               >
                 {/* Close button for accessibility */}
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="absolute top-5 right-5 p-2 rounded-full bg-dark-800 text-gray-300 mobile-touch-target"
+                  className="absolute top-5 right-5 p-2 rounded-full bg-dark-800 text-white mobile-touch-target z-50"
                   aria-label="Close menu"
                 >
                   <X className="w-5 h-5 mobile-icon" />
@@ -276,7 +276,7 @@ export default function Navigation() {
                 </motion.div>
 
                 {/* Nav items */}
-                <div className="flex flex-col space-y-6">
+                <div className="flex flex-col space-y-6 w-full">
                   {navItems.map((item, index) => (
                     <motion.div 
                       key={item} 
@@ -288,7 +288,7 @@ export default function Navigation() {
                       {item === 'Industries' ? (
                         <Link 
                           to="/industries" 
-                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors flex items-center justify-between mobile-touch-target ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
+                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors flex items-center justify-between mobile-touch-target py-2 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
                           onClick={() => setIsMobileMenuOpen(false)}
                           aria-current={isActive(item) ? 'page' : undefined}
                         >
@@ -298,7 +298,7 @@ export default function Navigation() {
                       ) : (
                         <button
                           onClick={() => handleNavClick(item)}
-                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors w-full text-left flex items-center justify-between mobile-touch-target ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
+                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors w-full text-left flex items-center justify-between mobile-touch-target py-2 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
                           aria-current={isActive(item) ? 'page' : undefined}
                         >
                           <span className="mobile-active-indicator">{item}</span>
@@ -316,7 +316,7 @@ export default function Navigation() {
                   >
                     <button 
                       onClick={scrollToContact}
-                      className="w-full button-glow text-white py-4 px-6 rounded-xl text-xl font-semibold transform transition-all duration-300 mobile-touch-target"
+                      className="w-full button-glow text-white py-4 px-6 rounded-xl text-xl font-semibold transform transition-all duration-300 mobile-touch-target shadow-lg"
                     >
                       Start Free
                     </button>
@@ -328,7 +328,7 @@ export default function Navigation() {
                   variants={itemVariants}
                   className="mt-auto pt-12"
                 >
-                  <div className="grid grid-cols-2 gap-4 text-sm text-gray-400">
+                  <div className="grid grid-cols-2 gap-4 text-sm text-gray-200">
                     <Link 
                       to="/#features" 
                       className="hover:text-primary-400 transition-colors"
