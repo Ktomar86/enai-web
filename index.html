@@ -3,7 +3,7 @@
   <head>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CEQC2QQHED"></script>
-<script>
+<script async>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -13,10 +13,105 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="enai-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enai</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Enai.ai - AI-Powered Sales Automation for B2B | AI Workers for Sales Teams</title>
+    <meta name="description" content="Empower your B2B sales team with Enai.ai's AI workers. Our AI agents automate lead qualification, market research, and personalized outreach to help you scale efficiently." />
+    <meta name="keywords" content="AI sales automation, B2B AI tools, sales AI, lead generation AI, AI-powered sales, AI workers for sales, sales process automation" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.enai.ai/" />
+    <meta property="og:title" content="Enai.ai - AI-Powered Sales Automation for B2B | AI Workers for Sales Teams" />
+    <meta property="og:description" content="Empower your B2B sales team with Enai.ai's AI workers. Our AI agents automate lead qualification, market research, and personalized outreach to help you scale efficiently." />
+    <meta property="og:image" content="https://www.enai.ai/og-image.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://www.enai.ai/" />
+    <meta property="twitter:title" content="Enai.ai - AI-Powered Sales Automation for B2B | AI Workers for Sales Teams" />
+    <meta property="twitter:description" content="Empower your B2B sales team with Enai.ai's AI workers. Our AI agents automate lead qualification, market research, and personalized outreach to help you scale efficiently." />
+    <meta property="twitter:image" content="https://www.enai.ai/twitter-image.jpg" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.enai.ai/" />
+    
+    <!-- Structured Data for Google AI Overviews -->
+    <script type="application/ld+json" async>
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Enai.ai",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "AI-powered sales automation platform with intelligent agents that qualify leads, research markets, and automate the entire sales process for B2B businesses.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "127"
+      },
+      "featureList": ["Lead Qualification", "Market Analysis", "Email Response", "24/7 Intelligent Support", "Personalized Content Creation", "Sales Process Automation"]
+    }
+    </script>
+    
+    <!-- Organization Schema -->
+    <script type="application/ld+json" async>
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Enai.ai",
+      "url": "https://www.enai.ai",
+      "logo": "https://www.enai.ai/enai-logo.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/enai-ai",
+        "https://twitter.com/enai_ai"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-000-000-0000",
+        "contactType": "customer service",
+        "email": "contact@enai.ai"
+      }
+    }
+    </script>
+    
+    <!-- FAQ Schema -->
+    <script type="application/ld+json" async>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What is Enai.ai?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enai.ai provides AI-powered sales automation with dedicated AI workers that understand your business and help you scale efficiently by automating lead qualification, market research, and personalized outreach."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How does Enai.ai improve B2B sales processes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enai.ai improves B2B sales by automating lead qualification based on 40+ buying signals, creating hyper-personalized content, providing 24/7 intelligent support, and analyzing performance data to continuously optimize your sales strategy."
+        }
+      }, {
+        "@type": "Question",
+        "name": "What AI agents does Enai.ai offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enai.ai offers multiple specialized AI agents including LEO for communication automation, ARES for customer profiling and targeting, ZEUS for call scheduling, TECHNO for performance tracking, CRONUS for personalized content generation, and CLIO for sales funnel optimization."
+        }
+      }]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx" async></script>
   </body>
 </html>

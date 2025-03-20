@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Optimize crawling
+Crawl-delay: 10
+
+# Important files for SEO
+Sitemap: https://www.enai.ai/sitemap.xml
+
+# Disallow access to admin or sensitive areas
+Disallow: /admin/
+Disallow: /private/

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight, Building, BarChart2, Briefcase, Users, Shield, Globe, Zap, Layers, BookOpen, ShoppingBag, Home, Code, Truck, HeartPulse } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import { Helmet } from 'react-helmet';
+import SEOFAQSection from '../components/SEOFAQSection';
 
 // Updated industries with startup-appropriate positioning
 const industries = [
@@ -328,19 +329,19 @@ export default function Industries() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm">
               <div className="text-4xl font-bold text-primary-400 mb-2">8+</div>
-              <div className="text-sm text-gray-300">Industries We Can Serve</div>
+              <div className="text-xs text-gray-300">Industries We Can Serve</div>
             </div>
             <div className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm">
               <div className="text-4xl font-bold text-primary-400 mb-2">24/7</div>
-              <div className="text-sm text-gray-300">AI Automation</div>
+              <div className="text-xs text-gray-300">AI Automation</div>
             </div>
             <div className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm">
               <div className="text-4xl font-bold text-primary-400 mb-2">60%+</div>
-              <div className="text-sm text-gray-300">Potential Efficiency Gain</div>
+              <div className="text-xs text-gray-300">Potential Efficiency Gain</div>
             </div>
             <div className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm">
               <div className="text-4xl font-bold text-primary-400 mb-2">100%</div>
-              <div className="text-sm text-gray-300">Dedicated Support</div>
+              <div className="text-xs text-gray-300">Dedicated Support</div>
             </div>
           </div>
         </div>
@@ -359,7 +360,8 @@ export default function Industries() {
               >
                 <div className="relative h-48 overflow-hidden">
                   <img 
-                    src={industry.image} 
+                    srcSet={`${industry.image}?w=400 400w, ${industry.image}?w=800 800w`}
+                    sizes="(max-width: 600px) 400px, 800px"
                     alt={`AI Solutions for ${industry.title}`}
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   />
@@ -449,6 +451,11 @@ export default function Industries() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section optimized for SEO */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <SEOFAQSection />
+      </div>
     </div>
   );
 }

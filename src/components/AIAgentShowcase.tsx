@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
-import { useSpring, animated } from 'react-spring';
+import { animated } from 'react-spring';
 import { Bot, Brain, MessageSquare, ChevronRight, BarChart3, Target, Users, ArrowRight, Terminal, Database, Shield } from 'lucide-react';
 
 // Animation data for different AI behaviors - using reliable public animations
@@ -63,7 +63,6 @@ export default function AIAgentShowcase() {
   const [activeScenario, setActiveScenario] = useState(0);
   const [demoState, setDemoState] = useState<'input' | 'processing' | 'output'>('input');
   const [progress, setProgress] = useState(0);
-  const [currentStep, setCurrentStep] = useState(0);
   const [animationData, setAnimationData] = useState<{[key: string]: any}>({});
   const [animationErrors, setAnimationErrors] = useState<{[key: string]: boolean}>({});
   const [isRunning, setIsRunning] = useState(false);
@@ -118,7 +117,6 @@ export default function AIAgentShowcase() {
     if (demoState === 'output') {
       setDemoState('input');
       setProgress(0);
-      setCurrentStep(0);
       
       // Small delay before starting the new demo
       setTimeout(() => {
@@ -142,7 +140,6 @@ export default function AIAgentShowcase() {
     
     const processStep = () => {
       if (stepIndex < steps) {
-        setCurrentStep(stepIndex);
         setProgress((stepIndex / steps) * 100);
         stepIndex++;
         timeoutRef.current = setTimeout(processStep, intervalTime);
@@ -164,7 +161,7 @@ export default function AIAgentShowcase() {
   };
 
   return (
-    <section className="py-24 bg-dark overflow-hidden">
+    <section id="ai-agents" className="py-24 bg-dark overflow-hidden" aria-labelledby="ai-agents-heading" itemScope itemType="https://schema.org/Product">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -178,7 +175,7 @@ export default function AIAgentShowcase() {
             transition={{ duration: 0.5 }}
             className="relative z-10"
           >
-            <h2 className="text-5xl md:text-6xl font-bold gradient-text mb-6">
+            <h2 id="ai-agents-heading" className="text-5xl md:text-6xl font-bold gradient-text mb-6" itemProp="name">
               AI Agents in Action
             </h2>
           </motion.div>
@@ -188,8 +185,8 @@ export default function AIAgentShowcase() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           />
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Experience the power of our AI agents through interactive demonstrations
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto" itemProp="description">
+            Experience the power of our AI agents through interactive demonstrations of lead qualification, email response, and market analysis capabilities
           </p>
         </motion.div>
 
@@ -228,7 +225,7 @@ export default function AIAgentShowcase() {
                   }`} />
                 </div>
                 
-                <p className="mt-2 text-gray-300 text-sm">
+                <p className="mt-2 text-gray-300 text-sm" itemProp="feature">
                   {scenario.description}
                 </p>
 
@@ -460,8 +457,8 @@ export default function AIAgentShowcase() {
           viewport={{ once: true }}
           className="mt-24"
         >
-          <h3 className="text-3xl font-bold text-center gradient-text mb-12">
-            AI vs Traditional Methods
+          <h3 className="text-3xl font-bold text-center gradient-text mb-12" id="ai-comparison">
+            AI vs Traditional Methods: The Enai.ai Advantage
           </h3>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-6 rounded-xl bg-dark-800/80 backdrop-blur-sm border border-primary-400 hover:shadow-lg hover:shadow-primary-400/20 transition-all duration-500 group">
