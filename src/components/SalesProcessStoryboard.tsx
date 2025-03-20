@@ -252,7 +252,7 @@ const processSteps: ProcessStep[] = [
   },
   {
     id: 'schedule',
-    title: 'Meeting Scheduling',
+    title: 'Schedule Meetings',
     description: 'AI coordinates and schedules meetings with qualified leads when they express interest.',
     icon: <CalendarClock className="w-6 h-6" />,
     color: 'bg-amber-500',
