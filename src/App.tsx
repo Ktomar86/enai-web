@@ -303,7 +303,7 @@ function App() {
               whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.25), 0 8px 10px -6px rgba(249, 115, 22, 0.15)" }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group mx-4"
-              onClick={() => window.open("https://calendly.com/enai-ai2024", "_blank")}
+              onClick={() => window.open("https://calendly.com/enai-ai2024/30min", "_blank")}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
             >
               <span className="relative z-10 flex items-center justify-center">
@@ -507,7 +507,7 @@ function App() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-dark-800/80 backdrop-blur-sm border border-dark-700 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:border-dark-600 transition-all duration-500"
+              className="bg-dark-800/80 backdrop-blur-sm border border-dark-700 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500"
             >
               <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-400/20 to-purple-400/20 rounded-xl mb-6 mx-auto md:mx-0">
                 <Mail className="w-8 h-8 text-primary-400" />
