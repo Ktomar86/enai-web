@@ -66,7 +66,7 @@ export default function AIAgentShowcase() {
   const [animationData, setAnimationData] = useState<{[key: string]: any}>({});
   const [animationErrors, setAnimationErrors] = useState<{[key: string]: boolean}>({});
   const [isRunning, setIsRunning] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Load animation data
   useEffect(() => {

@@ -126,16 +126,60 @@ const HeroScene = () => {
   }, []);
 
   return (
-    <div className="w-full h-[600px] absolute top-0 left-0 z-0" ref={containerRef}>
+    <div className="w-full h-[600px] absolute top-0 left-0 z-0 overflow-hidden" ref={containerRef}>
       <motion.div
         className="w-full h-full relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
       >
+        {/* Glowing orbs effect */}
+        <div className="absolute inset-0 z-10 pointer-events-none">
+          <motion.div 
+            className="absolute w-[300px] h-[300px] rounded-full bg-primary-500/20 blur-[100px] z-10"
+            style={{ top: '10%', left: '10%' }}
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.7, 0.3]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div 
+            className="absolute w-[250px] h-[250px] rounded-full bg-blue-500/20 blur-[80px] z-10"
+            style={{ top: '30%', right: '15%' }}
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.5, 0.2]
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          />
+          <motion.div 
+            className="absolute w-[200px] h-[200px] rounded-full bg-purple-500/20 blur-[60px] z-10"
+            style={{ bottom: '20%', left: '25%' }}
+            animate={{
+              scale: [1, 1.4, 1],
+              opacity: [0.2, 0.6, 0.2]
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
+        </div>
         {/* Spline viewer */}
         <spline-viewer 
-          url="https://prod.spline.design/MY4Fscz2MlT7hHOs/scene.splinecode"
+          url="https://prod.spline.design/7dqUlpFgEXNPUap8/scene.splinecode"
           className="w-full h-full"
         ></spline-viewer>
         
