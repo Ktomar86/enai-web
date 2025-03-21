@@ -175,40 +175,40 @@ function App() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark to-dark-800 relative overflow-hidden">
+      <section className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark to-dark-900 relative overflow-hidden">
         {/* 3D Mountain Scene with Lost Orb */}
         <HeroScene />
         
         {/* Additional tech elements layered on top */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[1]">
-          {/* Animated grid lines */}
+          {/* Animated grid lines - darker and more subtle */}
           <motion.div 
-            className="absolute inset-0 opacity-10"
+            className="absolute inset-0 opacity-8"
             style={{
               backgroundImage: `
-                linear-gradient(to right, rgba(247, 183, 51, 0.07) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(247, 183, 51, 0.07) 1px, transparent 1px)
+                linear-gradient(to right, rgba(247, 183, 51, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(247, 183, 51, 0.05) 1px, transparent 1px)
               `,
               backgroundSize: '50px 50px'
             }}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.1 }}
+            animate={{ opacity: 0.08 }}
             transition={{ duration: 2 }}
           />
 
-          {/* Digital particles layered on top */}
-          <div className="absolute inset-0 opacity-30">
-            {Array.from({ length: 15 }).map((_, i) => (
+          {/* Digital particles layered on top - more refined */}
+          <div className="absolute inset-0 opacity-20">
+            {Array.from({ length: 12 }).map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-1 h-1 bg-primary-400/40 rounded-full"
+                className="absolute w-1 h-1 bg-primary-400/30 rounded-full"
                 style={{
                   top: `${Math.random() * 100}%`,
                   left: `${Math.random() * 100}%`,
                 }}
                 animate={{
-                  opacity: [0, 1, 0],
-                  scale: [0, 1.5, 0],
+                  opacity: [0, 0.8, 0],
+                  scale: [0, 1.2, 0],
                 }}
                 transition={{
                   duration: 3 + Math.random() * 5,
@@ -244,22 +244,30 @@ function App() {
               >
                 AI WORKERS
               </motion.span>
+              {/* Enhanced hero border - darker, cleaner, and more polished */}
               <motion.div 
-                className="h-1.5 w-48 md:w-80 bg-gradient-to-r from-orange-400 via-yellow-400 to-red-400 mx-auto mt-5 rounded-full"
+                className="h-2 w-48 md:w-80 bg-gradient-to-r from-orange-500 via-yellow-400 to-red-500 mx-auto mt-5 rounded-full shadow-sm shadow-orange-500/20"
                 initial={{ scaleX: 0, opacity: 0 }}
                 animate={{ scaleX: 1, opacity: 1 }}
                 transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
+                style={{ 
+                  border: '1px solid rgba(0, 0, 0, 0.2)',
+                  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)' 
+                }}
               />
               <motion.div 
-                className="h-px w-24 md:w-40 bg-gradient-to-r from-orange-400/30 to-yellow-400/30 mx-auto mt-2 rounded-full"
+                className="h-px w-24 md:w-40 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 mx-auto mt-2 rounded-full"
                 initial={{ scaleX: 0, opacity: 0 }}
                 animate={{ scaleX: 1, opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
+                style={{ 
+                  border: '1px solid rgba(0, 0, 0, 0.1)'
+                }}
               />
             </h1>
           </motion.div>
           <motion.div 
-            className="w-full max-w-3xl mx-auto mb-8 h-px bg-dark-700/50"
+            className="w-full max-w-3xl mx-auto mb-8 h-px bg-dark-900/70"
             initial={{ opacity: 0, width: "0%" }}
             animate={{ opacity: 1, width: "100%" }}
             transition={{ delay: 1.3, duration: 0.5 }}

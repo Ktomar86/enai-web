@@ -109,6 +109,8 @@ const itemVariants = {
   }
 };
 
+const lightBlackColor = '#222222'; // Use this color in styles where light black is applied
+
 export default function FeatureHighlights() {
   const [activeFeature, setActiveFeature] = useState(features[0].id);
   // hoverFeature is used in event handlers for button hover effects
@@ -251,7 +253,7 @@ export default function FeatureHighlights() {
         {feature.flowSteps.map((step, i) => (
           <motion.div
             key={`${feature.id}-step-${i}`}
-            className={`absolute bg-dark-800/90 border text-xs px-2 py-1 text-white rounded-md shadow-lg z-10 ${
+            className={`absolute bg-${lightBlackColor}/90 border text-xs px-2 py-1 text-white rounded-md shadow-lg z-10 ${
               i === flowLineIndex 
                 ? `border-${feature.animationColor}-400 shadow-${feature.animationColor}-500/30` 
                 : 'border-dark-700'
@@ -263,7 +265,7 @@ export default function FeatureHighlights() {
             }}
             animate={{
               scale: i === flowLineIndex ? 1.1 : 1,
-              backgroundColor: i === flowLineIndex ? `rgba(var(--color-${feature.animationColor}-900-rgb), 0.9)` : 'rgba(15, 23, 42, 0.9)'
+              backgroundColor: i === flowLineIndex ? `rgba(var(--color-${feature.animationColor}-900-rgb), 0.9)` : `rgba(51, 51, 51, 0.9)`
             }}
             transition={{ duration: 0.3 }}
           >
@@ -377,7 +379,7 @@ export default function FeatureHighlights() {
   };
   
   return (
-    <section className="py-24 bg-dark-900 overflow-hidden relative">
+    <section className="py-24 bg-${lightBlackColor} overflow-hidden relative">
       {/* Enhanced background elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       <motion.div 
@@ -443,7 +445,7 @@ export default function FeatureHighlights() {
                   p-5 rounded-xl cursor-pointer transition-all duration-500 relative overflow-hidden group
                   ${activeFeature === feature.id ? 
                     `bg-gradient-to-br ${feature.color} shadow-lg shadow-${feature.animationColor}-500/40` : 
-                    'bg-dark-800/90 hover:bg-dark-800 border border-dark-700'
+                    'bg-${lightBlackColor}/90 hover:bg-${lightBlackColor} border border-${lightBlackColor}'
                   }
                 `}
                 onClick={() => setActiveFeature(feature.id)}
@@ -587,7 +589,7 @@ export default function FeatureHighlights() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="bg-dark-800/80 backdrop-blur-sm rounded-2xl p-8 border border-dark-700 relative overflow-hidden shadow-xl shadow-dark-900/50"
+            className="bg-${lightBlackColor}/80 backdrop-blur-sm rounded-2xl p-8 border border-${lightBlackColor} relative overflow-hidden shadow-xl shadow-${lightBlackColor}/50"
           >
             {/* Advanced background effects */}
             <motion.div 
@@ -718,16 +720,16 @@ export default function FeatureHighlights() {
               </div>
             </div>
             
-            <div className="h-72 rounded-xl overflow-hidden mb-8 bg-dark-900/70 flex items-center justify-center border border-dark-700 shadow-inner relative">
+            <div className="h-72 rounded-xl overflow-hidden mb-8 bg-${lightBlackColor}/70 flex items-center justify-center border border-${lightBlackColor} shadow-inner relative">
               {/* Enhanced feature visualization */}
               <EnhancedAnimation feature={currentFeature} />
               
               {/* Glass overlay effect */}
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-dark-900/40" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-${lightBlackColor}/40" />
               
               {/* Feature highlight badge */}
               <motion.div 
-                className="absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-dark-800/90 border border-dark-700 flex items-center gap-2 backdrop-blur-sm"
+                className="absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-${lightBlackColor}/90 border border-${lightBlackColor} flex items-center gap-2 backdrop-blur-sm"
                 initial={{ opacity: 0, scale: 0.9, y: -5 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
@@ -772,7 +774,7 @@ export default function FeatureHighlights() {
                     className="group"
                   >
                     <motion.div 
-                      className="flex items-center p-4 rounded-xl bg-dark-900/50 border border-dark-700 group-hover:border-dark-600 group-hover:bg-dark-900/70 transition-all duration-300 h-full"
+                      className="flex items-center p-4 rounded-xl bg-${lightBlackColor}/50 border border-${lightBlackColor} group-hover:border-${lightBlackColor} group-hover:bg-${lightBlackColor}/70 transition-all duration-300 h-full"
                       whileHover={{ y: -3, x: 0, boxShadow: `0 10px 25px -5px rgba(var(--color-${currentFeature.animationColor}-500-rgb), 0.15)` }}
                       transition={{ type: "spring", stiffness: 400, damping: 20 }}
                     >
@@ -808,9 +810,9 @@ export default function FeatureHighlights() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group"
-              onClick={() => window.open("https://calendly.com/enai-ai2024/30min", "_blank")} // ✅ Opens Calendly in new tab
+              onClick={() => window.open("https://calendly.com/enai-ai2024/30min", "_blank")}
             >
-              <span className="relative z-10">Get Your Personalized Demo</span>
+              <span className="relative z-10">Get Demo</span>
               <motion.div 
                 className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/20 to-primary-500/0"
                 animate={{ x: ['-100%', '200%'] }}
@@ -825,7 +827,7 @@ export default function FeatureHighlights() {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group"
             >
-              <span className="relative z-10">Get Your Personalized Demo</span>
+              <span className="relative z-10">Get Demo</span>
               <motion.div 
                 className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/20 to-primary-500/0"
                 animate={{ x: ['-100%', '200%'] }}
@@ -856,7 +858,7 @@ export default function FeatureHighlights() {
               />
             </div>
 
-            <div className="backdrop-blur-sm bg-dark-900/50 border border-dark-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+            <div className="backdrop-blur-sm bg-${lightBlackColor}/50 border border-${lightBlackColor} p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
               {/* Grid pattern overlay */}
               <motion.div 
                 className="absolute inset-0 opacity-10 bg-grid-pattern"
@@ -918,7 +920,7 @@ export default function FeatureHighlights() {
                     whileHover={{ scale: 1.05, y: -5 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    className="px-8 py-4 bg-dark-800 border border-dark-700 hover:border-primary-500/50 rounded-xl text-white font-medium relative overflow-hidden group flex items-center justify-center"
+                    className="px-8 py-4 bg-${lightBlackColor} border border-${lightBlackColor} hover:border-primary-500/50 rounded-xl text-white font-medium relative overflow-hidden group flex items-center justify-center"
                   >
                     <span className="relative z-10">Learn More</span>
                     <ChevronRight className="w-4 h-4 ml-1 relative z-10" />
@@ -939,7 +941,7 @@ export default function FeatureHighlights() {
                     {[...Array(4)].map((_, i) => (
                       <motion.div 
                         key={i}
-                        className="w-8 h-8 rounded-full border-2 border-dark-800 flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900"
+                        className="w-8 h-8 rounded-full border-2 border-${lightBlackColor} flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900"
                         initial={{ x: -10, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
                         viewport={{ once: true }}

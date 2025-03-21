@@ -54,8 +54,21 @@ const HeroScene = () => {
         right: 0;
         width: 250px;
         height: 80px;
-        background-color: rgba(0, 0, 0, 0.85);
+        background-color: rgba(0, 0, 0, 0.9);
         z-index: 9999999;
+      }
+      
+      /* Enhance scene with a darker overlay for better contrast */
+      spline-viewer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+        z-index: 1;
+        pointer-events: none;
       }
       
       /* Disable all links inside spline-viewer */
@@ -114,7 +127,7 @@ const HeroScene = () => {
         
         // Also add the black overlay directly as a child
         const overlay = document.createElement('div');
-        overlay.style.cssText = 'position:absolute;bottom:0;right:0;width:250px;height:80px;background:#111827;z-index:9999999;';
+        overlay.style.cssText = 'position:absolute;bottom:0;right:0;width:250px;height:80px;background:#0a0a0a;z-index:9999999;';
         splineViewer.appendChild(overlay);
       }
     }, 1000);
@@ -133,14 +146,14 @@ const HeroScene = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
       >
-        {/* Glowing orbs effect */}
+        {/* Darker, more refined glowing orbs effect */}
         <div className="absolute inset-0 z-10 pointer-events-none">
           <motion.div 
-            className="absolute w-[300px] h-[300px] rounded-full bg-primary-500/20 blur-[100px] z-10"
+            className="absolute w-[300px] h-[300px] rounded-full bg-primary-500/15 blur-[120px] z-10"
             style={{ top: '10%', left: '10%' }}
             animate={{
               scale: [1, 1.2, 1],
-              opacity: [0.3, 0.7, 0.3]
+              opacity: [0.2, 0.5, 0.2]
             }}
             transition={{
               duration: 8,
@@ -149,11 +162,11 @@ const HeroScene = () => {
             }}
           />
           <motion.div 
-            className="absolute w-[250px] h-[250px] rounded-full bg-blue-500/20 blur-[80px] z-10"
+            className="absolute w-[250px] h-[250px] rounded-full bg-blue-500/15 blur-[100px] z-10"
             style={{ top: '30%', right: '15%' }}
             animate={{
               scale: [1, 1.3, 1],
-              opacity: [0.2, 0.5, 0.2]
+              opacity: [0.15, 0.4, 0.15]
             }}
             transition={{
               duration: 10,
@@ -163,11 +176,11 @@ const HeroScene = () => {
             }}
           />
           <motion.div 
-            className="absolute w-[200px] h-[200px] rounded-full bg-purple-500/20 blur-[60px] z-10"
+            className="absolute w-[200px] h-[200px] rounded-full bg-purple-500/15 blur-[80px] z-10"
             style={{ bottom: '20%', left: '25%' }}
             animate={{
               scale: [1, 1.4, 1],
-              opacity: [0.2, 0.6, 0.2]
+              opacity: [0.15, 0.45, 0.15]
             }}
             transition={{
               duration: 7,
@@ -177,13 +190,15 @@ const HeroScene = () => {
             }}
           />
         </div>
+        
+        {/* Add a subtle dark vignette overlay for better contrast with content */}
+        <div className="absolute inset-0 bg-gradient-radial from-transparent to-black/30 z-5 pointer-events-none"></div>
+        
         {/* Spline viewer */}
         <spline-viewer 
           url="https://prod.spline.design/7dqUlpFgEXNPUap8/scene.splinecode"
           className="w-full h-full"
         ></spline-viewer>
-        
-        {/* We're removing the dark blue overlay as requested */}
         
         {/* Animated particles */}
         <motion.div 
@@ -247,45 +262,8 @@ const HeroScene = () => {
               ease: "easeInOut"
             }}
           />
-          
-          {/* Small digital circuit elements */}
-          <motion.div 
-            className="absolute bottom-[25px] right-[60px] w-[20px] h-[20px] border border-orange-400/50 rounded-sm"
-            animate={{
-              borderColor: ['rgba(245, 158, 11, 0.2)', 'rgba(245, 158, 11, 0.8)', 'rgba(245, 158, 11, 0.2)'],
-              rotate: [0, 180, 0],
-              scale: [0.8, 1, 0.8]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-          
-          {/* Additional rotating element */}
-          <motion.div 
-            className="absolute bottom-[20px] right-[100px] w-[10px] h-[10px] bg-orange-400/20 rounded-full"
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.2, 0.6, 0.2],
-              boxShadow: [
-                '0 0 0px rgba(245, 158, 11, 0)',
-                '0 0 8px rgba(245, 158, 11, 0.6)',
-                '0 0 0px rgba(245, 158, 11, 0)'
-              ]
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
         </motion.div>
       </motion.div>
-      
-      {/* Gradient overlay for better text visibility */}
-      <div className="absolute pointer-events-none top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-dark opacity-80 z-10" />
     </div>
   );
 };
