@@ -805,36 +805,6 @@ export default function FeatureHighlights() {
           transition={{ delay: 0.5 }}
           className="mt-20 mb-8"
         >
-          <div className="inline-block">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group"
-              onClick={() => window.open("https://calendly.com/enai-ai2024/30min", "_blank")}
-            >
-              <span className="relative z-10">Get Demo</span>
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/20 to-primary-500/0"
-                animate={{ x: ['-100%', '200%'] }}
-                transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 1 }}
-              />
-            </motion.button>
-          </div>
-
-          <div className="inline-block">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group"
-            >
-              <span className="relative z-10">Get Demo</span>
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/20 to-primary-500/0"
-                animate={{ x: ['-100%', '200%'] }}
-                transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 1 }}
-              />
-            </motion.button>
-          </div>
 
           {/* Background decorative elements */}
           <div className="relative max-w-4xl mx-auto">
