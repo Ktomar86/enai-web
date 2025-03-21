@@ -81,8 +81,17 @@ export default function Navigation() {
       'Features': 'features',
       'Solutions': 'solutions',
       'Team': 'team',
-      'Contact': 'contact'
+      'Contact': 'contact',
+      'About Us': 'about-us'
     };
+
+    if (item === 'About Us') {
+      if (location.pathname !== '/about-us') {
+        window.location.href = '/about-us';
+      }
+      setIsMobileMenuOpen(false);
+      return;
+    }
 
     if (location.pathname !== '/') {
       window.location.href = `/#${sectionMap[item]}`;
@@ -123,21 +132,21 @@ export default function Navigation() {
   // Mobile menu animation variants
   const menuVariants = {
     closed: {
-      opacity: 0,
-      y: -20,
+      x: '100%',
       transition: {
         duration: 0.3,
         staggerChildren: 0.05,
-        staggerDirection: -1
+        staggerDirection: -1,
+        ease: [0.4, 0.0, 0.2, 1]
       }
     },
     open: {
-      opacity: 1,
-      y: 0,
+      x: 0,
       transition: {
         duration: 0.4,
         staggerChildren: 0.1,
-        delayChildren: 0.1
+        delayChildren: 0.1,
+        ease: [0.4, 0.0, 0.2, 1]
       }
     }
   };
@@ -220,7 +229,7 @@ export default function Navigation() {
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-dark-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-400 transition-colors mobile-touch-target mobile-icon"
+              className="inline-flex items-center justify-center p-3 rounded-lg text-gray-300 hover:text-white hover:bg-dark-800 focus:outline-none focus:ring-2 focus:ring-primary-400 transition-colors"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
@@ -234,29 +243,37 @@ export default function Navigation() {
           </div>
         </div>
       </div>
+
+      {/* Mobile menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             ref={mobileMenuRef}
             id="mobile-menu"
-            className="fixed inset-0 z-40 md:hidden smooth-scrolling"
+            className="fixed inset-0 z-50 md:hidden smooth-scrolling"
             initial="closed"
             animate="open"
             exit="closed"
             variants={menuVariants}
           >
-            <div className="fixed inset-0 mobile-menu-backdrop">
-              <motion.div 
-                className="flex flex-col h-full w-full py-20 px-6 overflow-y-auto mobile-safe-area bg-dark-900 bg-opacity-95"
-                variants={menuVariants}
-              >
+            <motion.div 
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <motion.div 
+              className="fixed inset-y-0 right-0 w-full max-w-sm flex flex-col h-full py-20 px-6 overflow-y-auto mobile-safe-area bg-dark-900 shadow-2xl"
+              variants={menuVariants}
+            >
                 {/* Close button for accessibility */}
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="absolute top-5 right-5 p-2 rounded-full bg-dark-800 text-white mobile-touch-target z-50"
+                  className="absolute top-5 right-5 p-3 rounded-full bg-dark-800 text-white z-50 focus:outline-none focus:ring-2 focus:ring-primary-400"
                   aria-label="Close menu"
                 >
-                  <X className="w-5 h-5 mobile-icon" />
+                  <X className="w-6 h-6" />
                 </button>
 
                 {/* Logo in mobile menu */}
@@ -286,20 +303,31 @@ export default function Navigation() {
                       {item === 'Industries' ? (
                         <Link 
                           to="/industries" 
-                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors flex items-center justify-between mobile-touch-target py-2 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
+                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors flex items-center justify-between py-4 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
                           onClick={() => setIsMobileMenuOpen(false)}
                           aria-current={isActive(item) ? 'page' : undefined}
                         >
                           <span className="mobile-active-indicator">{item}</span>
-                          <ChevronRight className="w-5 h-5 ml-2 mobile-icon mobile-transition" />
+                          <ChevronRight className="w-5 h-5 ml-2" />
+                        </Link>
+                      ) : item === 'About Us' ? (
+                        <Link 
+                          to="/about-us" 
+                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors flex items-center justify-between py-4 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          aria-current={isActive(item) ? 'page' : undefined}
+                        >
+                          <span className="mobile-active-indicator">{item}</span>
+                          <ChevronRight className="w-5 h-5 ml-2" />
                         </Link>
                       ) : (
                         <button
                           onClick={() => handleNavClick(item)}
-                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors w-full text-left flex items-center justify-between mobile-touch-target py-2 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
+                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors w-full text-left flex items-center justify-between py-4 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
                           aria-current={isActive(item) ? 'page' : undefined}
                         >
-                          {item}
+                          <span className="mobile-active-indicator">{item}</span>
+                          <ChevronRight className="w-5 h-5 ml-2" />
                         </button>
                       )}
                     </motion.div>
@@ -313,7 +341,7 @@ export default function Navigation() {
                   >
                     <button 
                       onClick={scrollToContact}
-                      className="w-full button-glow text-white py-4 px-6 rounded-xl text-xl font-semibold transform transition-all duration-300 mobile-touch-target shadow-lg"
+                      className="w-full button-glow text-white py-5 px-6 rounded-xl text-xl font-semibold transform transition-all duration-300 shadow-lg"
                     >
                       Start Free
                     </button>
@@ -358,7 +386,6 @@ export default function Navigation() {
                   </div>
                 </motion.div>
               </motion.div>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

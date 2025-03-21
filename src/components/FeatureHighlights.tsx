@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useSpring, animated } from 'react-spring';
 import {
   Search,
-  MessageCircle,
-  BarChart2,
-  Clock,
   Users,
-  Brain,
-  Database,
-  BarChart3,
   Settings,
   LineChart,
   Workflow,
   Bot,
   ChevronRight,
-  Zap,
-  ChevronsRight
+  ChevronsRight,
+  BellRing
 } from 'lucide-react';
 
 // Feature data array with animations and details
@@ -118,8 +111,8 @@ const itemVariants = {
 
 export default function FeatureHighlights() {
   const [activeFeature, setActiveFeature] = useState(features[0].id);
+  // hoverFeature is used in event handlers for button hover effects
   const [hoverFeature, setHoverFeature] = useState<string | null>(null);
-  const [dataFlowActive, setDataFlowActive] = useState(true);
   const [flowLineIndex, setFlowLineIndex] = useState(0);
   
   // Find the currently active feature
@@ -385,20 +378,52 @@ export default function FeatureHighlights() {
   
   return (
     <section className="py-24 bg-dark-900 overflow-hidden relative">
+      {/* Enhanced background elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <motion.div 
+        className="absolute inset-0 opacity-10" 
+        style={{
+          backgroundImage: `radial-gradient(circle at 30% 70%, rgba(247, 183, 51, 0.15) 0%, transparent 50%), 
+                           radial-gradient(circle at 70% 30%, rgba(252, 74, 26, 0.1) 0%, transparent 50%)`
+        }}
+        animate={{ opacity: [0.05, 0.15, 0.05] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold gradient-text mb-6">
-            Sales Acceleration Suite
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <h2 className="text-5xl font-bold gradient-text mb-6 relative inline-block">
+              Sales Acceleration Suite
+              <motion.div 
+                className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-primary-400/0 via-primary-400 to-primary-400/0"
+                initial={{ scaleX: 0, opacity: 0 }}
+                whileInView={{ scaleX: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.8 }}
+              />
+            </h2>
+          </motion.div>
+          <motion.p 
+            className="text-xl text-gray-300 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             A complete toolkit to streamline your sales process, increase productivity, and drive revenue growth for businesses of any size
-          </p>
+          </motion.p>
         </motion.div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -408,73 +433,147 @@ export default function FeatureHighlights() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={containerVariants}
-            className="grid grid-cols-2 md:grid-cols-3 gap-4"
+            className="grid grid-cols-2 md:grid-cols-3 gap-6"
           >
             {features.map((feature) => (
               <motion.div
                 key={feature.id}
                 variants={itemVariants}
                 className={`
-                  p-4 rounded-xl cursor-pointer transition-all duration-300 relative
+                  p-5 rounded-xl cursor-pointer transition-all duration-500 relative overflow-hidden group
                   ${activeFeature === feature.id ? 
-                    `bg-gradient-to-br ${feature.color} shadow-lg shadow-${feature.animationColor}-500/30` : 
-                    'bg-dark-800/80 hover:bg-dark-800 border border-dark-700'
+                    `bg-gradient-to-br ${feature.color} shadow-lg shadow-${feature.animationColor}-500/40` : 
+                    'bg-dark-800/90 hover:bg-dark-800 border border-dark-700'
                   }
                 `}
                 onClick={() => setActiveFeature(feature.id)}
                 onMouseEnter={() => setHoverFeature(feature.id)}
                 onMouseLeave={() => setHoverFeature(null)}
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                {/* Connection lines - only shown on active/adjacent features */}
+                {/* Enhanced glass-like effect for cards */}
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-500"
+                  initial={{ opacity: 0 }}
+                  animate={activeFeature === feature.id ? { opacity: 0.15 } : { opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                />
+                
+                {/* Subtle animated background pattern */}
+                <motion.div 
+                  className="absolute inset-0 opacity-5 pointer-events-none"
+                  style={{
+                    backgroundImage: `radial-gradient(circle at 30% 50%, var(--color-${feature.animationColor}-500) 0%, transparent 25%),
+                                     radial-gradient(circle at 70% 50%, var(--color-${feature.animationColor}-500) 0%, transparent 25%)`
+                  }}
+                  animate={activeFeature === feature.id ? 
+                    { opacity: [0.05, 0.1, 0.05], scale: [1, 1.05, 1] } : 
+                    { opacity: 0.03 }
+                  }
+                  transition={{ duration: 5, repeat: Infinity, repeatType: "reverse" }}
+                />
+                
+                {/* Connection lines with animated particles */}
                 {activeFeature === feature.id && (
-                  <motion.div 
-                    className="absolute top-1/2 -right-4 w-4 h-0.5 bg-gradient-to-r from-transparent to-primary-400"
-                    initial={{ scaleX: 0, opacity: 0 }}
-                    animate={{ scaleX: 1, opacity: [0, 1, 0.5] }}
-                    transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
-                  />
+                  <>
+                    <motion.div 
+                      className="absolute top-1/2 -right-6 w-6 h-0.5 bg-gradient-to-r from-transparent to-white/50"
+                      initial={{ scaleX: 0, opacity: 0 }}
+                      animate={{ scaleX: 1, opacity: [0, 0.8, 0.4] }}
+                      transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+                    />
+                    
+                    {/* Animated particle */}
+                    <motion.div
+                      className={`absolute top-1/2 -right-1 w-1.5 h-1.5 rounded-full bg-${feature.animationColor}-400 shadow-sm shadow-${feature.animationColor}-400`}
+                      animate={{ 
+                        x: [0, -30, 0],
+                        opacity: [0, 1, 0]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity, repeatType: "loop" }}
+                    />
+                  </>
                 )}
                 
-                <div className="flex flex-col items-center text-center">
-                  <div className={`
-                    p-3 rounded-full mb-3 relative
-                    ${activeFeature === feature.id ? 
-                      'bg-white/20' : 
-                      `${feature.textColor} bg-opacity-20`
-                    }
-                  `}>
-                    {feature.icon}
+                <div className="flex flex-col items-center text-center z-10 relative">
+                  <motion.div 
+                    className={`
+                      w-16 h-16 flex items-center justify-center rounded-full mb-4 relative
+                      ${activeFeature === feature.id ? 
+                        'bg-white/20' : 
+                        `bg-${feature.animationColor}-500/10`
+                      }
+                    `}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    <motion.div
+                      animate={activeFeature === feature.id ? 
+                        { scale: [1, 1.1, 1], rotate: [0, 5, 0, -5, 0] } : 
+                        {}
+                      }
+                      transition={{ duration: 5, repeat: Infinity }}
+                    >
+                      {React.cloneElement(feature.icon, { 
+                        className: `w-8 h-8 ${activeFeature === feature.id ? 'text-white' : feature.textColor}` 
+                      })}
+                    </motion.div>
                     
-                    {/* Add active indicator dot */}
+                    {/* Pulsing rings for active feature */}
                     {activeFeature === feature.id && (
-                      <motion.div 
-                        className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-white"
-                        animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      />
+                      <>
+                        <motion.div 
+                          className="absolute inset-0 rounded-full border-2 border-white/20"
+                          animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0, 0.3] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        />
+                        <motion.div 
+                          className="absolute inset-0 rounded-full border border-white/10"
+                          animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0, 0.2] }}
+                          transition={{ duration: 2.5, repeat: Infinity, delay: 0.2 }}
+                        />
+                      </>
                     )}
-                  </div>
+                  </motion.div>
                   
-                  <h3 className={`
-                    font-medium text-sm
-                    ${activeFeature === feature.id ? 
-                      'text-white' : 
-                      'text-gray-300'
-                    }
-                  `}>
+                  <motion.h3 
+                    className={`
+                      font-semibold text-base mb-1
+                      ${activeFeature === feature.id ? 
+                        'text-white' : 
+                        'text-gray-200'
+                      }
+                    `}
+                    animate={activeFeature === feature.id ? { scale: [1, 1.05, 1] } : {}}
+                    transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+                  >
                     {feature.title}
-                  </h3>
+                  </motion.h3>
                   
-                  {/* Animated workflow indicator */}
-                  {activeFeature === feature.id && (
+                  {/* Enhanced workflow indicator */}
+                  {activeFeature === feature.id ? (
                     <motion.div 
                       initial={{ width: 0 }}
-                      animate={{ width: '100%' }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className={`h-0.5 mt-2 bg-gradient-to-r ${feature.color}`}
-                    />
+                      animate={{ width: '80%' }}
+                      transition={{ duration: 1 }}
+                      className={`h-0.5 mt-2 bg-gradient-to-r from-white/50 via-white to-white/50 rounded-full overflow-hidden relative`}
+                    >
+                      <motion.div 
+                        className="absolute inset-0 bg-white/90"
+                        animate={{ x: ["-100%", "100%"] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                      />
+                    </motion.div>
+                  ) : (
+                    <motion.p 
+                      className="text-xs text-gray-400 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      initial={{ y: 5, opacity: 0 }}
+                      whileHover={{ y: 0, opacity: 1 }}
+                    >
+                      Click to explore
+                    </motion.p>
                   )}
                 </div>
               </motion.div>
@@ -487,123 +586,351 @@ export default function FeatureHighlights() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            className="bg-dark-800/80 backdrop-blur-sm rounded-2xl p-8 border border-dark-700 relative overflow-hidden"
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="bg-dark-800/80 backdrop-blur-sm rounded-2xl p-8 border border-dark-700 relative overflow-hidden shadow-xl shadow-dark-900/50"
           >
-            {/* Background pattern for card */}
+            {/* Advanced background effects */}
             <motion.div 
               className="absolute inset-0 bg-grid-pattern opacity-5"
               animate={{ opacity: [0.05, 0.1, 0.05] }}
               transition={{ duration: 8, repeat: Infinity }}
             />
             
-            {/* Workflow indicator line at top */}
+            {/* Enhanced gradient overlay */}
             <motion.div 
-              className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${currentFeature.color}`}
-              initial={{ scaleX: 0, transformOrigin: 'left' }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.5 }}
+              className="absolute inset-0 opacity-10" 
+              style={{
+                backgroundImage: `radial-gradient(circle at 30% 70%, var(--color-${currentFeature.animationColor}-500) 0%, transparent 50%), 
+                                 radial-gradient(circle at 70% 30%, var(--color-${currentFeature.animationColor}-400) 0%, transparent 50%)`
+              }}
+              animate={{ opacity: [0.05, 0.15, 0.05] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
             
-            <div className="flex items-start mb-6 relative">
-              <div className={`p-4 rounded-lg ${currentFeature.textColor} bg-opacity-20 mr-4 relative`}>
-                {currentFeature.icon}
-                
-                {/* Active animation indicator */}
-                <motion.span
-                  className={`absolute -top-1 -right-1 w-2 h-2 rounded-full ${currentFeature.bgColor}`}
-                  animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                />
+            {/* Improved workflow indicator line with animation */}
+            <motion.div 
+              className="absolute top-0 left-0 right-0 h-1 overflow-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div 
+                className={`absolute inset-0 bg-gradient-to-r ${currentFeature.color}`}
+                initial={{ scaleX: 0, transformOrigin: 'left' }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              />
+              
+              {/* Animated shine effect */}
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent"
+                initial={{ x: "-100%" }}
+                animate={{ x: "100%" }}
+                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                style={{ opacity: 0.3 }}
+              />
+            </motion.div>
+            
+            <div className="flex flex-col sm:flex-row sm:items-start mb-8 relative">
+              <div className="flex-shrink-0 sm:mr-6 mb-6 sm:mb-0 flex items-center justify-center">
+                <motion.div 
+                  className={`p-5 rounded-xl ${currentFeature.textColor} bg-opacity-10 relative`}
+                  style={{ 
+                    background: `radial-gradient(circle at center, var(--color-${currentFeature.animationColor}-500/20) 0%, transparent 70%)` 
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  animate={{ 
+                    boxShadow: [
+                      `0 0 0px 0px var(--color-${currentFeature.animationColor}-500/0)`,
+                      `0 0 20px 5px var(--color-${currentFeature.animationColor}-500/20)`,
+                      `0 0 0px 0px var(--color-${currentFeature.animationColor}-500/0)`
+                    ]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 5, 0, -5, 0]
+                    }}
+                    transition={{ duration: 5, repeat: Infinity, repeatType: "mirror" }}
+                  >
+                    {React.cloneElement(currentFeature.icon, { className: `w-12 h-12 ${currentFeature.textColor}` })}
+                  </motion.div>
+                  
+                  {/* Animated rings */}
+                  <motion.div 
+                    className="absolute inset-0 rounded-xl border border-current opacity-20"
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0, 0.2] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                  <motion.div 
+                    className="absolute inset-0 rounded-xl border border-current opacity-10"
+                    animate={{ scale: [1, 1.4, 1], opacity: [0.1, 0, 0.1] }}
+                    transition={{ duration: 2.5, repeat: Infinity, delay: 0.2 }}
+                  />
+                </motion.div>
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-2 flex items-center">
+              
+              <div className="flex-1">
+                <motion.h3 
+                  className="text-3xl font-bold mb-3 bg-clip-text text-transparent relative inline-block"
+                  style={{ 
+                    backgroundImage: `linear-gradient(90deg, white, var(--color-${currentFeature.animationColor}-200))`,
+                  }}
+                  animate={{ backgroundPosition: ['0% 0%', '100% 0%', '0% 0%'] }}
+                  transition={{ duration: 8, repeat: Infinity, repeatType: "mirror" }}
+                >
                   {currentFeature.title}
                   <motion.div 
-                    className="ml-2 inline-flex"
-                    animate={{ x: [0, 3, 0] }}
+                    className="ml-2 inline-flex absolute -right-8 top-1/2 transform -translate-y-1/2"
+                    animate={{ x: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    <ChevronsRight className={`w-5 h-5 ${currentFeature.textColor}`} />
+                    <ChevronsRight className={`w-6 h-6 ${currentFeature.textColor}`} />
                   </motion.div>
-                </h3>
-                <p className="text-gray-300">{currentFeature.description}</p>
+                </motion.h3>
+                
+                <motion.p 
+                  className="text-gray-200 text-lg leading-relaxed"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  {currentFeature.description}
+                </motion.p>
+                
+                {/* Feature tags */}
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {currentFeature.flowSteps.map((step, idx) => (
+                    <motion.span 
+                      key={idx}
+                      className={`px-3 py-1 rounded-full text-xs font-medium bg-${currentFeature.animationColor}-500/10 text-${currentFeature.animationColor}-300 border border-${currentFeature.animationColor}-500/20`}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 + (idx * 0.1) }}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                    >
+                      {step}
+                    </motion.span>
+                  ))}
+                </div>
               </div>
             </div>
             
-            <div className="h-64 rounded-lg overflow-hidden mb-6 bg-dark-900/50 flex items-center justify-center border border-dark-700">
-              {/* Enhanced animation component */}
+            <div className="h-72 rounded-xl overflow-hidden mb-8 bg-dark-900/70 flex items-center justify-center border border-dark-700 shadow-inner relative">
+              {/* Enhanced feature visualization */}
               <EnhancedAnimation feature={currentFeature} />
+              
+              {/* Glass overlay effect */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-dark-900/40" />
+              
+              {/* Feature highlight badge */}
+              <motion.div 
+                className="absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-dark-800/90 border border-dark-700 flex items-center gap-2 backdrop-blur-sm"
+                initial={{ opacity: 0, scale: 0.9, y: -5 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <motion.div 
+                  className={`w-2 h-2 rounded-full bg-${currentFeature.animationColor}-400`}
+                  animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <span className="text-xs font-medium text-white">AI-Powered Feature</span>
+              </motion.div>
             </div>
             
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4 flex items-center">
-                Key Benefits
-                <div className={`ml-2 w-2 h-2 rounded-full ${currentFeature.bgColor}`}></div>
-              </h4>
-              <ul className="space-y-3">
+              <motion.h4 
+                className={`text-xl font-semibold mb-5 flex items-center`}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <span className="text-gradient-subtle mr-2" style={{ 
+                  background: `linear-gradient(90deg, white, var(--color-${currentFeature.animationColor}-200))`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent" 
+                }}>
+                  Key Benefits
+                </span>
+                <motion.div 
+                  className={`w-2 h-2 rounded-full bg-${currentFeature.animationColor}-400`}
+                  animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              </motion.h4>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {currentFeature.benefits.map((benefit, idx) => (
-                  <motion.li 
+                  <motion.div 
                     key={idx}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="flex items-center bg-dark-900/50 rounded-lg p-3 border border-dark-700 hover:border-primary-400 transition-colors duration-300"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 + (idx * 0.1) }}
+                    className="group"
                   >
-                    <div className={`w-2 h-2 rounded-full ${currentFeature.textColor} mr-3`}></div>
-                    <span className="text-gray-300">{benefit}</span>
-                  </motion.li>
+                    <motion.div 
+                      className="flex items-center p-4 rounded-xl bg-dark-900/50 border border-dark-700 group-hover:border-dark-600 group-hover:bg-dark-900/70 transition-all duration-300 h-full"
+                      whileHover={{ y: -3, x: 0, boxShadow: `0 10px 25px -5px rgba(var(--color-${currentFeature.animationColor}-500-rgb), 0.15)` }}
+                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    >
+                      <motion.div 
+                        className={`w-8 h-8 rounded-lg mr-3 flex items-center justify-center bg-${currentFeature.animationColor}-500/10 flex-shrink-0`}
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                      >
+                        <motion.div 
+                          className={`w-1.5 h-1.5 rounded-full bg-${currentFeature.animationColor}-400`}
+                          animate={{ scale: [1, 1.5, 1] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        />
+                      </motion.div>
+                      <span className="text-gray-200 group-hover:text-white transition-colors duration-300">{benefit}</span>
+                    </motion.div>
+                  </motion.div>
                 ))}
-              </ul>
+              </div>
             </div>
           </motion.div>
         </div>
         
-        {/* CTA */}
+        {/* Enhanced CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="mt-16 text-center"
+          className="mt-20 mb-8"
         >
-          <div className="inline-block">
-  <motion.button
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group"
-    onClick={() => window.open("https://calendly.com/enai-ai2024", "_blank")} // ✅ Opens Calendly in new tab
-  >
-    <span className="relative z-10">Get Your Personalized Demo</span>
-    <motion.div 
-      className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/20 to-primary-500/0"
-      animate={{ x: ['-100%', '200%'] }}
-      transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 1 }}
-    />
-  </motion.button>
-</div>
-
-{/*           <div className="inline-block">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group"
-            >
-              <span className="relative z-10">Get Your Personalized Demo</span>
+          {/* Background decorative elements */}
+          <div className="relative max-w-4xl mx-auto">
+            {/* Animated background glow */}
+            <div className="absolute inset-0 -z-10">
               <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/20 to-primary-500/0"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-2/3 rounded-full blur-[80px] opacity-30 bg-primary-500"
                 animate={{ 
-                  x: ['-100%', '200%']
+                  scale: [1, 1.2, 1],
+                  opacity: [0.2, 0.4, 0.2]
                 }}
-                transition={{ 
-                  duration: 2.5, 
-                  repeat: Infinity, 
-                  repeatDelay: 1
-                }}
+                transition={{ duration: 8, repeat: Infinity, repeatType: "mirror" }}
               />
-            </motion.button>
-          </div> */}
-          <p className="text-gray-400 mt-3 text-sm">Experience how these tools can work for your specific business needs</p>
+              <motion.div 
+                className="absolute top-1/3 right-1/4 w-16 h-16 rounded-full blur-[80px] opacity-60 bg-blue-500"
+                animate={{ 
+                  scale: [1, 1.5, 1],
+                  opacity: [0.4, 0.6, 0.4]
+                }}
+                transition={{ duration: 5, repeat: Infinity, repeatType: "mirror" }}
+              />
+            </div>
+
+            <div className="backdrop-blur-sm bg-dark-900/50 border border-dark-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+              {/* Grid pattern overlay */}
+              <motion.div 
+                className="absolute inset-0 opacity-10 bg-grid-pattern"
+                animate={{ opacity: [0.05, 0.1, 0.05] }}
+                transition={{ duration: 8, repeat: Infinity }}
+              />
+
+              {/* Content */}
+              <div className="max-w-2xl mx-auto text-center relative z-10">
+                <motion.h3 
+                  className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-primary-200 to-white mb-6"
+                  initial={{ opacity: 0, y: -10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  Ready to Transform Your Sales Process?
+                </motion.h3>
+
+                <motion.p 
+                  className="text-lg text-gray-200 mb-8"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  Book a personalized demo and see how our AI-powered sales acceleration platform can drive results for your specific business needs.
+                </motion.p>
+
+                <motion.div 
+                  className="flex flex-col sm:flex-row justify-center gap-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  <motion.button
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-xl text-white font-medium shadow-xl shadow-primary-500/30 relative overflow-hidden group"
+                    onClick={() => window.open("https://calendly.com/enai-ai2024", "_blank")}
+                  >
+                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+                    <span className="relative z-10 flex items-center justify-center">
+                      <BellRing className="w-4 h-4 mr-2" />
+                      Schedule Demo
+                    </span>
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/30 to-primary-500/0"
+                      initial={{ x: "-100%", opacity: 0 }}
+                      animate={{ x: "200%", opacity: 1 }}
+                      transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
+                    />
+                  </motion.button>
+
+                  <motion.a
+                    href="#features"
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    className="px-8 py-4 bg-dark-800 border border-dark-700 hover:border-primary-500/50 rounded-xl text-white font-medium relative overflow-hidden group flex items-center justify-center"
+                  >
+                    <span className="relative z-10">Learn More</span>
+                    <ChevronRight className="w-4 h-4 ml-1 relative z-10" />
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-r from-primary-500/0 to-primary-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" 
+                    />
+                  </motion.a>
+                </motion.div>
+
+                <motion.div 
+                  className="flex justify-center items-center mt-8 space-x-1"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <motion.div className="flex -space-x-2">
+                    {[...Array(4)].map((_, i) => (
+                      <motion.div 
+                        key={i}
+                        className="w-8 h-8 rounded-full border-2 border-dark-800 flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900"
+                        initial={{ x: -10, opacity: 0 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.7 + (i * 0.1) }}
+                      >
+                        <span className="text-xs font-medium text-white">{String.fromCharCode(65 + i)}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                  <motion.span 
+                    className="text-sm text-gray-400"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.1 }}
+                  >
+                    Join companies already using our platform
+                  </motion.span>
+                </motion.div>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

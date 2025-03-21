@@ -1279,7 +1279,7 @@ function AboutUs() {
           </motion.div>
         </div>
       </section>
-    </div>
+   </div>
   );
 }
 

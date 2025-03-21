@@ -23,6 +23,7 @@ import {
 import { Link } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Insights from './components/SuccessStories';
+import SalesProcessGuide from './components/SalesProcessGuide';
 import AIAgentShowcase from './components/AIAgentShowcase';
 import Testimonials from './components/Testimonials';
 import FeatureHighlights from './components/FeatureHighlights';
@@ -30,6 +31,7 @@ import SalesProcessStoryboard from './components/SalesProcessStoryboard';
 import AIInsightsVisualizer from './components/AIInsightsVisualizer';
 import AIActionShowcase from './components/AIActionShowcase';
 import ElevenLabsOrb from './components/ElevenLabsOrb';
+import HeroScene from './components/HeroScene';
 import { motion } from 'framer-motion';
 
 const solutions = [
@@ -174,40 +176,178 @@ function App() {
 
       {/* Hero Section */}
       <section className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark to-dark-800 relative overflow-hidden">
-        {/* Decorative background elements */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-24 h-24 bg-orange-500/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/3 right-1/4 w-32 h-32 bg-yellow-500/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/3 w-28 h-28 bg-red-500/5 rounded-full blur-3xl"></div>
+        {/* 3D Mountain Scene with Lost Orb */}
+        <HeroScene />
+        
+        {/* Additional tech elements layered on top */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[1]">
+          {/* Animated grid lines */}
+          <motion.div 
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(247, 183, 51, 0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(247, 183, 51, 0.07) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px'
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.1 }}
+            transition={{ duration: 2 }}
+          />
+
+          {/* Digital particles layered on top */}
+          <div className="absolute inset-0 opacity-30">
+            {Array.from({ length: 15 }).map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-primary-400/40 rounded-full"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  opacity: [0, 1, 0],
+                  scale: [0, 1.5, 0],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 5,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  delay: Math.random() * 5,
+                }}
+              />
+            ))}
+          </div>
         </div>
         
-        <div className="max-w-7xl mx-auto text-center scroll-fade relative z-10">
-          <h1 className="mb-10">
-            <span className="text-white text-lg md:text-2xl font-medium tracking-wider uppercase block mb-3">Meet Your New</span>
-            <span className="text-6xl md:text-8xl font-bold tracking-tight ai-workers-text block leading-tight">AI WORKERS</span>
-            <div className="h-1.5 w-48 md:w-80 bg-gradient-to-r from-orange-400 via-yellow-400 to-red-400 mx-auto mt-5 rounded-full divider-animation"></div>
-            <div className="h-px w-24 md:w-40 bg-gradient-to-r from-orange-400/30 to-yellow-400/30 mx-auto mt-2 rounded-full divider-animation-delayed"></div>
-          </h1>
-          <div className="w-full max-w-3xl mx-auto mb-8 h-px bg-dark-700/50"></div>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-14 leading-relaxed">
-            Empower your business with our AI workers. Get a dedicated team of <span className="font-semibold text-white">AI agents</span> that understand your business and help you <span className="font-semibold text-white">scale efficiently</span>.
-          </p>
-
-          <div className="flex justify-center items-center mb-16">
-            <motion.button
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <h1 className="mb-10">
+              <motion.span 
+                className="text-white text-lg md:text-2xl font-medium tracking-wider uppercase block mb-3"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+              >
+                Meet Your New
+              </motion.span>
+              <motion.span 
+                className="text-6xl md:text-8xl font-bold tracking-tight ai-workers-text block leading-tight"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+              >
+                AI WORKERS
+              </motion.span>
+              <motion.div 
+                className="h-1.5 w-48 md:w-80 bg-gradient-to-r from-orange-400 via-yellow-400 to-red-400 mx-auto mt-5 rounded-full"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
+              />
+              <motion.div 
+                className="h-px w-24 md:w-40 bg-gradient-to-r from-orange-400/30 to-yellow-400/30 mx-auto mt-2 rounded-full"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
+              />
+            </h1>
+          </motion.div>
+          <motion.div 
+            className="w-full max-w-3xl mx-auto mb-8 h-px bg-dark-700/50"
+            initial={{ opacity: 0, width: "0%" }}
+            animate={{ opacity: 1, width: "100%" }}
+            transition={{ delay: 1.3, duration: 0.5 }}
+          />
+          <motion.p 
+            className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-14 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+          >
+            Empower your business with our AI workers. Get a dedicated team of <motion.span 
+              className="font-semibold text-white relative inline-block"
               whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <span className="relative z-10">AI agents</span>
+              <motion.span 
+                className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-orange-400 to-yellow-400"
+                layoutId="highlight"
+              />
+            </motion.span> that understand your business and help you <motion.span 
+              className="font-semibold text-white relative inline-block"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <span className="relative z-10">scale efficiently</span>
+              <motion.span 
+                className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-orange-400 to-yellow-400"
+                layoutId="highlight"
+              />
+            </motion.span>.
+          </motion.p>
+
+          <motion.div 
+            className="flex justify-center items-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.8, duration: 0.8 }}
+          >
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.25), 0 8px 10px -6px rgba(249, 115, 22, 0.15)" }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group mx-4"
               onClick={() => window.open("https://calendly.com/enai-ai2024", "_blank")}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
             >
-              <span className="relative z-10">Get Demo</span>
+              <span className="relative z-10 flex items-center justify-center">
+                <motion.svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="18" 
+                  height="18" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  className="mr-2"
+                  initial={{ opacity: 0, x: -5 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 2, duration: 0.5 }}
+                >
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                  <polyline points="10 17 15 12 10 7"/>
+                  <line x1="15" y1="12" x2="3" y2="12"/>
+                </motion.svg>
+                Get Demo
+              </span>
               <motion.div 
                 className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/20 to-primary-500/0"
                 animate={{ x: ["-100%", "200%"] }}
                 transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 1 }}
               />
+              <motion.div 
+                className="absolute -inset-1 rounded-lg"
+                style={{ 
+                  background: "linear-gradient(90deg, #f97316, #facc15, #f97316)", 
+                  backgroundSize: "200% 200%",
+                  zIndex: -1, 
+                  filter: "blur(8px)" 
+                }}
+                animate={{ backgroundPosition: ["0% 0%", "100% 0%", "0% 0%"] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 0.5 }}
+              />
             </motion.button>
-          </div>
+          </motion.div>
           
 
 
@@ -367,7 +507,7 @@ function App() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-dark-800/80 backdrop-blur-sm border border-dark-700 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500"
+              className="bg-dark-800/80 backdrop-blur-sm border border-dark-700 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:border-dark-600 transition-all duration-500"
             >
               <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-400/20 to-purple-400/20 rounded-xl mb-6 mx-auto md:mx-0">
                 <Mail className="w-8 h-8 text-primary-400" />
