@@ -572,7 +572,7 @@ export default function FeatureHighlights() {
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     className="px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group"
-    onClick={() => window.open("https://calendly.com/enai-ai2024", "_blank")} // ✅ Opens Calendly in new tab
+    onClick={() => window.open("https://calendly.com/enai-ai2024/30min", "_blank")} // ✅ Opens Calendly in new tab
   >
     <span className="relative z-10">Get Your Personalized Demo</span>
     <motion.div 
