@@ -25,6 +25,7 @@ import { Helmet } from 'react-helmet';
 import SEOFAQSection from '../components/SEOFAQSection';
 import LazyImage from '../components/LazyImage';
 import { throttle, debounce, isLowEndDevice, prefersReducedMotion } from '../utils/performance';
+import { GlowingEffectDemo } from '../components/ui/glowing-effect-demo';
 
 // Define interfaces for better typing
 interface IndustryApplication {
@@ -759,6 +760,39 @@ export default function Industries() {
                   </Tabs>
                 </motion.div>
               </motion.div>
+            </section>
+
+            {/* Glowing Effect Demo Section */}
+            <section className="py-16 bg-dark relative overflow-hidden">
+              <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern"></div>
+              <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary-400/5 rounded-full blur-[100px] pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-500/5 rounded-full blur-[80px] pointer-events-none"></div>
+              
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="text-center mb-12"
+                >
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                    <span className="gradient-text">Explore Our AI Capabilities</span>
+                  </h2>
+                  <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+                    Our AI solutions adapt to multiple industries, providing tailored automation and insights for your specific needs.
+                  </p>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                >
+                  <GlowingEffectDemo />
+                </motion.div>
+              </div>
             </section>
 
             {/* Industry Overview Stats */}

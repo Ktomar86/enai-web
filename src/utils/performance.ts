@@ -160,15 +160,17 @@ export const requestIdleCallback = (
   callback: IdleRequestCallback,
   options?: IdleRequestOptions
 ): number => {
-  return 'requestIdleCallback' in window
-    ? window.requestIdleCallback(callback, options)
-    : setTimeout(() => {
-        const start = Date.now();
-        callback({
-          didTimeout: false,
-          timeRemaining: () => Math.max(0, 50 - (Date.now() - start)),
-        });
-      }, 1);
+  if ('requestIdleCallback' in window) {
+    return window.requestIdleCallback(callback, options);
+  } else {
+    return setTimeout(() => {
+      const start = Date.now();
+      callback({
+        didTimeout: false,
+        timeRemaining: () => Math.max(0, 50 - (Date.now() - start)),
+      });
+    }, 1) as unknown as number; // Cast to number to satisfy TypeScript
+  }
 };
 
 /**
