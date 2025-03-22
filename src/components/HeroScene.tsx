@@ -1,24 +1,57 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 
 // Main HeroScene component with Spline viewer
 const HeroScene = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isSplineLoaded, setIsSplineLoaded] = useState(false);
+  const [isInViewport, setIsInViewport] = useState(false);
 
+  // Use Intersection Observer to only load Spline when in viewport
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsInViewport(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Only load Spline when component is in viewport
+  useEffect(() => {
+    if (!isInViewport) return;
+
     // Dynamically load the Spline viewer script
     const script = document.createElement('script');
     script.type = 'module';
     script.src = 'https://unpkg.com/@splinetool/viewer@1.9.79/build/spline-viewer.js';
+    
+    script.onload = () => {
+      setIsSplineLoaded(true);
+    };
+    
     document.head.appendChild(script);
 
     // Clean up script when component unmounts
     return () => {
       document.head.removeChild(script);
     };
-  }, []);
+  }, [isInViewport]);
 
   useEffect(() => {
+    if (!isSplineLoaded || !isInViewport) return;
+    
     // Add CSS to completely hide all Spline branding
     const style = document.createElement('style');
     style.textContent = `
@@ -116,7 +149,7 @@ const HeroScene = () => {
     });
     
     // Start observing the spline-viewer after a short delay
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       const splineViewer = document.querySelector('spline-viewer');
       if (splineViewer) {
         observer.observe(splineViewer, {
@@ -135,8 +168,36 @@ const HeroScene = () => {
     return () => {
       document.head.removeChild(style);
       observer.disconnect();
+      clearTimeout(timeoutId);
     };
-  }, []);
+  }, [isSplineLoaded, isInViewport]);
+
+  // Reduce the number of animated particles for better performance
+  const renderParticles = () => {
+    // Only render 8 particles instead of 12 for better performance
+    return Array.from({ length: 8 }).map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute rounded-full bg-orange-400"
+        style={{
+          width: 2 + Math.random() * 4 + 'px',
+          height: 2 + Math.random() * 4 + 'px',
+          bottom: Math.random() * 50 + 'px',
+          right: Math.random() * 180 + 'px',
+        }}
+        animate={{
+          y: [0, -15, 0],
+          opacity: [0.4, 1, 0.4],
+          scale: [1, 1.5, 1],
+        }}
+        transition={{
+          duration: 2 + Math.random() * 3,
+          repeat: Infinity,
+          delay: Math.random() * 2,
+        }}
+      />
+    ));
+  };
 
   return (
     <div className="w-full h-[600px] absolute top-0 left-0 z-0 overflow-hidden" ref={containerRef}>
@@ -144,49 +205,35 @@ const HeroScene = () => {
         className="w-full h-full relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: 1 }} // Reduced from 2s to 1s for faster initial render
       >
-        {/* Darker, more refined glowing orbs effect */}
+        {/* Optimized glowing orbs effect - reduced blur radius and simplified animations */}
         <div className="absolute inset-0 z-10 pointer-events-none">
           <motion.div 
-            className="absolute w-[300px] h-[300px] rounded-full bg-primary-500/15 blur-[120px] z-10"
+            className="absolute w-[300px] h-[300px] rounded-full bg-primary-500/15 blur-[80px] z-10"
             style={{ top: '10%', left: '10%' }}
             animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.5, 0.2]
+              scale: [1, 1.1, 1],
+              opacity: [0.2, 0.4, 0.2]
             }}
             transition={{
-              duration: 8,
+              duration: 10,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           />
           <motion.div 
-            className="absolute w-[250px] h-[250px] rounded-full bg-blue-500/15 blur-[100px] z-10"
+            className="absolute w-[250px] h-[250px] rounded-full bg-blue-500/15 blur-[80px] z-10"
             style={{ top: '30%', right: '15%' }}
             animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.15, 0.4, 0.15]
+              scale: [1, 1.2, 1],
+              opacity: [0.15, 0.3, 0.15]
             }}
             transition={{
-              duration: 10,
+              duration: 12,
               repeat: Infinity,
               ease: "easeInOut",
               delay: 1
-            }}
-          />
-          <motion.div 
-            className="absolute w-[200px] h-[200px] rounded-full bg-purple-500/15 blur-[80px] z-10"
-            style={{ bottom: '20%', left: '25%' }}
-            animate={{
-              scale: [1, 1.4, 1],
-              opacity: [0.15, 0.45, 0.15]
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2
             }}
           />
         </div>
@@ -194,71 +241,40 @@ const HeroScene = () => {
         {/* Add a subtle dark vignette overlay for better contrast with content */}
         <div className="absolute inset-0 bg-gradient-radial from-transparent to-black/30 z-5 pointer-events-none"></div>
         
-        {/* Spline viewer */}
-        <spline-viewer 
-          url="https://prod.spline.design/7dqUlpFgEXNPUap8/scene.splinecode"
-          className="w-full h-full"
-        ></spline-viewer>
+        {/* Conditionally render Spline viewer */}
+        {isInViewport && (
+          <spline-viewer 
+            url="https://prod.spline.design/7dqUlpFgEXNPUap8/scene.splinecode"
+            className="w-full h-full"
+            loading="lazy"
+          ></spline-viewer>
+        )}
         
-        {/* Animated particles */}
+        {/* Animated particles with reduced number */}
         <motion.div 
           className="absolute bottom-0 right-0 w-[200px] h-[60px] overflow-hidden z-[600]" 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          {/* Animated dots */}
-          {Array.from({ length: 12 }).map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-orange-400"
-              style={{
-                width: 2 + Math.random() * 4 + 'px',
-                height: 2 + Math.random() * 4 + 'px',
-                bottom: Math.random() * 50 + 'px',
-                right: Math.random() * 180 + 'px',
-              }}
-              animate={{
-                y: [0, -15, 0],
-                opacity: [0.4, 1, 0.4],
-                scale: [1, 1.5, 1],
-              }}
-              transition={{
-                duration: 2 + Math.random() * 3,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
+          {/* Optimized animated dots */}
+          {renderParticles()}
           
           {/* Animated small pulse */}
           <motion.div
             className="absolute bottom-[15px] right-[20px] w-[6px] h-[6px] bg-orange-400 rounded-full"
             animate={{
-              scale: [1, 1.8, 1],
+              scale: [1, 1.6, 1],
               opacity: [0.7, 1, 0.7],
               boxShadow: [
                 '0 0 0px rgba(245, 158, 11, 0.0)',
-                '0 0 10px rgba(245, 158, 11, 0.8)',
+                '0 0 8px rgba(245, 158, 11, 0.7)',
                 '0 0 0px rgba(245, 158, 11, 0.0)'
               ]
             }}
             transition={{
-              duration: 2,
+              duration: 2.5,
               repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          
-          {/* Animated line */}
-          <motion.div
-            className="absolute bottom-[15px] right-[30px] h-[3px] bg-gradient-to-r from-transparent via-primary-400 to-primary-400/30 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: 100 }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              repeatType: 'reverse',
               ease: "easeInOut"
             }}
           />
