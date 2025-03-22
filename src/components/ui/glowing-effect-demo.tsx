@@ -4,7 +4,7 @@ import { ChevronRight, Building, Code, BarChart2, Zap, Globe } from 'lucide-reac
 import { GlowingEffect } from "./glowing-effect";
 import { cn } from "../../lib/utils";
 
-export function GlowingEffectDemo() {
+function GlowingEffectDemo() {
   return (
     <ul className="grid grid-cols-1 md:grid-cols-12 md:grid-rows-3 gap-4 lg:gap-6 my-12">
       <GridItem
@@ -40,6 +40,8 @@ export function GlowingEffectDemo() {
     </ul>
   );
 }
+
+export default GlowingEffectDemo;
 
 interface GridItemProps {
   area: string;
