@@ -11,6 +11,10 @@ import {
 import Navigation from './components/Navigation';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './components/ui/card';
+import { Button } from './components/ui/button';
+import { Badge } from './components/ui/badge';
+import { Separator } from './components/ui/separator';
 
 // Enhanced SEO data for the About Us page
 const SEO_DATA = {
@@ -240,7 +244,7 @@ function AboutUs() {
               </span>
               <span className="text-4xl md:text-5xl font-bold block mt-4">for High-Performance Teams</span>
             </h1>
-            <div className="w-full max-w-3xl mx-auto mb-8 h-px bg-dark-700/50"></div>
+            <Separator className="w-full max-w-3xl mx-auto mb-8" />
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Enai is redefining how sales teams prospect, qualify, and convert leads—24/7, powered by AI.
             </p>
@@ -259,13 +263,18 @@ function AboutUs() {
                 initial={{ y: 10, opacity: 0.8 }}
                 animate={{ y: [10, 0, 10], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="bg-dark border border-dark-700 hover:border-orange-500/50 rounded-lg p-4 md:p-6 text-center transition-all duration-300"
               >
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Target className="w-6 h-6 md:w-8 md:h-8 text-orange-400" />
-                </div>
-                <h3 className="text-sm md:text-lg font-semibold text-white mb-1">Prospect</h3>
-                <p className="text-xs md:text-sm text-gray-400">AI finds & qualifies ideal leads</p>
+                <Card className="overflow-hidden">
+                  <CardHeader className="text-center pb-2">
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <Target className="w-6 h-6 md:w-8 md:h-8 text-orange-400" />
+                    </div>
+                    <CardTitle className="text-sm md:text-lg text-white">Prospect</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-center pt-0">
+                    <CardDescription className="text-xs md:text-sm">AI finds & qualifies ideal leads</CardDescription>
+                  </CardContent>
+                </Card>
               </motion.div>
               
               {/* Animated workflow - Step 2 */}
@@ -273,13 +282,18 @@ function AboutUs() {
                 initial={{ y: 10, opacity: 0.8 }}
                 animate={{ y: [10, 0, 10], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1 }}
-                className="bg-dark border border-dark-700 hover:border-orange-500/50 rounded-lg p-4 md:p-6 text-center transition-all duration-300"
               >
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <MessageSquare className="w-6 h-6 md:w-8 md:h-8 text-orange-400" />
-                </div>
-                <h3 className="text-sm md:text-lg font-semibold text-white mb-1">Engage</h3>
-                <p className="text-xs md:text-sm text-gray-400">Multi-channel outreach at scale</p>
+                <Card className="overflow-hidden">
+                  <CardHeader className="text-center pb-2">
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <MessageSquare className="w-6 h-6 md:w-8 md:h-8 text-orange-400" />
+                    </div>
+                    <CardTitle className="text-sm md:text-lg text-white">Engage</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-center pt-0">
+                    <CardDescription className="text-xs md:text-sm">Multi-channel outreach at scale</CardDescription>
+                  </CardContent>
+                </Card>
               </motion.div>
               
               {/* Animated workflow - Step 3 */}
@@ -287,13 +301,18 @@ function AboutUs() {
                 initial={{ y: 10, opacity: 0.8 }}
                 animate={{ y: [10, 0, 10], opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 2 }}
-                className="bg-dark border border-dark-700 hover:border-orange-500/50 rounded-lg p-4 md:p-6 text-center transition-all duration-300"
               >
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <BarChart3 className="w-6 h-6 md:w-8 md:h-8 text-orange-400" />
-                </div>
-                <h3 className="text-sm md:text-lg font-semibold text-white mb-1">Convert</h3>
-                <p className="text-xs md:text-sm text-gray-400">Book meetings & close deals</p>
+                <Card className="overflow-hidden">
+                  <CardHeader className="text-center pb-2">
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <BarChart3 className="w-6 h-6 md:w-8 md:h-8 text-orange-400" />
+                    </div>
+                    <CardTitle className="text-sm md:text-lg text-white">Convert</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-center pt-0">
+                    <CardDescription className="text-xs md:text-sm">Book meetings & close deals</CardDescription>
+                  </CardContent>
+                </Card>
               </motion.div>
             </div>
             
@@ -356,11 +375,15 @@ function AboutUs() {
               >
                 <div className="flex flex-col md:flex-row items-center">
                   <div className="md:w-1/2 md:pr-12 mb-8 md:mb-0 md:text-right">
-                    <div className="bg-dark-900 border border-dark-700 rounded-xl p-8 hover:border-orange-500/30 transition-colors duration-300 shadow-xl">
-                      <span className="inline-block text-orange-400 font-bold text-xl mb-2">2024</span>
-                      <h3 className="text-2xl font-bold text-white mb-4">🚀 Founding & Vision</h3>
-                      <p className="text-gray-300">Enai was founded with a mission to transform sales automation through AI-driven innovation. Our team recognized the inefficiencies in traditional sales processes, where businesses lose valuable time on manual prospecting and unqualified leads. Enai was built to automate, optimize, and accelerate sales workflows using cutting-edge AI technology.</p>
-                    </div>
+                    <Card className="shadow-xl">
+                      <CardHeader>
+                        <Badge className="w-fit" variant="default">2024</Badge>
+                        <CardTitle className="text-2xl">🚀 Founding & Vision</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-gray-300">Enai was founded with a mission to transform sales automation through AI-driven innovation. Our team recognized the inefficiencies in traditional sales processes, where businesses lose valuable time on manual prospecting and unqualified leads. Enai was built to automate, optimize, and accelerate sales workflows using cutting-edge AI technology.</p>
+                      </CardContent>
+                    </Card>
                   </div>
                   <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center">
                     <Calendar className="w-6 h-6 text-white" />
@@ -383,11 +406,15 @@ function AboutUs() {
                     <Zap className="w-6 h-6 text-white" />
                   </div>
                   <div className="md:w-1/2 md:pl-12 md:text-left">
-                    <div className="bg-dark-900 border border-dark-700 rounded-xl p-8 hover:border-orange-500/30 transition-colors duration-300 shadow-xl">
-                      <span className="inline-block text-orange-400 font-bold text-xl mb-2">2025</span>
-                      <h3 className="text-2xl font-bold text-white mb-4">🔬 Beta Launch & Early Success</h3>
-                      <p className="text-gray-300">In our first year, we launched a closed beta with select clients, testing our AI-driven approach to lead qualification and outreach. Our models quickly demonstrated a significant increase in engagement rates and precision in targeting high-intent leads—proving that AI-powered sales automation can outperform conventional methods.</p>
-                    </div>
+                    <Card className="shadow-xl">
+                      <CardHeader>
+                        <Badge className="w-fit" variant="default">2025</Badge>
+                        <CardTitle className="text-2xl">🔬 Beta Launch & Early Success</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-gray-300">In our first year, we launched a closed beta with select clients, testing our AI-driven approach to lead qualification and outreach. Our models quickly demonstrated a significant increase in engagement rates and precision in targeting high-intent leads—proving that AI-powered sales automation can outperform conventional methods.</p>
+                      </CardContent>
+                    </Card>
                   </div>
                 </div>
               </motion.div>
@@ -402,11 +429,15 @@ function AboutUs() {
               >
                 <div className="flex flex-col md:flex-row items-center">
                   <div className="md:w-1/2 md:pr-12 mb-8 md:mb-0 md:text-right">
-                    <div className="bg-dark-900 border border-dark-700 rounded-xl p-8 hover:border-orange-500/30 transition-colors duration-300 shadow-xl">
-                      <span className="inline-block text-orange-400 font-bold text-xl mb-2">2025 & Beyond</span>
-                      <h3 className="text-2xl font-bold text-white mb-4">📈 Expanding Capabilities</h3>
-                      <p className="text-gray-300">Enai is growing, refining its AI models, and expanding integrations with CRM systems and outreach platforms. As we scale, our focus remains on enhancing accuracy in lead qualification, optimizing outreach timing, and improving workflow automation to support sales teams in various industries.</p>
-                    </div>
+                    <Card className="shadow-xl">
+                      <CardHeader>
+                        <Badge className="w-fit" variant="default">2025 & Beyond</Badge>
+                        <CardTitle className="text-2xl">📈 Expanding Capabilities</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-gray-300">Enai is growing, refining its AI models, and expanding integrations with CRM systems and outreach platforms. As we scale, our focus remains on enhancing accuracy in lead qualification, optimizing outreach timing, and improving workflow automation to support sales teams in various industries.</p>
+                      </CardContent>
+                    </Card>
                   </div>
                   <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center">
                     <Users className="w-6 h-6 text-white" />
@@ -459,15 +490,28 @@ function AboutUs() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="bg-white rounded-2xl p-10 md:p-12 shadow-2xl"
+              className="relative overflow-hidden"
             >
-              <h2 className="text-4xl font-bold text-dark mb-8">Who is Enai?</h2>
-              <p className="text-xl text-gray-700 mb-6">
-                Enai is an AI-powered <span className="font-semibold">sales automation platform</span> designed to <span className="font-semibold">eliminate manual prospecting</span> and streamline outreach.
-              </p>
-              <p className="text-xl text-gray-700">
-                Our mission is to <span className="font-semibold">help sales teams scale faster</span>, close more deals, and <span className="font-semibold">leverage AI-driven automation</span> to outperform the competition.
-              </p>
+              <Card className="bg-white text-dark rounded-2xl p-6 md:p-8 shadow-2xl">
+                <CardHeader className="px-0 pt-0">
+                  <CardTitle className="text-4xl font-bold text-dark">Who is Enai?</CardTitle>
+                </CardHeader>
+                <CardContent className="px-0 space-y-6">
+                  <p className="text-xl text-gray-700">
+                    Enai is an AI-powered <span className="font-semibold">sales automation platform</span> designed to <span className="font-semibold">eliminate manual prospecting</span> and streamline outreach.
+                  </p>
+                  <p className="text-xl text-gray-700">
+                    Our mission is to <span className="font-semibold">help sales teams scale faster</span>, close more deals, and <span className="font-semibold">leverage AI-driven automation</span> to outperform the competition.
+                  </p>
+                </CardContent>
+                <CardFooter className="px-0 pt-4">
+                  <Button className="mt-2">
+                    Learn More <ChevronRight className="h-4 w-4 ml-1" />
+                  </Button>
+                </CardFooter>
+              </Card>
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"></div>
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-red-500/10 rounded-full blur-3xl"></div>
             </motion.div>
             
             {/* Right side - Enhanced AI Message Generation Visualization */}
@@ -552,283 +596,100 @@ function AboutUs() {
                     }}
                   />
                   
-                  {/* User Message */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="flex justify-end"
-                  >
-                    <div className="flex items-end gap-2 max-w-[85%]">
-                      <div className="max-w-full bg-orange-500/20 text-white p-3 rounded-lg rounded-tr-none border border-orange-500/10 shadow-md">
-                        <p className="text-sm">Hi Enai, I need to find some new <span className="text-orange-300 font-medium">leads</span> for our SaaS product</p>
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-gray-700 flex items-center justify-center flex-shrink-0 border border-gray-600/30">
-                        <span className="text-xs font-bold text-gray-300">JD</span>
+                  {/* AI Message Components */}
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 mr-3">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                        <span className="text-xs font-bold text-white">ENAI</span>
                       </div>
                     </div>
-                  </motion.div>
+                    <div>
+                      <Card className="max-w-[85%] bg-dark-800 border-dark-700 mb-2">
+                        <CardContent className="p-3 text-sm">
+                          <p>I'm Enai, your AI sales assistant. I can help your team find, engage, and convert high-quality leads 24/7.</p>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
                   
-                  {/* AI Thinking Animation */}
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8, duration: 0.3 }}
-                    className="flex"
-                  >
-                    <div className="max-w-[80%] bg-dark-700 p-3 rounded-lg rounded-tl-none relative overflow-hidden">
-                      <motion.div
-                        className="flex space-x-2 items-center py-1"
-                      >
-                        <motion.span 
-                          className="text-sm text-white"
-                        >
-                          Enai is thinking
-                        </motion.span>
-                        <div className="flex space-x-1">
-                          {[...Array(3)].map((_, i) => (
-                            <motion.div
-                              key={i}
-                              initial={{ opacity: 0.3 }}
-                              animate={{ opacity: [0.3, 1, 0.3] }}
-                              transition={{ 
-                                duration: 0.8, 
-                                repeat: Infinity, 
-                                delay: i * 0.2,
-                                repeatDelay: 0.2
-                              }}
-                              className="w-1.5 h-1.5 rounded-full bg-orange-500"
-                            />
-                          ))}
-                        </div>
-                      </motion.div>
-                      
-                      {/* Processing Animation */}
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: '100%' }}
-                        transition={{ duration: 2, delay: 1.5 }}
-                        className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-500"
-                      />
-                    </div>
-                  </motion.div>
+                  <div className="flex items-start justify-end">
+                    <Card className="max-w-[85%] bg-dark/60 border-dark-700">
+                      <CardContent className="p-3 text-sm">
+                        <p>How do you qualify leads to ensure they're high-intent?</p>
+                      </CardContent>
+                    </Card>
+                  </div>
                   
-                  {/* AI Response Generation */}
-                  <motion.div 
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    transition={{ delay: 3.8, duration: 0.5 }}
-                    className="flex"
-                  >
-                    <div className="max-w-[80%] bg-gradient-to-r from-dark-700 to-dark-700/90 p-3 rounded-lg rounded-tl-none text-white border border-dark-600/50 shadow-lg">
-                      <div className="flex items-start gap-2">
-                        <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0 border border-orange-300/20">
-                          <span className="text-[10px] font-bold">AI</span>
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center mb-1">
-                            <p className="text-xs text-orange-300 font-medium">Enai Assistant</p>
-                            <motion.span 
-                              className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 ml-2"
-                              animate={{ opacity: [1, 0.3, 1] }}
-                              transition={{ duration: 1.5, repeat: Infinity }}
-                            />
-                          </div>
-                          <motion.p 
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 4, duration: 0.5 }}
-                            className="text-sm"
-                          >
-                            I've analyzed your market and identified <span className="text-orange-400 font-medium">high-conversion opportunities</span> for your SaaS product. Based on your <span className="text-orange-400 font-medium">ICP data</span>:
-                          </motion.p>
-                        </div>
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 mr-3">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                        <span className="text-xs font-bold text-white">ENAI</span>
                       </div>
-                      
-                      {/* Animated typing effect for the message */}
-                      <motion.div 
-                        className="text-sm mt-2 space-y-2"
-                      >
-                        {[
-                          "1. I've identified 250+ decision-makers in tech companies",
-                          "2. Filtered for companies with 50-200 employees", 
-                          "3. Targeting prospects showing product-fit signals"
-                        ].map((item, i) => (
-                          <motion.div 
-                            key={i}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 4.3 + (i * 0.7), duration: 0.3 }}
-                            className="flex items-start"
-                          >
-                            <div className="text-orange-500 mr-2 flex-shrink-0">
-                              <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ delay: 4.3 + (i * 0.7), duration: 0.4, type: "spring" }}
-                                className="flex items-center justify-center w-4 h-4 bg-orange-500/20 rounded-full"
-                              >
-                                <span className="text-[10px]">→</span>
-                              </motion.div>
-                            </div>
-                            <motion.span
-                              initial={{ width: 0 }}
-                              animate={{ width: '100%' }}
-                              transition={{ delay: 4.3 + (i * 0.7), duration: 0.7 }}
-                              className="whitespace-nowrap overflow-hidden"
-                              style={{ display: 'block' }}
-                            >
-                              {item.split('key decision-makers').join(
-                                '<span class="text-orange-400 font-medium">key decision-makers</span>'
-                              ).split('high-growth companies').join(
-                                '<span class="text-orange-400 font-medium">high-growth companies</span>'
-                              ).split('intent and product-fit signals').join(
-                                '<span class="text-orange-400 font-medium">intent and product-fit signals</span>'
-                              )}
-                            </motion.span>
-                          </motion.div>
-                        ))}
-                      </motion.div>
-                      
-                      <motion.p 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 6.5, duration: 0.5 }}
-                        className="mt-3 text-sm"
-                      >
-                        I can launch <span className="text-orange-400 font-medium">multi-channel campaigns</span> with <span className="text-orange-400 font-medium">personalized messaging</span> to these prospects today. Shall we proceed?
-                      </motion.p>
-                      <motion.div 
-                        className="flex mt-1 space-x-1"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: [0, 1, 0] }}
-                        transition={{ 
-                          delay: 7.5,
-                          duration: 1.5, 
-                          repeat: Infinity, 
-                          repeatDelay: 2
-                        }}
-                      >
-                        <span className="w-1 h-1 bg-orange-400 rounded-full"/>
-                        <span className="w-1 h-1 bg-orange-400 rounded-full"/>
-                        <span className="w-1 h-1 bg-orange-400 rounded-full"/>
-                      </motion.div>
                     </div>
-                  </motion.div>
+                    <div>
+                      <Card className="max-w-[85%] bg-dark-800 border-dark-700 mb-2">
+                        <CardContent className="p-3 text-sm">
+                          <p>I analyze multiple factors including:</p>
+                          <ul className="list-disc pl-5 mt-2 space-y-1 text-xs text-gray-300">
+                            <li>Company growth signals</li>
+                            <li>Digital engagement patterns</li>
+                            <li>Technographic fit with your solution</li>
+                            <li>Recent organizational changes</li>
+                            <li>Behavioral scoring across channels</li>
+                          </ul>
+                        </CardContent>
+                      </Card>
+                      <Card className="max-w-[85%] bg-dark-800 border-dark-700">
+                        <CardContent className="p-3 text-sm">
+                          <p>This creates a comprehensive qualification score to ensure you're focusing on prospects most likely to convert.</p>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
+                  
+                  {/* Typing indicator */}
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 mr-3">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                        <span className="text-xs font-bold text-white">ENAI</span>
+                      </div>
+                    </div>
+                    <div className="bg-dark-800 px-4 py-2 rounded-full">
+                      <div className="flex space-x-1">
+                        <motion.div 
+                          animate={{ y: [0, -3, 0] }}
+                          transition={{ repeat: Infinity, duration: 1, delay: 0 }}
+                          className="w-1.5 h-1.5 bg-gray-400 rounded-full"
+                        />
+                        <motion.div 
+                          animate={{ y: [0, -3, 0] }}
+                          transition={{ repeat: Infinity, duration: 1, delay: 0.2 }}
+                          className="w-1.5 h-1.5 bg-gray-400 rounded-full"
+                        />
+                        <motion.div 
+                          animate={{ y: [0, -3, 0] }}
+                          transition={{ repeat: Infinity, duration: 1, delay: 0.4 }}
+                          className="w-1.5 h-1.5 bg-gray-400 rounded-full"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 
-                {/* Glowing Data Processing Effects */}
-                <motion.div 
-                  className="absolute right-10 top-1/2 transform -translate-y-1/2 pointer-events-none z-10"
-                  animate={{ opacity: [0.3, 0.7, 0.3] }}
-                  transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
-                >
-                  <div className="relative">
-                    <div className="absolute -inset-2 bg-orange-500/10 rounded-full blur-md"></div>
-                    <div className="w-4 h-20 bg-gradient-to-b from-orange-500/50 to-transparent rounded-full"></div>
-                  </div>
-                </motion.div>
-                
-                {/* AI Processing indicator */}
-                <motion.div
-                  initial={{ opacity: 0, y: -5 }}
-                  animate={{ 
-                    opacity: [0, 0.9, 0],
-                    y: [-5, 0, -5]
-                  }}
-                  transition={{ 
-                    repeat: Infinity, 
-                    duration: 2.5,
-                    repeatDelay: 1.5
-                  }}
-                  className="absolute right-6 top-20 bg-dark-700/90 backdrop-blur-sm border border-orange-500/30 text-xs text-white px-3 py-1.5 rounded-lg shadow-lg shadow-orange-500/10"
-                >
-                  <div className="flex items-center gap-2">
-                    <motion.div 
-                      animate={{ rotate: 360 }}
-                      transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-                      className="w-3 h-3 border-2 border-orange-500 border-t-transparent rounded-full"
-                    />
-                    <span>Processing customer data<motion.span
-                      animate={{ opacity: [0, 1, 0] }}
-                      transition={{ repeat: Infinity, duration: 1.5 }}
-                    >...</motion.span></span>
-                  </div>
-                </motion.div>
-              </div>
-              
-              {/* Background processing effects */}
-              <div className="absolute inset-0 pointer-events-none z-0">
-                {/* Additional subtle animated background gradients */}
-                <motion.div
-                  className="absolute -top-20 right-0 w-40 h-40 bg-gradient-to-br from-orange-500/5 to-red-500/5 rounded-full blur-3xl"
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.5, 0.7, 0.5]
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 6,
-                    ease: "easeInOut"
-                  }}
-                />
-                <motion.div
-                  className="absolute bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-red-500/5 to-orange-500/5 rounded-full blur-3xl"
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.4, 0.6, 0.4]
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 8,
-                    ease: "easeInOut",
-                    delay: 1
-                  }}
-                />
-                {/* Data Processing Beams */}
-                {[...Array(5)].map((_, i) => {
-                  const delay = i * 2;
-                  const positions = [
-                    { start: { x: '10%', y: '20%' }, end: { x: '90%', y: '40%' } },
-                    { start: { x: '80%', y: '15%' }, end: { x: '20%', y: '75%' } },
-                    { start: { x: '50%', y: '90%' }, end: { x: '30%', y: '10%' } },
-                    { start: { x: '70%', y: '80%' }, end: { x: '40%', y: '30%' } },
-                    { start: { x: '30%', y: '60%' }, end: { x: '80%', y: '50%' } },
-                  ];
-                  return (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0 }}
-                      animate={{
-                        opacity: [0, 0.5, 0],
-                      }}
-                      transition={{
-                        repeat: Infinity,
-                        duration: 2,
-                        delay: delay,
-                        repeatDelay: 8
-                      }}
-                      className="absolute w-full h-full"
-                    >
-                      <motion.div
-                        animate={{
-                          left: [positions[i].start.x, positions[i].end.x],
-                          top: [positions[i].start.y, positions[i].end.y],
-                        }}
-                        transition={{
-                          repeat: Infinity,
-                          duration: 2,
-                          delay: delay,
-                          repeatDelay: 8
-                        }}
-                        className="absolute w-1.5 h-1.5 rounded-full bg-orange-500 blur-[1px]"
-                        style={{
-                          boxShadow: '0 0 12px 3px rgba(249, 115, 22, 0.4)',
-                        }}
-                      />
-                    </motion.div>
-                  );
-                })}
+                {/* Chat Input */}
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    placeholder="Type a message..." 
+                    className="w-full bg-dark/50 border border-dark-700 rounded-full pl-4 pr-12 py-2 text-gray-200 text-sm focus:outline-none focus:border-orange-500/50"
+                  />
+                  <Button size="sm" variant="default" className="absolute right-1 top-1 rounded-full w-8 h-8 p-0 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="m22 2-7 20-4-9-9-4Z"/>
+                      <path d="M22 2 11 13"/>
+                    </svg>
+                  </Button>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -1098,7 +959,7 @@ function AboutUs() {
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
-                  className="w-12 h-12 rounded-full border-2 border-dashed border-white/60 flex items-center justify-center"
+                  className="w-12 h-12 rounded-full border border-dashed border-white/60 flex items-center justify-center"
                 >
                   <span className="text-sm font-bold text-white">ENAI</span>
                 </motion.div>
@@ -1279,7 +1140,227 @@ function AboutUs() {
           </motion.div>
         </div>
       </section>
-   </div>
+      
+      {/* Core Values Section with Enhanced UI */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-dark-900 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+          <motion.div 
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+            className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-orange-500/5 to-red-500/5 rounded-full blur-3xl"
+          />
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-400 to-red-400">
+                  Our Core Values
+                </span>
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                The guiding principles that drive our innovation and commitment to excellence
+              </p>
+            </motion.div>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Value 1: Innovation */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              whileHover={{ y: -5 }}
+              className="scroll-fade"
+            >
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="w-14 h-14 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mb-4">
+                    <Zap className="w-7 h-7 text-orange-400" />
+                  </div>
+                  <CardTitle className="text-2xl">Innovation</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300">We constantly push the boundaries of what's possible in AI-driven sales automation, staying ahead of market trends and technological advancements to deliver cutting-edge solutions.</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+            
+            {/* Value 2: Customer Success */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -5 }}
+              className="scroll-fade"
+            >
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="w-14 h-14 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mb-4">
+                    <Users className="w-7 h-7 text-orange-400" />
+                  </div>
+                  <CardTitle className="text-2xl">Customer Success</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300">Your success is our success. We build deep partnerships with our clients, focusing on delivering measurable results and helping them achieve their sales and revenue goals.</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+            
+            {/* Value 3: Data-Driven */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ y: -5 }}
+              className="scroll-fade"
+            >
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="w-14 h-14 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-full flex items-center justify-center mb-4">
+                    <BarChart3 className="w-7 h-7 text-orange-400" />
+                  </div>
+                  <CardTitle className="text-2xl">Data-Driven</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300">Our approach is rooted in analytics and measurable outcomes. We leverage data intelligence to optimize sales strategies, make informed decisions, and drive continuous improvement.</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Join Our Team Section With Enhanced UI */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-dark-800 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="scroll-fade"
+          >
+            <Card className="bg-gradient-to-br from-dark-900 to-dark-800 border-dark-700 overflow-hidden relative">
+              <div className="absolute inset-0 overflow-hidden">
+                <motion.div 
+                  initial={{ opacity: 0.1, scale: 0.9 }}
+                  animate={{ 
+                    opacity: [0.1, 0.2, 0.1],
+                    scale: [0.9, 1.1, 0.9]
+                  }}
+                  transition={{ 
+                    repeat: Infinity,
+                    duration: 15,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute -top-1/4 -right-1/4 w-full h-full bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-full blur-3xl"
+                />
+              </div>
+              
+              <div className="relative z-10 flex flex-col md:flex-row md:items-center">
+                <div className="md:w-2/3 p-8 md:p-12">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Our Team</h2>
+                  <Separator className="w-20 mb-6" />
+                  <p className="text-xl text-gray-300 mb-8 max-w-2xl">
+                    We're always looking for passionate, innovative people to join our mission of transforming sales automation with AI. Help us build the future of intelligent sales.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <Button size="lg">
+                      View Open Positions
+                    </Button>
+                    <Button variant="outline" size="lg">
+                      Our Culture
+                    </Button>
+                  </div>
+                </div>
+                <div className="md:w-1/3 bg-dark-900/50 p-8 md:p-12 border-t md:border-t-0 md:border-l border-dark-700">
+                  <h3 className="text-2xl font-bold mb-6">Perks & Benefits</h3>
+                  <ul className="space-y-3">
+                    {['Remote-first culture', 'Competitive compensation', 'Health & wellness programs', 'Learning & development', 'Cutting-edge tech stack'].map((item, index) => (
+                      <motion.li 
+                        key={index}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.8 + (index * 0.1) }}
+                        className="flex items-center"
+                      >
+                        <Badge variant="outline" className="mr-2">
+                          <ChevronRight className="w-3 h-3" />
+                        </Badge>
+                        <span>{item}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+      
+      {/* Footer Section */}
+      <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-dark-900 border-t border-dark-700">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-6 md:mb-0">
+              <div className="flex items-center">
+                <img 
+                  src="/enai-logo.png" 
+                  alt="Enai Logo" 
+                  className="h-10 mr-3 filter brightness-0 invert"
+                />
+                <span className="text-xl font-bold text-orange-500">ENAI</span>
+              </div>
+              <p className="text-gray-400 mt-2 max-w-md">
+                AI-powered sales automation platform helping teams prospect, qualify, and convert leads 24/7
+              </p>
+            </div>
+            
+            <div className="flex space-x-4">
+              <Button variant="ghost" size="sm">
+                Privacy
+              </Button>
+              <Button variant="ghost" size="sm">
+                Terms
+              </Button>
+              <Button variant="ghost" size="sm">
+                Contact
+              </Button>
+            </div>
+          </div>
+          
+          <Separator className="my-8" />
+          
+          <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+            <p>© {new Date().getFullYear()} Enai. All rights reserved.</p>
+            <div className="flex space-x-4 mt-4 md:mt-0">
+              <a href="#" className="hover:text-orange-400 transition-colors">
+                LinkedIn
+              </a>
+              <a href="#" className="hover:text-orange-400 transition-colors">
+                Twitter
+              </a>
+              <a href="#" className="hover:text-orange-400 transition-colors">
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
 

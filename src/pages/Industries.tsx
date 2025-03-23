@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, memo, useMemo, Suspense } from 'react';
+import React, { useEffect, useState, useCallback, memo, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   ChevronRight, 
@@ -22,8 +22,10 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '../components/Navigation';
 import { Helmet } from 'react-helmet';
+import SEOFAQSection from '../components/SEOFAQSection';
 import LazyImage from '../components/LazyImage';
 import { throttle, debounce, isLowEndDevice, prefersReducedMotion } from '../utils/performance';
+import { GlowingEffectDemo } from '../components/ui/glowing-effect-demo';
 
 // Define interfaces for better typing
 interface IndustryApplication {
@@ -511,20 +513,6 @@ const IndustryCard = memo(({
   );
 });
 
-// Lazy load components
-const GlowingEffectDemo = React.lazy(() => import('../components/ui/glowing-effect-demo'));
-const SEOFAQSection = React.lazy(() => import('../components/SEOFAQSection'));
-
-// Loading fallback component
-const LoadingFallback = () => (
-  <div className="flex items-center justify-center min-h-[200px]">
-    <div className="relative w-12 h-12">
-      <div className="absolute top-0 left-0 w-full h-full border-4 border-primary-400/20 rounded-full"></div>
-      <div className="absolute top-0 left-0 w-full h-full border-4 border-primary-400 rounded-full animate-spin border-t-transparent"></div>
-    </div>
-  </div>
-);
-
 // SEO Schema Data
 const getSchemaMarkup = () => {
   return {
@@ -561,7 +549,6 @@ export default function Industries() {
   const [filteredIndustries, setFilteredIndustries] = useState<Industry[]>(industries);
   const [selectedIndustry, setSelectedIndustry] = useState<Industry | null>(null);
   const [isDetailView, setIsDetailView] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(true);
   
   // Check for reduced motion preference
   const shouldReduceMotion = useMemo(() => prefersReducedMotion() || isLowEndDevice(), []);
@@ -658,464 +645,459 @@ export default function Industries() {
     }
   }, [shouldReduceMotion]);
 
-  useEffect(() => {
-    // Simulate loading state for smoother transitions
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-dark text-white relative">
-      {/* Optimized background gradients */}
-      <div className="fixed inset-0 bg-dark overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark to-dark-800"></div>
-        <div 
-          className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-primary-400/5 rounded-full blur-[120px] animate-pulse-slow"
-          style={{ animationDuration: '8s' }}
-        ></div>
-        <div 
-          className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-blue-500/5 rounded-full blur-[120px] animate-pulse-slow"
-          style={{ animationDuration: '12s' }}
-        ></div>
-        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px] opacity-20"></div>
-      </div>
-
-      <div className="relative z-10">
-        <Helmet>
-          <title>Industries We Serve | AI Solutions for Business Growth</title>
-          <meta name="description" content="Discover how our innovative AI solutions can revolutionize your industry with intelligent automation, personalized engagement, and data-driven insights. Explore industry-specific applications and potential benefits." />
-          <meta name="keywords" content="AI solutions, industry automation, SaaS AI, financial services automation, healthcare AI, real estate AI, retail AI, manufacturing AI, education technology, AI applications" />
-          <link rel="canonical" href="https://yourcompany.com/industries" />
-          
-          {/* Open Graph / Social Media */}
-          <meta property="og:type" content="website" />
-          <meta property="og:title" content="Industries We Serve | Innovative AI Solutions" />
-          <meta property="og:description" content="Explore how our AI solutions can revolutionize your industry with intelligent automation and personalized engagement." />
-          <meta property="og:url" content="https://yourcompany.com/industries" />
-          <meta property="og:image" content="https://yourcompany.com/images/industries-og.jpg" />
-          
-          {/* Twitter */}
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Industries We Serve | Innovative AI Solutions" />
-          <meta name="twitter:description" content="Explore how our AI solutions can revolutionize your industry with intelligent automation and personalized engagement." />
-          <meta name="twitter:image" content="https://yourcompany.com/images/industries-og.jpg" />
-          
-          {/* Schema.org JSON-LD */}
-          <script type="application/ld+json">
-            {JSON.stringify(getSchemaMarkup())}
-          </script>
-        </Helmet>
+    <div className="min-h-screen bg-dark text-white">
+      <Helmet>
+        <title>Industries We Serve | AI Solutions for Business Growth</title>
+        <meta name="description" content="Discover how our innovative AI solutions can revolutionize your industry with intelligent automation, personalized engagement, and data-driven insights. Explore industry-specific applications and potential benefits." />
+        <meta name="keywords" content="AI solutions, industry automation, SaaS AI, financial services automation, healthcare AI, real estate AI, retail AI, manufacturing AI, education technology, AI applications" />
+        <link rel="canonical" href="https://yourcompany.com/industries" />
         
-        <Navigation />
+        {/* Open Graph / Social Media */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Industries We Serve | Innovative AI Solutions" />
+        <meta property="og:description" content="Explore how our AI solutions can revolutionize your industry with intelligent automation and personalized engagement." />
+        <meta property="og:url" content="https://yourcompany.com/industries" />
+        <meta property="og:image" content="https://yourcompany.com/images/industries-og.jpg" />
         
-        <AnimatePresence mode="wait" initial={false}>
-          {isLoading ? (
-            <motion.div
-              key="loading"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="min-h-screen flex items-center justify-center"
-            >
-              <LoadingFallback />
-            </motion.div>
-          ) : !isDetailView ? (
-            <motion.div
-              key="list-view"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {/* Hero Section with optimized motion effects */}
-              <section className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8">
-                <motion.div 
-                  className="max-w-7xl mx-auto text-center"
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Industries We Serve | Innovative AI Solutions" />
+        <meta name="twitter:description" content="Explore how our AI solutions can revolutionize your industry with intelligent automation and personalized engagement." />
+        <meta name="twitter:image" content="https://yourcompany.com/images/industries-og.jpg" />
+        
+        {/* Schema.org JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify(getSchemaMarkup())}
+        </script>
+      </Helmet>
+      
+      <Navigation />
+      
+      <AnimatePresence mode="wait">
+        {!isDetailView ? (
+          <motion.div
+            key="list-view"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Hero Section with motion effects */}
+            <section className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+              {/* Background decorative elements */}
+              <div className="absolute inset-0 bg-gradient-to-b from-dark to-dark-800 pointer-events-none"></div>
+              <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary-400/5 rounded-full blur-[100px]"></div>
+              <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-500/5 rounded-full blur-[80px]"></div>
+              
+              <motion.div 
+                className="max-w-7xl mx-auto text-center relative z-10"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <Badge variant="outline" className="mb-6 px-4 py-1 border-primary-400/30 bg-primary-400/5 backdrop-blur-sm text-primary-300">
+                  Industry Solutions
+                </Badge>
+                
+                <h1 className="text-5xl md:text-7xl font-bold mb-8">
+                  <span className="gradient-text">AI Solutions for Every Industry</span>
+                </h1>
+                
+                <motion.p 
+                  className="text-xl text-gray-300 max-w-3xl mx-auto"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <Badge variant="outline" className="mb-6 px-4 py-1 border-primary-400/30 bg-primary-400/5 backdrop-blur-sm text-primary-300">
-                    Industry Solutions
-                  </Badge>
-                  
-                  <h1 className="text-5xl md:text-7xl font-bold mb-8">
-                    <span className="gradient-text">AI Solutions for Every Industry</span>
-                  </h1>
-                  
-                  <motion.p 
-                    className="text-xl text-gray-300 max-w-3xl mx-auto"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                  >
-                    Our innovative AI platform can revolutionize how businesses operate across sectors, delivering intelligent automation, personalized engagement, and data-driven insights.
-                  </motion.p>
-                  
-                  {/* Search and filter container */}
+                  Our innovative AI platform can revolutionize how businesses operate across sectors, delivering intelligent automation, personalized engagement, and data-driven insights.
+                </motion.p>
+                
+                {/* Search and filter container */}
+                <motion.div 
+                  className="mt-12 max-w-2xl mx-auto"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                    <Input
+                      type="search"
+                      placeholder="Search industry solutions..."
+                      className="pl-10 bg-dark-800/70 border-dark-700 focus:border-primary-400 h-12 w-full"
+                      value={searchTerm}
+                      onChange={handleSearchChange}
+                    />
+                  </div>
+                </motion.div>
+                
+                {/* Industry tabs */}
+                <motion.div 
+                  className="mt-10"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <Tabs defaultValue="all" onValueChange={setActiveTab} className="w-full">
+                    <TabsList className="mb-8 p-1 bg-dark-800/50 backdrop-blur-sm border border-dark-700 rounded-full grid grid-flow-col auto-cols-fr w-full max-w-3xl mx-auto overflow-x-auto">
+                      <TabsTrigger value="all" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
+                        All Industries
+                      </TabsTrigger>
+                      <TabsTrigger value="saas" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
+                        Technology
+                      </TabsTrigger>
+                      <TabsTrigger value="financial-services" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
+                        Finance
+                      </TabsTrigger>
+                      <TabsTrigger value="healthcare" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
+                        Healthcare
+                      </TabsTrigger>
+                      <TabsTrigger value="real-estate" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
+                        Real Estate
+                      </TabsTrigger>
+                    </TabsList>
+                  </Tabs>
+                </motion.div>
+              </motion.div>
+            </section>
+
+            {/* Glowing Effect Demo Section */}
+            <section className="py-16 bg-dark relative overflow-hidden">
+              <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern"></div>
+              <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary-400/5 rounded-full blur-[100px] pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-500/5 rounded-full blur-[80px] pointer-events-none"></div>
+              
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="text-center mb-12"
+                >
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                    <span className="gradient-text">Explore Our AI Capabilities</span>
+                  </h2>
+                  <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+                    Our AI solutions adapt to multiple industries, providing tailored automation and insights for your specific needs.
+                  </p>
+                </motion.div>
+                
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                >
+                  <GlowingEffectDemo />
+                </motion.div>
+              </div>
+            </section>
+
+            {/* Industry Overview Stats */}
+            <section className="py-16 bg-dark-800 relative overflow-hidden">
+              <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern"></div>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <motion.div 
+                  className="grid grid-cols-2 md:grid-cols-4 gap-8"
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                >
                   <motion.div 
-                    className="mt-12 max-w-2xl mx-auto"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
+                    variants={itemVariants}
+                    className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
                   >
-                    <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                      <Input
-                        type="search"
-                        placeholder="Search industry solutions..."
-                        className="pl-10 bg-dark-800/70 border-dark-700 focus:border-primary-400 h-12 w-full"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                      />
-                    </div>
+                    <div className="text-4xl font-bold text-primary-400 mb-2">8+</div>
+                    <div className="text-xs text-gray-300">Industries We Can Serve</div>
                   </motion.div>
-                  
-                  {/* Industry tabs */}
                   <motion.div 
-                    className="mt-10"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
+                    variants={itemVariants}
+                    className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
                   >
-                    <Tabs defaultValue="all" onValueChange={setActiveTab} className="w-full">
-                      <TabsList className="mb-8 p-1 bg-dark-800/50 backdrop-blur-sm border border-dark-700 rounded-full grid grid-flow-col auto-cols-fr w-full max-w-3xl mx-auto overflow-x-auto">
-                        <TabsTrigger value="all" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
-                          All Industries
-                        </TabsTrigger>
-                        <TabsTrigger value="saas" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
-                          Technology
-                        </TabsTrigger>
-                        <TabsTrigger value="financial-services" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
-                          Finance
-                        </TabsTrigger>
-                        <TabsTrigger value="healthcare" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
-                          Healthcare
-                        </TabsTrigger>
-                        <TabsTrigger value="real-estate" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
-                          Real Estate
-                        </TabsTrigger>
-                      </TabsList>
-                    </Tabs>
+                    <div className="text-4xl font-bold text-primary-400 mb-2">24/7</div>
+                    <div className="text-xs text-gray-300">AI Automation</div>
+                  </motion.div>
+                  <motion.div 
+                    variants={itemVariants}
+                    className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
+                  >
+                    <div className="text-4xl font-bold text-primary-400 mb-2">60%+</div>
+                    <div className="text-xs text-gray-300">Potential Efficiency Gain</div>
+                  </motion.div>
+                  <motion.div 
+                    variants={itemVariants}
+                    className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
+                  >
+                    <div className="text-4xl font-bold text-primary-400 mb-2">100%</div>
+                    <div className="text-xs text-gray-300">Dedicated Support</div>
                   </motion.div>
                 </motion.div>
-              </section>
+              </div>
+            </section>
 
-              {/* Lazy loaded sections */}
-              <Suspense fallback={<LoadingFallback />}>
-                <section className="py-16 bg-dark relative overflow-hidden">
-                  <GlowingEffectDemo />
-                </section>
-              </Suspense>
-
-              {/* Industry Overview Stats */}
-              <section className="py-16 bg-dark-800 relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern"></div>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Industries Grid with Shadcn UI Card components */}
+            <section className="py-24 bg-dark relative">
+              <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-primary-400/5 rounded-full blur-[150px] pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+              
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                {filteredIndustries.length === 0 ? (
                   <motion.div 
-                    className="grid grid-cols-2 md:grid-cols-4 gap-8"
+                    className="text-center py-20"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                  >
+                    <h3 className="text-2xl font-semibold mb-4">No industries found matching your search</h3>
+                    <p className="text-gray-400 mb-8">Try changing your search term or selecting a different category</p>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => {
+                        setSearchTerm("");
+                        setActiveTab("all");
+                      }}
+                    >
+                      Reset Filters
+                    </Button>
+                  </motion.div>
+                ) : (
+                  <motion.div 
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, margin: "-50px" }}
                   >
-                    <motion.div 
-                      variants={itemVariants}
-                      className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
-                    >
-                      <div className="text-4xl font-bold text-primary-400 mb-2">8+</div>
-                      <div className="text-xs text-gray-300">Industries We Can Serve</div>
-                    </motion.div>
-                    <motion.div 
-                      variants={itemVariants}
-                      className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
-                    >
-                      <div className="text-4xl font-bold text-primary-400 mb-2">24/7</div>
-                      <div className="text-xs text-gray-300">AI Automation</div>
-                    </motion.div>
-                    <motion.div 
-                      variants={itemVariants}
-                      className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
-                    >
-                      <div className="text-4xl font-bold text-primary-400 mb-2">60%+</div>
-                      <div className="text-xs text-gray-300">Potential Efficiency Gain</div>
-                    </motion.div>
-                    <motion.div 
-                      variants={itemVariants}
-                      className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
-                    >
-                      <div className="text-4xl font-bold text-primary-400 mb-2">100%</div>
-                      <div className="text-xs text-gray-300">Dedicated Support</div>
-                    </motion.div>
+                    {filteredIndustries.map((industry, index) => (
+                      <motion.div 
+                        key={industry.slug}
+                        variants={itemVariants}
+                        id={industry.slug}
+                        whileHover={shouldReduceMotion ? {} : { y: -8 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        <IndustryCard 
+                          industry={industry} 
+                          onIndustryClick={handleIndustryClick}
+                        />
+                      </motion.div>
+                    ))}
                   </motion.div>
-                </div>
-              </section>
+                )}
+              </div>
+            </section>
 
-              {/* Industries Grid with Shadcn UI Card components */}
-              <section className="py-24 bg-dark relative">
-                <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-primary-400/5 rounded-full blur-[150px] pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none"></div>
-                
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                  {filteredIndustries.length === 0 ? (
-                    <motion.div 
-                      className="text-center py-20"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+            {/* CTA Section */}
+            <section className="py-24 bg-gradient-to-b from-dark-800 to-dark relative overflow-hidden">
+              <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern"></div>
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-4xl font-bold gradient-text mb-8">Ready to Transform Your Business?</h2>
+                  <p className="text-xl text-gray-300 mb-12">
+                    Our AI solutions are designed to help businesses of any size achieve remarkable efficiency gains and competitive advantages.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button 
+                      variant="default" 
+                      size="lg" 
+                      onClick={scrollToContact}
+                      className="button-glow text-white rounded-full text-lg font-semibold group hover:scale-105 transition-all duration-300"
                     >
-                      <h3 className="text-2xl font-semibold mb-4">No industries found matching your search</h3>
-                      <p className="text-gray-400 mb-8">Try changing your search term or selecting a different category</p>
+                      Schedule a Demo
+                      <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      asChild
+                      className="rounded-full text-lg font-semibold border-gray-700 hover:border-primary-400 text-gray-300 hover:text-white"
+                    >
+                      <Link to="/contact">
+                        Contact Us
+                      </Link>
+                    </Button>
+                  </div>
+                </motion.div>
+              </div>
+            </section>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="detail-view"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="pt-32"
+          >
+            {selectedIndustry && (
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <Button 
+                  variant="ghost" 
+                  onClick={handleBackClick}
+                  className="mb-8 text-gray-300 hover:text-white"
+                >
+                  <ChevronRight className="mr-2 h-4 w-4 rotate-180" />
+                  Back to all industries
+                </Button>
+                
+                <div className="grid lg:grid-cols-2 gap-12 items-start">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Badge variant="outline" className="mb-4 px-3 py-1 border-primary-400/30 bg-primary-400/5 backdrop-blur-sm text-primary-300">
+                      Industry Solution
+                    </Badge>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                      <span className="gradient-text">AI for {selectedIndustry.title}</span>
+                    </h1>
+                    <p className="text-xl text-gray-300 mb-8">{selectedIndustry.description}</p>
+                    
+                    <div className="bg-dark-800/50 backdrop-blur-sm border border-dark-700 rounded-xl p-6 mb-8">
+                      <h3 className="text-xl font-semibold mb-4">Key Benefits</h3>
+                      <ul className="space-y-4">
+                        {selectedIndustry.benefits.map((benefit, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <div className="bg-primary-400/10 rounded-full p-1 mr-3 mt-1">
+                              <ChevronRight className="w-4 h-4 text-primary-400" />
+                            </div>
+                            <span className="text-gray-200">{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    
+                    <div className="flex gap-4 mt-8">
+                      <Button 
+                        size="lg" 
+                        className="button-glow"
+                        onClick={scrollToContact}
+                      >
+                        Get Started
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
                       <Button 
                         variant="outline" 
-                        onClick={() => {
-                          setSearchTerm("");
-                          setActiveTab("all");
-                        }}
-                      >
-                        Reset Filters
-                      </Button>
-                    </motion.div>
-                  ) : (
-                    <motion.div 
-                      className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-                      variants={containerVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true, margin: "-50px" }}
-                    >
-                      {filteredIndustries.map((industry, index) => (
-                        <motion.div 
-                          key={industry.slug}
-                          variants={itemVariants}
-                          id={industry.slug}
-                          whileHover={shouldReduceMotion ? {} : { y: -8 }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
-                          <IndustryCard 
-                            industry={industry} 
-                            onIndustryClick={handleIndustryClick}
-                          />
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  )}
-                </div>
-              </section>
-
-              {/* CTA Section */}
-              <section className="py-24 bg-gradient-to-b from-dark-800 to-dark relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern"></div>
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                  >
-                    <h2 className="text-4xl font-bold gradient-text mb-8">Ready to Transform Your Business?</h2>
-                    <p className="text-xl text-gray-300 mb-12">
-                      Our AI solutions are designed to help businesses of any size achieve remarkable efficiency gains and competitive advantages.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                      <Button 
-                        variant="default" 
-                        size="lg" 
-                        onClick={scrollToContact}
-                        className="button-glow text-white rounded-full text-lg font-semibold group hover:scale-105 transition-all duration-300"
-                      >
-                        Schedule a Demo
-                        <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                      <Button
-                        variant="outline"
                         size="lg"
                         asChild
-                        className="rounded-full text-lg font-semibold border-gray-700 hover:border-primary-400 text-gray-300 hover:text-white"
                       >
                         <Link to="/contact">
-                          Contact Us
+                          Contact Sales
                         </Link>
                       </Button>
                     </div>
                   </motion.div>
-                </div>
-              </section>
-
-              {/* Lazy loaded FAQ section */}
-              <Suspense fallback={<LoadingFallback />}>
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                  <SEOFAQSection />
-                </div>
-              </Suspense>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="detail-view"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="pt-32"
-            >
-              {selectedIndustry && (
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                  <Button 
-                    variant="ghost" 
-                    onClick={handleBackClick}
-                    className="mb-8 text-gray-300 hover:text-white"
-                  >
-                    <ChevronRight className="mr-2 h-4 w-4 rotate-180" />
-                    Back to all industries
-                  </Button>
                   
-                  <div className="grid lg:grid-cols-2 gap-12 items-start">
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <Badge variant="outline" className="mb-4 px-3 py-1 border-primary-400/30 bg-primary-400/5 backdrop-blur-sm text-primary-300">
-                        Industry Solution
-                      </Badge>
-                      <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                        <span className="gradient-text">AI for {selectedIndustry.title}</span>
-                      </h1>
-                      <p className="text-xl text-gray-300 mb-8">{selectedIndustry.description}</p>
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="relative"
+                  >
+                    <div className="rounded-2xl overflow-hidden border border-dark-700 shadow-xl">
+                      <img 
+                        src={selectedIndustry.image}
+                        alt={`AI Solutions for ${selectedIndustry.title}`}
+                        className="w-full h-64 object-cover"
+                      />
                       
-                      <div className="bg-dark-800/50 backdrop-blur-sm border border-dark-700 rounded-xl p-6 mb-8">
-                        <h3 className="text-xl font-semibold mb-4">Key Benefits</h3>
-                        <ul className="space-y-4">
-                          {selectedIndustry.benefits.map((benefit, idx) => (
-                            <li key={idx} className="flex items-start">
-                              <div className="bg-primary-400/10 rounded-full p-1 mr-3 mt-1">
-                                <ChevronRight className="w-4 h-4 text-primary-400" />
-                              </div>
-                              <span className="text-gray-200">{benefit}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      
-                      <div className="flex gap-4 mt-8">
-                        <Button 
-                          size="lg" 
-                          className="button-glow"
-                          onClick={scrollToContact}
-                        >
-                          Get Started
-                          <ArrowRight className="ml-2 h-5 w-5" />
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="lg"
-                          asChild
-                        >
-                          <Link to="/contact">
-                            Contact Sales
-                          </Link>
-                        </Button>
-                      </div>
-                    </motion.div>
-                    
-                    <motion.div
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                      className="relative"
-                    >
-                      <div className="rounded-2xl overflow-hidden border border-dark-700 shadow-xl">
-                        <img 
-                          src={selectedIndustry.image}
-                          alt={`AI Solutions for ${selectedIndustry.title}`}
-                          className="w-full h-64 object-cover"
-                        />
-                        
-                        <div className="p-8 bg-dark-800">
-                          <div className="flex justify-between items-center mb-6">
-                            <div className="flex items-center gap-4">
-                              <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center">
-                                {selectedIndustry.icon}
-                              </div>
-                              <h3 className="text-2xl font-semibold">{selectedIndustry.title}</h3>
+                      <div className="p-8 bg-dark-800">
+                        <div className="flex justify-between items-center mb-6">
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center">
+                              {selectedIndustry.icon}
                             </div>
-                            <Badge variant="secondary" className="bg-primary-400/10 text-primary-400 border-primary-400/20">
-                              {selectedIndustry.stats.impactPercent}
-                            </Badge>
+                            <h3 className="text-2xl font-semibold">{selectedIndustry.title}</h3>
+                          </div>
+                          <Badge variant="secondary" className="bg-primary-400/10 text-primary-400 border-primary-400/20">
+                            {selectedIndustry.stats.impactPercent}
+                          </Badge>
+                        </div>
+                        
+                        <div className="space-y-6">
+                          <div>
+                            <h4 className="text-lg font-semibold mb-4">Applications</h4>
+                            <div className="space-y-6">
+                              {selectedIndustry.applications.map((app, idx) => (
+                                <div key={idx} className="bg-dark-900/50 p-4 rounded-lg">
+                                  <h5 className="text-primary-400 font-medium mb-2">{app.title}</h5>
+                                  <p className="text-gray-300">{app.description}</p>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                           
-                          <div className="space-y-6">
-                            <div>
-                              <h4 className="text-lg font-semibold mb-4">Applications</h4>
-                              <div className="space-y-6">
-                                {selectedIndustry.applications.map((app, idx) => (
-                                  <div key={idx} className="bg-dark-900/50 p-4 rounded-lg">
-                                    <h5 className="text-primary-400 font-medium mb-2">{app.title}</h5>
-                                    <p className="text-gray-300">{app.description}</p>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                            
-                            <div>
-                              <h4 className="text-lg font-semibold mb-2">Client Profile</h4>
-                              <p className="text-gray-300">{selectedIndustry.stats.clientText}</p>
-                            </div>
-                            
-                            <div>
-                              <h4 className="text-lg font-semibold mb-2">Impact Potential</h4>
-                              <p className="text-gray-300">{selectedIndustry.stats.impactText} of {selectedIndustry.stats.impactPercent}</p>
-                            </div>
+                          <div>
+                            <h4 className="text-lg font-semibold mb-2">Client Profile</h4>
+                            <p className="text-gray-300">{selectedIndustry.stats.clientText}</p>
+                          </div>
+                          
+                          <div>
+                            <h4 className="text-lg font-semibold mb-2">Impact Potential</h4>
+                            <p className="text-gray-300">{selectedIndustry.stats.impactText} of {selectedIndustry.stats.impactPercent}</p>
                           </div>
                         </div>
                       </div>
-                      
-                      {/* Decorative element */}
-                      <div className="absolute -z-10 top-1/2 right-0 w-64 h-64 bg-primary-400/5 rounded-full blur-[80px] translate-x-1/2 -translate-y-1/2"></div>
-                    </motion.div>
-                  </div>
-                  
-                  {/* Related Industries */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="mt-24"
-                  >
-                    <h2 className="text-3xl font-bold mb-8">Explore Other Industries</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                      {industries
-                        .filter(industry => industry.slug !== selectedIndustry.slug)
-                        .slice(0, 4)
-                        .map((industry, idx) => (
-                          <Card 
-                            key={idx} 
-                            className="bg-dark-800/80 backdrop-blur-sm border-dark-700 hover:border-primary-400/50 cursor-pointer"
-                            onClick={() => handleIndustryClick(industry)}
-                          >
-                            <CardHeader className="p-4">
-                              <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-primary-400/10 flex items-center justify-center">
-                                  {React.cloneElement(industry.icon, { className: "w-5 h-5 text-primary-400" })}
-                                </div>
-                                <CardTitle className="text-lg">{industry.title}</CardTitle>
-                              </div>
-                            </CardHeader>
-                            <CardContent className="p-4 pt-0">
-                              <CardDescription className="text-gray-400 line-clamp-2">
-                                {industry.description}
-                              </CardDescription>
-                            </CardContent>
-                          </Card>
-                        ))}
                     </div>
+                    
+                    {/* Decorative element */}
+                    <div className="absolute -z-10 top-1/2 right-0 w-64 h-64 bg-primary-400/5 rounded-full blur-[80px] translate-x-1/2 -translate-y-1/2"></div>
                   </motion.div>
                 </div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
+                
+                {/* Related Industries */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="mt-24"
+                >
+                  <h2 className="text-3xl font-bold mb-8">Explore Other Industries</h2>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {industries
+                      .filter(industry => industry.slug !== selectedIndustry.slug)
+                      .slice(0, 4)
+                      .map((industry, idx) => (
+                        <Card 
+                          key={idx} 
+                          className="bg-dark-800/80 backdrop-blur-sm border-dark-700 hover:border-primary-400/50 cursor-pointer"
+                          onClick={() => handleIndustryClick(industry)}
+                        >
+                          <CardHeader className="p-4">
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded-full bg-primary-400/10 flex items-center justify-center">
+                                {React.cloneElement(industry.icon, { className: "w-5 h-5 text-primary-400" })}
+                              </div>
+                              <CardTitle className="text-lg">{industry.title}</CardTitle>
+                            </div>
+                          </CardHeader>
+                          <CardContent className="p-4 pt-0">
+                            <CardDescription className="text-gray-400 line-clamp-2">
+                              {industry.description}
+                            </CardDescription>
+                          </CardContent>
+                        </Card>
+                      ))}
+                  </div>
+                </motion.div>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* FAQ Section optimized for SEO */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <SEOFAQSection />
       </div>
     </div>
   );
