@@ -1034,8 +1034,8 @@ function AboutUs() {
           </motion.div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8">
-{/*             {/* Start Free Button with Enhanced Animations */}
-            <motion.div
+            {/* Start Free Button with Enhanced Animations */}
+{/*             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
