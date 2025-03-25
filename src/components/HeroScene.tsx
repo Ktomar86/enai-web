@@ -79,19 +79,19 @@ const HeroScene = () => {
         bottom: -9999px !important;
       }
       
-      /* Create a large overlay in the bottom-right corner */
+      /* Create a much larger overlay in the bottom-right corner */
       spline-viewer::after {
         content: '';
         position: absolute;
         bottom: 0;
         right: 0;
-        width: 250px;
-        height: 80px;
-        background-color: rgba(0, 0, 0, 0.9);
+        width: 300px; /* Wider overlay to ensure coverage */
+        height: 100px; /* Taller overlay to ensure coverage */
+        background-color: #000000; /* Pure black for complete hiding */
         z-index: 9999999;
       }
       
-      /* Enhance scene with a darker overlay for better contrast */
+      /* Enhanced scene with a darker overlay for better contrast */
       spline-viewer::before {
         content: '';
         position: absolute;
@@ -99,7 +99,7 @@ const HeroScene = () => {
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
         z-index: 1;
         pointer-events: none;
       }
@@ -109,6 +109,15 @@ const HeroScene = () => {
         pointer-events: none !important;
         opacity: 0 !important;
         display: none !important;
+      }
+
+      /* Target specific elements that might contain the spline branding */
+      spline-viewer [style*="position: absolute"][style*="right: 8px"][style*="bottom: 8px"],
+      spline-viewer [style*="position: fixed"][style*="right: 8px"][style*="bottom: 8px"],
+      spline-viewer div[style*="z-index: 999"] {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
       }
     `;
     document.head.appendChild(style);
@@ -128,7 +137,9 @@ const HeroScene = () => {
                 el.className?.includes?.('spline') ||
                 el.getAttribute?.('data-name')?.includes?.('watermark') ||
                 el.getAttribute?.('data-name')?.includes?.('spline') ||
-                el.getAttribute?.('href')?.includes?.('spline')
+                el.getAttribute?.('href')?.includes?.('spline') ||
+                el.textContent?.toLowerCase()?.includes?.('spline') ||
+                el.textContent?.toLowerCase()?.includes?.('built with')
               ) {
                 el.remove();
               }
@@ -137,8 +148,8 @@ const HeroScene = () => {
               const style = window.getComputedStyle(el);
               if (
                 style.position === 'absolute' && 
-                (style.bottom === '0px' || parseInt(style.bottom) < 20) && 
-                (style.right === '0px' || parseInt(style.right) < 20)
+                (style.bottom === '0px' || parseInt(style.bottom) < 30) && 
+                (style.right === '0px' || parseInt(style.right) < 30)
               ) {
                 el.remove();
               }
@@ -158,17 +169,34 @@ const HeroScene = () => {
           attributes: true
         });
         
-        // Also add the black overlay directly as a child
+        // Create a larger, completely black overlay as a child
         const overlay = document.createElement('div');
-        overlay.style.cssText = 'position:absolute;bottom:0;right:0;width:250px;height:80px;background:#0a0a0a;z-index:9999999;';
+        overlay.style.cssText = 'position:absolute;bottom:0;right:0;width:300px;height:100px;background:#000000;z-index:9999999;';
         splineViewer.appendChild(overlay);
+        
+        // Add an additional overlay specifically targeting the bottom right corner
+        const cornerOverlay = document.createElement('div');
+        cornerOverlay.style.cssText = 'position:absolute;bottom:0;right:0;width:200px;height:50px;background:#000000;z-index:9999999;';
+        splineViewer.appendChild(cornerOverlay);
       }
     }, 1000);
+    
+    // Make an additional attempt to hide the watermark after a longer delay
+    const secondAttemptTimeoutId = setTimeout(() => {
+      document.querySelectorAll('[class*="watermark"], [class*="spline"], a[href*="spline"]').forEach(el => {
+        if (el instanceof HTMLElement) {
+          el.style.display = 'none';
+          el.style.opacity = '0';
+          el.style.visibility = 'hidden';
+        }
+      });
+    }, 3000);
 
     return () => {
       document.head.removeChild(style);
       observer.disconnect();
       clearTimeout(timeoutId);
+      clearTimeout(secondAttemptTimeoutId);
     };
   }, [isSplineLoaded, isInViewport]);
 

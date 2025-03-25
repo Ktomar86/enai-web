@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Button } from '../components/ui/button';
+import { Separator } from '../components/ui/separator';
+import { Badge } from '../components/ui/badge';
 
 export default function Navigation() {
   const location = useLocation();
@@ -157,15 +160,14 @@ export default function Navigation() {
   };
 
   return (
-    <nav 
+    <header 
       className={`fixed w-full z-50 transition-all duration-300 fixed-element ${
         isScrolled ? 'glass-effect py-2 shadow-lg' : 'bg-transparent py-4'
       }`}
-      aria-label="Main navigation"
+      role="banner"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-safe-area">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-safe-area" aria-label="Main navigation">
         <div className="flex justify-between items-center h-16 nav-container">
-          {/* Mobile navigation styles are in index.css */}
           {/* Logo */}
           <Link 
             to="/" 
@@ -174,30 +176,35 @@ export default function Navigation() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <img 
-              src="https://i.postimg.cc/5j48qtcH/logo.png" 
-              alt="" 
-              className="h-8 w-8 transition-transform duration-300 group-hover:scale-110" 
-              aria-hidden="true"
+              src="/enai-logo.png" 
+              alt="ENAI Logo" 
+              className="h-8 w-8 transition-transform duration-300 group-hover:scale-110 filter brightness-0 invert" 
               loading="eager"
               fetchPriority="high"
+              width="42"
+              height="32"
             />
             <span className="ml-2 text-xl font-bold gradient-text">ENAI</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8" role="navigation">
             {navItems.map((item) => (
               <button
                 key={item}
                 onClick={() => (item === 'Industries' || item === 'About Us') ? null : handleNavClick(item)}
-                className={`nav-link relative overflow-hidden ${isActive(item) ? 'text-primary-400' : 'text-gray-300'}`}
+                className={`relative px-3 py-2 rounded-md transition-colors hover:bg-dark-800/40 ${
+                  isActive(item) 
+                    ? 'text-primary-400 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-3/4 after:h-0.5 after:bg-primary-400 after:rounded-full' 
+                    : 'text-gray-300'
+                }`}
                 aria-label={item}
                 aria-current={isActive(item) ? 'page' : undefined}
               >
                 {item === 'Industries' ? (
                   <Link 
                     to="/industries" 
-                    className={`nav-link ${isActive(item) ? 'text-primary-400' : 'text-gray-300'}`}
+                    className="inline-flex items-center w-full h-full"
                     aria-current={isActive(item) ? 'page' : undefined}
                   >
                     {item}
@@ -205,7 +212,7 @@ export default function Navigation() {
                 ) : item === 'About Us' ? (
                   <Link 
                     to="/about-us" 
-                    className={`nav-link ${isActive(item) ? 'text-primary-400' : 'text-gray-300'}`}
+                    className="inline-flex items-center w-full h-full"
                     aria-current={isActive(item) ? 'page' : undefined}
                   >
                     {item}
@@ -213,23 +220,34 @@ export default function Navigation() {
                 ) : (
                   item
                 )}
+                {isActive(item) && (
+                  <span className="sr-only">(current page)</span>
+                )}
               </button>
             ))}
-{/*             <button 
-              onClick={scrollToContact}
-              className="button-glow text-white px-6 py-2 rounded-full transform transition-all duration-300 hover:scale-105 hover:shadow-glow mobile-touch-target"
-              aria-label="Start Free Trial"
+            
+            <Button 
+              variant="outline" 
+              className="ml-4 text-white bg-transparent border-primary-400 hover:bg-primary-400/10"
+              asChild
             >
-              Start Free
-            </button> */}
+              <a 
+                href="https://calendly.com/enai-ai2024/30min" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Get Demo
+              </a>
+            </Button>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
-            <button
-              type="button"
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="inline-flex items-center justify-center p-3 rounded-lg text-gray-300 hover:text-white hover:bg-dark-800 focus:outline-none focus:ring-2 focus:ring-primary-400 transition-colors"
+              className="inline-flex items-center justify-center text-gray-300 hover:text-white hover:bg-dark-800 focus-visible:ring-2 focus-visible:ring-primary-400"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
@@ -239,156 +257,143 @@ export default function Navigation() {
               ) : (
                 <Menu className="block h-6 w-6" aria-hidden="true" />
               )}
-            </button>
+            </Button>
           </div>
         </div>
-      </div>
+      </nav>
 
       {/* Mobile menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            ref={mobileMenuRef}
             id="mobile-menu"
-            className="fixed inset-0 z-50 md:hidden smooth-scrolling"
+            ref={mobileMenuRef}
+            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-dark-900/95 backdrop-blur-lg z-50 shadow-xl"
             initial="closed"
             animate="open"
             exit="closed"
             variants={menuVariants}
+            aria-label="Mobile navigation"
           >
-            <motion.div 
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-            <motion.div 
-              className="fixed inset-y-0 right-0 w-full max-w-sm flex flex-col h-full py-20 px-6 overflow-y-auto mobile-safe-area bg-dark-900 shadow-2xl"
-              variants={menuVariants}
-            >
-                {/* Close button for accessibility */}
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="absolute top-5 right-5 p-3 rounded-full bg-dark-800 text-white z-50 focus:outline-none focus:ring-2 focus:ring-primary-400"
-                  aria-label="Close menu"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-
-                {/* Logo in mobile menu */}
-                <motion.div 
-                  className="flex items-center justify-center mb-12"
-                  variants={itemVariants}
+            <div className="p-6 h-full flex flex-col">
+              <div className="flex justify-between items-center mb-8">
+                <Link 
+                  to="/" 
+                  className="flex items-center" 
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  aria-label="ENAI homepage"
                 >
                   <img 
-                    src="https://i.postimg.cc/5j48qtcH/logo.png" 
-                    alt="" 
-                    className="h-10 w-10" 
-                    aria-hidden="true"
+                    src="/enai-logo.png" 
+                    alt="ENAI Logo" 
+                    className="h-8 w-8 filter brightness-0 invert" 
+                    width="32"
+                    height="32"
                   />
-                  <span className="ml-2 text-2xl font-bold gradient-text">ENAI</span>
-                </motion.div>
-
-                {/* Nav items */}
-                <div className="flex flex-col space-y-6 w-full">
-                  {navItems.map((item, index) => (
-                    <motion.div 
-                      key={item} 
-                      variants={itemVariants}
-                      custom={index}
-                      whileHover={{ x: 10 }}
-                      className="border-b border-dark-700 pb-4"
-                    >
-                      {item === 'Industries' ? (
-                        <Link 
-                          to="/industries" 
-                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors flex items-center justify-between py-4 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          aria-current={isActive(item) ? 'page' : undefined}
-                        >
-                          <span className="mobile-active-indicator">{item}</span>
-                          <ChevronRight className="w-5 h-5 ml-2" />
-                        </Link>
-                      ) : item === 'About Us' ? (
-                        <Link 
-                          to="/about-us" 
-                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors flex items-center justify-between py-4 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          aria-current={isActive(item) ? 'page' : undefined}
-                        >
-                          <span className="mobile-active-indicator">{item}</span>
-                          <ChevronRight className="w-5 h-5 ml-2" />
-                        </Link>
-                      ) : (
-                        <button
-                          onClick={() => handleNavClick(item)}
-                          className={`mobile-nav-item text-xl font-medium hover:text-primary-400 transition-colors w-full text-left flex items-center justify-between py-4 ${isActive(item) ? 'mobile-active text-primary-400' : 'text-white'}`}
-                          aria-current={isActive(item) ? 'page' : undefined}
-                        >
-                          <span className="mobile-active-indicator">{item}</span>
-                          <ChevronRight className="w-5 h-5 ml-2" />
-                        </button>
-                      )}
-                    </motion.div>
-                  ))}
-
-                  {/* CTA button */}
-                  <motion.div 
-                    variants={itemVariants} 
-                    className="pt-8"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <button 
-                      onClick={scrollToContact}
-                      className="w-full button-glow text-white py-5 px-6 rounded-xl text-xl font-semibold transform transition-all duration-300 shadow-lg"
-                    >
-                      Start Free
-                    </button>
-                  </motion.div>
-                </div>
-
-                {/* Additional useful links */}
-                <motion.div 
-                  variants={itemVariants}
-                  className="mt-auto pt-12"
+                  <span className="ml-2 text-xl font-bold text-orange-500">ENAI</span>
+                </Link>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-gray-300 hover:text-white hover:bg-dark-800"
+                  aria-label="Close menu"
                 >
-                  <div className="grid grid-cols-2 gap-4 text-sm text-gray-200">
-                    <Link 
-                      to="/#features" 
-                      className="hover:text-primary-400 transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Why Choose ENAI
-                    </Link>
-                    <Link 
-                      to="/#team" 
-                      className="hover:text-primary-400 transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      AI Team
-                    </Link>
-                    <Link 
-                      to="/#contact" 
-                      className="hover:text-primary-400 transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Get in Touch
-                    </Link>
+                  <X className="h-6 w-6" aria-hidden="true" />
+                </Button>
+              </div>
+              
+              <Separator className="mb-6" />
+              
+              <nav className="flex-grow">
+                <ul className="space-y-6">
+                  {navItems.map((item) => (
+                    <motion.li key={item} variants={itemVariants}>
+                      <button
+                        onClick={() => (item === 'Industries' || item === 'About Us') ? null : handleNavClick(item)}
+                        className={`group flex items-center w-full text-left py-2 text-lg font-medium transition-colors ${
+                          isActive(item) ? 'text-primary-400' : 'text-gray-300 hover:text-white'
+                        }`}
+                        aria-current={isActive(item) ? 'page' : undefined}
+                      >
+                        {isActive(item) && (
+                          <motion.span 
+                            layoutId="activeMobileIndicator"
+                            className="absolute left-0 w-1 h-8 bg-primary-400 rounded-r-full"
+                          />
+                        )}
+                        {item === 'Industries' ? (
+                          <Link 
+                            to="/industries" 
+                            className="flex items-center w-full"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            <span className="relative pl-4">{item}</span>
+                            <ChevronRight className="ml-auto w-5 h-5 opacity-70 group-hover:translate-x-1 transition-transform" />
+                          </Link>
+                        ) : item === 'About Us' ? (
+                          <Link 
+                            to="/about-us" 
+                            className="flex items-center w-full"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            <span className="relative pl-4">{item}</span>
+                            <ChevronRight className="ml-auto w-5 h-5 opacity-70 group-hover:translate-x-1 transition-transform" />
+                          </Link>
+                        ) : (
+                          <>
+                            <span className="relative pl-4">{item}</span>
+                            <ChevronRight className="ml-auto w-5 h-5 opacity-70 group-hover:translate-x-1 transition-transform" />
+                          </>
+                        )}
+                      </button>
+                    </motion.li>
+                  ))}
+                </ul>
+              </nav>
+              
+              <div className="mt-auto pt-6">
+                <Separator className="mb-6" />
+                <Button 
+                  className="w-full bg-gradient-to-r from-primary-400 to-primary-500"
+                >
+                  <a 
+                    href="https://calendly.com/enai-ai2024/30min" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-full h-full"
+                  >
+                    <span>Get Demo</span>
+                    <ChevronRight className="ml-2 w-4 h-4" />
+                  </a>
+                </Button>
+                
+                <div className="mt-8 flex items-center justify-center space-x-4">
+                  <Badge variant="outline" className="hover:bg-dark-800 transition-colors">
                     <a 
-                      href="https://login.enai.ai" 
-                      className="hover:text-primary-400 transition-colors"
-                      target="_blank"
+                      href="https://www.linkedin.com/company/enai-ai" 
+                      target="_blank" 
                       rel="noopener noreferrer"
+                      aria-label="Enai LinkedIn Profile"
                     >
-                      Login
+                      LinkedIn
                     </a>
-                  </div>
-                </motion.div>
-              </motion.div>
+                  </Badge>
+                  <Badge variant="outline" className="hover:bg-dark-800 transition-colors">
+                    <Link to="/privacy-policy">Privacy</Link>
+                  </Badge>
+                  <Badge variant="outline" className="hover:bg-dark-800 transition-colors">
+                    <Link to="/terms-of-service">Terms</Link>
+                  </Badge>
+                </div>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 }

@@ -18,26 +18,41 @@
     <title>Enai.ai - AI-Powered Sales Automation for B2B | AI Workers for Sales Teams</title>
     <meta name="description" content="Empower your B2B sales team with Enai.ai's AI workers. Our AI agents automate lead qualification, market research, and personalized outreach to help you scale efficiently." />
     <meta name="keywords" content="AI sales automation, B2B AI tools, sales AI, lead generation AI, AI-powered sales, AI workers for sales, sales process automation" />
+    <meta name="author" content="Enai.ai" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.enai.ai/" />
     <meta property="og:title" content="Enai.ai - AI-Powered Sales Automation for B2B | AI Workers for Sales Teams" />
     <meta property="og:description" content="Empower your B2B sales team with Enai.ai's AI workers. Our AI agents automate lead qualification, market research, and personalized outreach to help you scale efficiently." />
-    <meta property="og:image" content="https://www.enai.ai/og-image.jpg" />
+    <meta property="og:image" content="https://www.enai.ai/enai-og-image.jpg" />
+    <meta property="og:image:alt" content="Enai.ai - AI-Powered Sales Automation" />
+    <meta property="og:site_name" content="Enai.ai" />
+    <meta property="og:locale" content="en_US" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://www.enai.ai/" />
     <meta property="twitter:title" content="Enai.ai - AI-Powered Sales Automation for B2B | AI Workers for Sales Teams" />
     <meta property="twitter:description" content="Empower your B2B sales team with Enai.ai's AI workers. Our AI agents automate lead qualification, market research, and personalized outreach to help you scale efficiently." />
-    <meta property="twitter:image" content="https://www.enai.ai/twitter-image.jpg" />
+    <meta property="twitter:image" content="https://www.enai.ai/enai-twitter-image.jpg" />
+    <meta name="twitter:creator" content="@enai_ai" />
+    <meta name="twitter:site" content="@enai_ai" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.enai.ai/" />
     
+    <!-- Preconnect to common resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Preload key resources -->
+    <link rel="preload" href="/enai-logo.png" as="image" />
+    
     <!-- Enhanced Structured Data for Google AI Overviews -->
-    <script type="application/ld+json" async>
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
@@ -86,7 +101,7 @@
     </script>
     
     <!-- Enhanced Organization Schema -->
-    <script type="application/ld+json" async>
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
@@ -99,12 +114,13 @@
       "founders": [{
         "@type": "Person",
         "name": "Madhav Kunal"
+      }, {
+        "@type": "Person",
+        "name": "Nikhil Nehra"
       }],
       "sameAs": [
         "https://www.linkedin.com/company/enai-ai",
-        "https://twitter.com/enai_ai",
-        "https://www.facebook.com/enai.ai",
-        "https://www.instagram.com/enai.ai"
+        "https://twitter.com/enai_ai"
       ],
       "knowsAbout": [
         "AI Sales Automation",
@@ -115,7 +131,6 @@
       ],
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+1-000-000-0000",
         "contactType": "customer service",
         "email": "contact@enai.ai",
         "availableLanguage": ["English"],
@@ -130,7 +145,7 @@
     </script>
     
     <!-- Enhanced FAQ Schema -->
-    <script type="application/ld+json" async>
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -193,10 +208,60 @@
       }]
     }
     </script>
+    
+    <!-- Webpage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Enai.ai - AI-Powered Sales Automation for B2B",
+      "description": "Empower your B2B sales team with Enai.ai's AI workers. Our AI agents automate lead qualification, market research, and personalized outreach to help you scale efficiently.",
+      "url": "https://www.enai.ai/",
+      "lastReviewed": "2024-03-23",
+      "reviewedBy": {
+        "@type": "Organization",
+        "name": "Enai.ai"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": ["h1", "h2", "p.hero-text"]
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.enai.ai/"
+        }]
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "contentUrl": "https://www.enai.ai/enai-logo.png",
+        "caption": "Enai.ai Logo"
+      },
+      "mainEntity": {
+        "@type": "Product",
+        "name": "Enai.ai AI Sales Platform",
+        "image": "https://www.enai.ai/enai-product-image.jpg",
+        "description": "AI-powered sales automation platform with intelligent agents that qualify leads, research markets, and automate the entire sales process.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Enai.ai"
+        },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0",
+          "availability": "https://schema.org/InStock"
+        }
+      }
+    }
+    </script>
     <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx" async></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

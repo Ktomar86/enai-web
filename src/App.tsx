@@ -180,12 +180,12 @@ function App() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark to-dark-900 relative overflow-hidden">
+      <section className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-dark to-dark-900 relative overflow-hidden" aria-labelledby="hero-heading">
         {/* 3D Mountain Scene with Lost Orb */}
         <HeroScene />
         
         {/* Additional tech elements layered on top */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[1]">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-[1]" aria-hidden="true">
           {/* Animated grid lines - darker and more subtle */}
           <motion.div 
             className="absolute inset-0 opacity-8"
@@ -232,7 +232,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="mb-10">
+            <h1 id="hero-heading" className="mb-10">
               <motion.span 
                 className="text-white text-lg md:text-2xl font-medium tracking-wider uppercase block mb-3"
                 initial={{ opacity: 0, y: 20 }}
@@ -259,6 +259,7 @@ function App() {
                   border: '1px solid rgba(0, 0, 0, 0.2)',
                   boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)' 
                 }}
+                aria-hidden="true"
               />
               <motion.div 
                 className="h-px w-24 md:w-40 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 mx-auto mt-2 rounded-full"
@@ -268,12 +269,13 @@ function App() {
                 style={{ 
                   border: '1px solid rgba(0, 0, 0, 0.1)'
                 }}
+                aria-hidden="true"
               />
             </h1>
           </motion.div>
           <Separator className="w-full max-w-3xl mx-auto mb-8 opacity-30" />
           <motion.p 
-            className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-14 leading-relaxed"
+            className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-14 leading-relaxed hero-text"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.8 }}
@@ -287,6 +289,7 @@ function App() {
               <motion.span 
                 className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-orange-400 to-yellow-400"
                 layoutId="highlight"
+                aria-hidden="true"
               />
             </motion.span> that understand your business and help you <motion.span 
               className="font-semibold text-white relative inline-block"
@@ -297,6 +300,7 @@ function App() {
               <motion.span 
                 className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-orange-400 to-yellow-400"
                 layoutId="highlight"
+                aria-hidden="true"
               />
             </motion.span>.
           </motion.p>
@@ -317,6 +321,7 @@ function App() {
                 variant="default"
                 className="px-8 py-7 bg-gradient-to-r from-primary-400 to-primary-500 rounded-lg text-white font-medium shadow-lg shadow-primary-500/30 relative overflow-hidden group mx-4 text-lg"
                 onClick={() => window.open("https://calendly.com/enai-ai2024/30min", "_blank")}
+                aria-label="Schedule a demo with Enai.ai"
               >
                 <span className="relative z-10 flex items-center justify-center">
                   <motion.svg 
@@ -333,6 +338,7 @@ function App() {
                     initial={{ opacity: 0, x: -5 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 2, duration: 0.5 }}
+                    aria-hidden="true"
                   >
                     <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
                     <polyline points="10 17 15 12 10 7"/>
@@ -344,6 +350,7 @@ function App() {
                   className="absolute inset-0 bg-gradient-to-r from-primary-500/0 via-white/20 to-primary-500/0"
                   animate={{ x: ["-100%", "200%"] }}
                   transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 1 }}
+                  aria-hidden="true"
                 />
                 <motion.div 
                   className="absolute -inset-1 rounded-lg"
@@ -357,6 +364,7 @@ function App() {
                   transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 0.5 }}
+                  aria-hidden="true"
                 />
               </Button>
             </motion.div>
@@ -380,15 +388,15 @@ function App() {
       <AIAgentShowcase />
 
       {/* Why Choose ENAI */}
-      <section id="features" className="py-24 bg-gradient-to-b from-dark-800 to-dark">
+      <section id="features" className="py-24 bg-gradient-to-b from-dark-800 to-dark" aria-labelledby="features-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center gradient-text mb-6">Why Choose ENAI?</h2>
+          <h2 id="features-heading" className="text-4xl font-bold text-center gradient-text mb-6">Why Choose ENAI?</h2>
           <Separator className="mb-16 max-w-md mx-auto" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card className="bg-dark-800 border-dark-700 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="pb-4">
                 <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary-400/10">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary-400/10" aria-hidden="true">
                     <Brain className="w-10 h-10 text-primary-400" />
                   </div>
                 </div>
@@ -402,7 +410,7 @@ function App() {
             <Card className="bg-dark-800 border-dark-700 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="pb-4">
                 <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary-400/10">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary-400/10" aria-hidden="true">
                     <Zap className="w-10 h-10 text-primary-400" />
                   </div>
                 </div>
@@ -416,7 +424,7 @@ function App() {
             <Card className="bg-dark-800 border-dark-700 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="pb-4">
                 <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary-400/10">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary-400/10" aria-hidden="true">
                     <Users className="w-10 h-10 text-primary-400" />
                   </div>
                 </div>
@@ -431,7 +439,7 @@ function App() {
             <Card className="bg-dark-800 border-dark-700 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="pb-4">
                 <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary-400/10">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary-400/10" aria-hidden="true">
                     <LineChart className="w-10 h-10 text-primary-400" />
                   </div>
                 </div>
@@ -445,7 +453,7 @@ function App() {
             <Card className="bg-dark-800 border-dark-700 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="pb-4">
                 <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary-400/10">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-primary-400/10" aria-hidden="true">
                     <HeadphonesIcon className="w-10 h-10 text-primary-400" />
                   </div>
                 </div>
@@ -460,9 +468,9 @@ function App() {
       </section>
 
       {/* Solutions */}
-      <section id="solutions" className="py-24 bg-dark">
+      <section id="solutions" className="py-24 bg-dark" aria-labelledby="solutions-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center gradient-text mb-6">Solutions</h2>
+          <h2 id="solutions-heading" className="text-4xl font-bold text-center gradient-text mb-6">Solutions</h2>
           <Separator className="mb-16 max-w-md mx-auto" />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {solutions.map((solution, index) => (
@@ -476,15 +484,15 @@ function App() {
               >
                 <Card className="bg-dark-800 border-dark-700 h-full shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
-                    <div className="text-primary-400 mb-2">{solution.icon}</div>
+                    <div className="text-primary-400 mb-2" aria-hidden="true">{solution.icon}</div>
                     <CardTitle className="text-xl text-white">{solution.title}</CardTitle>
                     <CardDescription className="text-gray-300">{solution.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2">
+                    <ul className="space-y-2" aria-label={`Benefits of ${solution.title}`}>
                       {solution.bullets.map((bullet, i) => (
                         <li key={i} className="flex items-start">
-                          <ChevronRight className="w-4 h-4 text-primary-400 mt-1 mr-2 flex-shrink-0" />
+                          <ChevronRight className="w-4 h-4 text-primary-400 mt-1 mr-2 flex-shrink-0" aria-hidden="true" />
                           <span className="text-gray-300 text-sm">{bullet}</span>
                         </li>
                       ))}
@@ -498,15 +506,15 @@ function App() {
       </section>
 
       {/* AI Team */}
-      <section id="team" className="py-24 bg-gradient-to-b from-dark to-dark-800">
+      <section id="team" className="py-24 bg-gradient-to-b from-dark to-dark-800" aria-labelledby="team-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center gradient-text mb-6">Meet Our AI Team</h2>
+          <h2 id="team-heading" className="text-4xl font-bold text-center gradient-text mb-6">Meet Our AI Team</h2>
           <Separator className="mb-16 max-w-md mx-auto" />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {aiTeam.map((member, index) => (
               <Card key={index} className="bg-dark-800 border-dark-700 text-center shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                 <CardHeader className="pb-4">
-                  <div className="mb-4 text-primary-400 flex justify-center">{member.icon}</div>
+                  <div className="mb-4 text-primary-400 flex justify-center" aria-hidden="true">{member.icon}</div>
                   <CardTitle className="text-2xl text-white">
                     <Badge variant="outline" className="text-lg px-4 py-1 bg-primary-400/10 border-primary-400/20">
                       {member.name}
@@ -529,9 +537,9 @@ function App() {
       <Insights />
 
       {/* Contact */}
-      <section id="contact" className="py-24 bg-gradient-to-b from-dark-800 to-dark relative overflow-hidden">
+      <section id="contact" className="py-24 bg-gradient-to-b from-dark-800 to-dark relative overflow-hidden" aria-labelledby="contact-heading">
         {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary-400/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
         </div>
@@ -544,7 +552,7 @@ function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold gradient-text mb-4">Get in Touch</h2>
+            <h2 id="contact-heading" className="text-5xl font-bold gradient-text mb-4">Get in Touch</h2>
             <Separator className="mb-4 max-w-md mx-auto" />
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Have a question or ready to explore how our AI workers can transform your business? Reach out to us today.
@@ -561,7 +569,7 @@ function App() {
             >
               <Card className="bg-dark-800/80 backdrop-blur-sm border-dark-700 shadow-xl hover:shadow-2xl transition-all duration-500">
                 <CardHeader>
-                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-400/20 to-purple-400/20 rounded-xl mb-6 mx-auto md:mx-0">
+                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-400/20 to-purple-400/20 rounded-xl mb-6 mx-auto md:mx-0" aria-hidden="true">
                     <Mail className="w-8 h-8 text-primary-400" />
                   </div>
                   <CardTitle className="text-2xl text-white text-center md:text-left">Contact Information</CardTitle>
@@ -569,20 +577,20 @@ function App() {
                 <CardContent>
                   <div className="mb-8">
                     <div className="flex items-start mb-4">
-                      <MapPin className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" />
-                      <p className="text-gray-300 ml-4">
+                      <MapPin className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" aria-hidden="true" />
+                      <address className="text-gray-300 ml-4 not-italic">
                         Unit 3, Bradbury's Court<br />
                         Lyon Rd, London HA1 2BY<br />
                         United Kingdom
-                      </p>
+                      </address>
                     </div>
                   </div>
                   
                   <h4 className="text-lg font-medium text-white mb-4 text-center md:text-left">Team</h4>
-                  <div className="space-y-5">
-                    <div className="flex items-center group p-3 rounded-xl transition-all duration-300 hover:bg-dark-700/50">
+                  <ul className="space-y-5">
+                    <li className="flex items-center group p-3 rounded-xl transition-all duration-300 hover:bg-dark-700/50">
                       <div className="flex-shrink-0 mr-4">
-                        <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center" aria-hidden="true">
                           <User className="w-6 h-6 text-primary-400" />
                         </div>
                       </div>
@@ -606,11 +614,11 @@ function App() {
                           </a>
                         </div>
                       </div>
-                    </div>
+                    </li>
                     
-                    <div className="flex items-center group p-3 rounded-xl transition-all duration-300 hover:bg-dark-700/50">
+                    <li className="flex items-center group p-3 rounded-xl transition-all duration-300 hover:bg-dark-700/50">
                       <div className="flex-shrink-0 mr-4">
-                        <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center" aria-hidden="true">
                           <Code className="w-6 h-6 text-primary-400" />
                         </div>
                       </div>
@@ -634,11 +642,11 @@ function App() {
                           </a>
                         </div>
                       </div>
-                    </div>
+                    </li>
                     
-                    <div className="flex items-center group p-3 rounded-xl transition-all duration-300 hover:bg-dark-700/50">
+                    <li className="flex items-center group p-3 rounded-xl transition-all duration-300 hover:bg-dark-700/50">
                       <div className="flex-shrink-0 mr-4">
-                        <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center" aria-hidden="true">
                           <TrendingUp className="w-6 h-6 text-primary-400" />
                         </div>
                       </div>
@@ -662,8 +670,8 @@ function App() {
                           </a>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </li>
+                  </ul>
                 </CardContent>
               </Card>
             </motion.div>
@@ -684,7 +692,7 @@ function App() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="relative">
                         <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
-                          Full Name <span className="text-primary-400">*</span>
+                          Full Name <span className="text-primary-400" aria-hidden="true">*</span><span className="sr-only">(required)</span>
                         </label>
                         <div className="relative">
                           <input
@@ -694,14 +702,15 @@ function App() {
                             required
                             placeholder="John Doe"
                             className="w-full pl-10 pr-4 py-3 rounded-lg bg-dark-900 border border-dark-700 text-white input-glow focus:border-primary-400 transition-all duration-300"
+                            aria-required="true"
                           />
-                          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+                          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" aria-hidden="true" />
                         </div>
                       </div>
                       
                       <div className="relative">
                         <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
-                          Email Address <span className="text-primary-400">*</span>
+                          Email Address <span className="text-primary-400" aria-hidden="true">*</span><span className="sr-only">(required)</span>
                         </label>
                         <div className="relative">
                           <input
@@ -711,15 +720,16 @@ function App() {
                             required
                             placeholder="you@example.com"
                             className="w-full pl-10 pr-4 py-3 rounded-lg bg-dark-900 border border-dark-700 text-white input-glow focus:border-primary-400 transition-all duration-300"
+                            aria-required="true"
                           />
-                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" aria-hidden="true" />
                         </div>
                       </div>
                     </div>
                     
                     <div className="relative">
                       <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-1">
-                        Company <span className="text-primary-400">*</span>
+                        Company <span className="text-primary-400" aria-hidden="true">*</span><span className="sr-only">(required)</span>
                       </label>
                       <div className="relative">
                         <input
@@ -729,14 +739,15 @@ function App() {
                           required
                           placeholder="Your Company"
                           className="w-full pl-10 pr-4 py-3 rounded-lg bg-dark-900 border border-dark-700 text-white input-glow focus:border-primary-400 transition-all duration-300"
+                          aria-required="true"
                         />
-                        <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+                        <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" aria-hidden="true" />
                       </div>
                     </div>
                     
                     <div className="relative">
                       <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
-                        Message <span className="text-primary-400">*</span>
+                        Message <span className="text-primary-400" aria-hidden="true">*</span><span className="sr-only">(required)</span>
                       </label>
                       <div className="relative">
                         <textarea
@@ -746,8 +757,9 @@ function App() {
                           required
                           placeholder="Tell us about your project and how we can help..."
                           className="w-full pl-10 pr-4 py-3 rounded-lg bg-dark-900 border border-dark-700 text-white input-glow focus:border-primary-400 transition-all duration-300"
+                          aria-required="true"
                         />
-                        <MessageSquare className="absolute left-3 top-6 w-4 h-4 text-gray-500" />
+                        <MessageSquare className="absolute left-3 top-6 w-4 h-4 text-gray-500" aria-hidden="true" />
                       </div>
                     </div>
                     
@@ -758,6 +770,7 @@ function App() {
                         type="checkbox"
                         required
                         className="h-4 w-4 rounded border-gray-600 bg-dark-900 text-primary-400 focus:ring-primary-400"
+                        aria-required="true"
                       />
                       <label htmlFor="privacy-policy" className="ml-2 block text-sm text-gray-400">
                         I agree to the <Link to="/privacy-policy" className="text-primary-400 hover:underline">Privacy Policy</Link>
@@ -768,7 +781,7 @@ function App() {
                       type="submit"
                       className="w-full bg-gradient-to-r from-primary-400 to-purple-500 text-white px-6 py-6 rounded-lg font-semibold shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300 flex items-center justify-center"
                     >
-                      <Send className="w-4 h-4 mr-2" />
+                      <Send className="w-4 h-4 mr-2" aria-hidden="true" />
                       Send Message
                     </Button>
                     
@@ -784,35 +797,44 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-dark text-white py-12 border-t border-dark-800">
+      <footer className="bg-dark text-white py-12 border-t border-dark-800" role="contentinfo">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center mb-8 md:mb-0">
-              <img src="/enai-logo.png" alt="ENAI" className="h-10 filter brightness-0 invert" />
+              <img 
+                src="/enai-logo.png" 
+                alt="ENAI Logo" 
+                className="h-10 filter brightness-0 invert" 
+                width="40"
+                height="40"
+              />
               <span className="ml-2 text-xl font-bold text-orange-500">ENAI</span>
             </div>
-            <div className="flex space-x-8 mb-8 md:mb-0">
-              <Link 
-                to="/privacy-policy"
-                className="text-gray-300 hover:text-primary-400 transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <Link 
-                to="/terms-of-service"
-                className="text-gray-300 hover:text-primary-400 transition-colors"
-              >
-                Terms of Service
-              </Link>
-            </div>
+            <nav aria-label="Footer Navigation">
+              <div className="flex space-x-8 mb-8 md:mb-0">
+                <Link 
+                  to="/privacy-policy"
+                  className="text-gray-300 hover:text-primary-400 transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+                <Link 
+                  to="/terms-of-service"
+                  className="text-gray-300 hover:text-primary-400 transition-colors"
+                >
+                  Terms of Service
+                </Link>
+              </div>
+            </nav>
             <div className="flex space-x-6">
               <a 
                 href="https://www.linkedin.com/company/enai-ai" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-gray-300 hover:text-primary-400 transition-colors"
+                aria-label="Visit Enai on LinkedIn"
               >
-                <Linkedin className="w-6 h-6" />
+                <Linkedin className="w-6 h-6" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -824,7 +846,7 @@ function App() {
       </footer>
 
       <div className="fixed bottom-4 right-4 z-50">
-        <ElevenLabsOrb agentId="FeDHh9EmNfMMKCvrYZyn" className="w-80 h-80" />
+        <ElevenLabsOrb agentId="FeDHh9EmNfMMKCvrYZyn" className="w-80 h-80" aria-label="AI Assistant Chat" />
       </div>
     </div>
   );
