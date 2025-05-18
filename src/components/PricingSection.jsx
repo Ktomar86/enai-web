@@ -15,7 +15,7 @@ const pricingPlans = [
       "No credit card required"
     ],
     highlight: "Best for exploring",
-    cta: "Get Started",
+    cta: "Contact Sales",
     link: "https://calendly.com/enai-ai2024/30min"
   },
   {
@@ -31,7 +31,7 @@ const pricingPlans = [
       "Enhanced KPI dashboard and campaign analytics"
     ],
     highlight: "Most Popular",
-    cta: "Start Scaling",
+    cta: "Contact Sales",
     link: "https://calendly.com/enai-ai2024/30min"
   },
   {
