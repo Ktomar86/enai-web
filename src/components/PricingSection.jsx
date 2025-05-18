@@ -16,7 +16,7 @@ const pricingPlans = [
     ],
     highlight: "Best for exploring",
     cta: "Get Started",
-    link: "https://calendly.com/starter-link"
+    link: "https://calendly.com/enai-ai2024/30min"
   },
   {
     name: "Growth",
@@ -32,7 +32,7 @@ const pricingPlans = [
     ],
     highlight: "Most Popular",
     cta: "Start Scaling",
-    link: "https://calendly.com/growth-link"
+    link: "https://calendly.com/enai-ai2024/30min"
   },
   {
     name: "Enterprise",
@@ -50,7 +50,7 @@ const pricingPlans = [
     ],
     highlight: "All-Inclusive",
     cta: "Contact Sales",
-    link: "https://calendly.com/enterprise-link"
+    link: "https://calendly.com/enai-ai2024/30min"
   }
 ];
 
