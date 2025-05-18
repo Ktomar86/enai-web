@@ -15,7 +15,8 @@ const pricingPlans = [
       "No credit card required"
     ],
     highlight: "Best for exploring",
-    cta: "Get Started"
+    cta: "Get Started",
+    link: "https://calendly.com/starter-link"
   },
   {
     name: "Growth",
@@ -30,7 +31,8 @@ const pricingPlans = [
       "Enhanced KPI dashboard and campaign analytics"
     ],
     highlight: "Most Popular",
-    cta: "Start Scaling"
+    cta: "Start Scaling",
+    link: "https://calendly.com/growth-link"
   },
   {
     name: "Enterprise",
@@ -47,7 +49,8 @@ const pricingPlans = [
       "Free access to all future feature upgrades and innovations"
     ],
     highlight: "All-Inclusive",
-    cta: "Contact Sales"
+    cta: "Contact Sales",
+    link: "https://calendly.com/enterprise-link"
   }
 ];
 
@@ -59,25 +62,35 @@ const PricingSection = () => {
         <p className="text-gray-400 mb-12">Choose the plan that fits your growth stage and outbound needs.</p>
         <div className="grid md:grid-cols-3 gap-8">
           {pricingPlans.map((plan, index) => (
-            <Card key={index} className="bg-dark-700 border border-dark-600 text-left shadow-lg hover:shadow-xl transition-all">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-2xl font-bold text-white mb-2">{plan.name}</CardTitle>
-                <p className="text-primary-400 text-xl font-semibold">{plan.price}</p>
-                <p className="text-gray-400 text-sm mt-2">{plan.subtitle}</p>
-                <Badge variant="outline" className="mt-4 text-sm">{plan.highlight}</Badge>
-              </CardHeader>
-              <CardContent>
-                <ul className="mt-6 space-y-2">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="text-gray-300">• {feature}</li>
-                  ))}
-                </ul>
-                <button
-                  className="mt-6 w-full py-3 rounded-md bg-gradient-to-r from-primary-400 to-purple-500 text-white font-semibold hover:opacity-90 transition"
+            <Card
+              key={index}
+              className="bg-dark-700 border border-dark-600 text-left shadow-lg hover:shadow-xl transition-all flex flex-col justify-between"
+            >
+              <div className="flex-grow flex flex-col">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-2xl font-bold text-white mb-2">{plan.name}</CardTitle>
+                  <p className="text-primary-400 text-xl font-semibold">{plan.price}</p>
+                  <p className="text-gray-400 text-sm mt-2">{plan.subtitle}</p>
+                  <Badge variant="outline" className="mt-4 text-sm">{plan.highlight}</Badge>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <ul className="mt-6 space-y-2">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="text-gray-300">• {feature}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </div>
+              <div className="p-6 pt-0">
+                <a
+                  href={plan.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-center w-full py-3 rounded-md bg-gradient-to-r from-primary-400 to-purple-500 text-white font-semibold hover:opacity-90 transition"
                 >
                   {plan.cta}
-                </button>
-              </CardContent>
+                </a>
+              </div>
             </Card>
           ))}
         </div>
