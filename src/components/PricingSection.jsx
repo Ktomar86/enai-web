@@ -20,7 +20,7 @@ const pricingPlans = [
   },
   {
     name: "Growth",
-    price: "$99/month",
+    price: "$59/month",
     subtitle: "For growing teams ready to scale outreach and drive consistent engagement.",
     features: [
       "Everything in Starter, plus:",
