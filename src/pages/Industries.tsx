@@ -22,10 +22,9 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '../components/Navigation';
 import { Helmet } from 'react-helmet';
-import SEOFAQSection from '../components/SEOFAQSection';
+import LazySection from '../components/LazySection';
 import LazyImage from '../components/LazyImage';
 import { throttle, debounce, isLowEndDevice, prefersReducedMotion } from '../utils/performance';
-import { GlowingEffectDemo } from '../components/ui/glowing-effect-demo';
 
 // Define interfaces for better typing
 interface IndustryApplication {
@@ -790,7 +789,7 @@ export default function Industries() {
                   transition={{ duration: 0.8 }}
                   viewport={{ once: true, margin: "-50px" }}
                 >
-                  <GlowingEffectDemo />
+                  <LazySection loader={() => import('../components/ui/glowing-effect-demo').then(mod => ({ default: mod.GlowingEffectDemo }))} />
                 </motion.div>
               </div>
             </section>
@@ -1004,10 +1003,11 @@ export default function Industries() {
                     className="relative"
                   >
                     <div className="rounded-2xl overflow-hidden border border-dark-700 shadow-xl">
-                      <img 
+                      <LazyImage
                         src={selectedIndustry.image}
                         alt={`AI Solutions for ${selectedIndustry.title}`}
                         className="w-full h-64 object-cover"
+                        loadingPriority="auto"
                       />
                       
                       <div className="p-8 bg-dark-800">
@@ -1097,7 +1097,7 @@ export default function Industries() {
 
       {/* FAQ Section optimized for SEO */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <SEOFAQSection />
+        <LazySection loader={() => import('../components/SEOFAQSection')} />
       </div>
     </div>
   );

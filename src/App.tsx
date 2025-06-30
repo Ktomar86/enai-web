@@ -24,23 +24,38 @@ import PricingSection from './components/PricingSection';
 
 import { Link } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import Insights from './components/SuccessStories';
 import SalesProcessGuide from './components/SalesProcessGuide';
-import AIAgentShowcase from './components/AIAgentShowcase';
-import Testimonials from './components/Testimonials';
-import FeatureHighlights from './components/FeatureHighlights';
-import SalesProcessStoryboard from './components/SalesProcessStoryboard';
-import AIInsightsVisualizer from './components/AIInsightsVisualizer';
-import AIActionShowcase from './components/AIActionShowcase';
+import LazySection from './components/LazySection';
 import ElevenLabsOrb from './components/ElevenLabsOrb';
 import HeroScene from './components/HeroScene';
 import { motion } from 'framer-motion';
-// Import Shadcn UI components
 import { Button } from './components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './components/ui/card';
 import { Badge } from './components/ui/badge';
 import { Separator } from './components/ui/separator';
 
+// Defer heavy sections until near viewport
+const LazySalesProcessStoryboard = () => (
+  <LazySection loader={() => import('./components/SalesProcessStoryboard')} />
+);
+const LazyAIActionShowcase = () => (
+  <LazySection loader={() => import('./components/AIActionShowcase')} />
+);
+const LazyFeatureHighlights = () => (
+  <LazySection loader={() => import('./components/FeatureHighlights')} />
+);
+const LazyAIInsightsVisualizer = () => (
+  <LazySection loader={() => import('./components/AIInsightsVisualizer')} />
+);
+const LazyAIAgentShowcase = () => (
+  <LazySection loader={() => import('./components/AIAgentShowcase')} />
+);
+const LazyTestimonials = () => (
+  <LazySection loader={() => import('./components/Testimonials')} />
+);
+const LazyInsights = () => (
+  <LazySection loader={() => import('./components/SuccessStories')} />
+);
 
 const solutions = [
   {
@@ -206,7 +221,7 @@ function App() {
 
           {/* Digital particles layered on top - more refined */}
           <div className="absolute inset-0 opacity-20">
-            {Array.from({ length: 12 }).map((_, i) => (
+            {Array.from({ length: 6 }).map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute w-1 h-1 bg-primary-400/30 rounded-full"
@@ -219,10 +234,10 @@ function App() {
                   scale: [0, 1.2, 0],
                 }}
                 transition={{
-                  duration: 3 + Math.random() * 5,
+                  duration: 4 + Math.random() * 2,
                   repeat: Infinity,
                   repeatType: "loop",
-                  delay: Math.random() * 5,
+                  delay: Math.random() * 3,
                 }}
               />
             ))}
@@ -376,19 +391,19 @@ function App() {
       </section>
 
       {/* ENHANCED: Visual Sales Process Storyboard */}
-      <SalesProcessStoryboard />
+      <LazySalesProcessStoryboard />
 
       {/* NEW: Real UI Mockups Showcase */}
-      <AIActionShowcase />
+      <LazyAIActionShowcase />
 
       {/* Feature Highlights */}
-      <FeatureHighlights />
+      <LazyFeatureHighlights />
 
       {/* ENHANCED: Visual AI Insights */}
-      <AIInsightsVisualizer />
+      <LazyAIInsightsVisualizer />
 
       {/* AI Agent Showcase */}
-      <AIAgentShowcase />
+      <LazyAIAgentShowcase />
 
       {/* Why Choose ENAI */}
       <section id="features" className="py-24 bg-gradient-to-b from-dark-800 to-dark" aria-labelledby="features-heading">
@@ -536,10 +551,10 @@ function App() {
       </section>
 
       {/* Testimonials */}
-      <Testimonials />
+      <LazyTestimonials />
 
       {/* Insights */}
-      <Insights />
+      <LazyInsights />
 
       {/* Contact */}
       <section id="contact" className="py-24 bg-gradient-to-b from-dark-800 to-dark relative overflow-hidden" aria-labelledby="contact-heading">

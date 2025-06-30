@@ -31,6 +31,9 @@ export default {
           900: '#0A0B0D',
         }
       },
+      fontFamily: {
+        sans: ['"OpenAI Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
       animation: {
         'float': 'float 3s ease-in-out infinite',
         'fade-in-up': 'fadeInUp 0.6s ease-out forwards',

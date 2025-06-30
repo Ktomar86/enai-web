@@ -9,6 +9,9 @@
 
   body {
     @apply antialiased bg-dark;
+    font-family: "OpenAI Sans", sans-serif;
+    font-feature-settings: "liga", "calt";
+    -webkit-font-smoothing: antialiased;
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { prefersReducedMotion } from '../utils/performance';
 import {
   Search,
   Users,
@@ -382,15 +383,17 @@ export default function FeatureHighlights() {
     <section className="py-24 bg-${lightBlackColor} overflow-hidden relative">
       {/* Enhanced background elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-      <motion.div 
-        className="absolute inset-0 opacity-10" 
-        style={{
-          backgroundImage: `radial-gradient(circle at 30% 70%, rgba(247, 183, 51, 0.15) 0%, transparent 50%), 
-                           radial-gradient(circle at 70% 30%, rgba(252, 74, 26, 0.1) 0%, transparent 50%)`
-        }}
-        animate={{ opacity: [0.05, 0.15, 0.05] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
+      {(!prefersReducedMotion()) && (
+        <motion.div 
+          className="absolute inset-0 opacity-10" 
+          style={{
+            backgroundImage: `radial-gradient(circle at 30% 70%, rgba(247, 183, 51, 0.15) 0%, transparent 50%), 
+                             radial-gradient(circle at 70% 30%, rgba(252, 74, 26, 0.1) 0%, transparent 50%)`
+          }}
+          animate={{ opacity: [0.05, 0.15, 0.05] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+      )}
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 relative">
         <motion.div
