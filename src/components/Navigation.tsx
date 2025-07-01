@@ -266,17 +266,21 @@ export default function Navigation() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            id="mobile-menu"
-            ref={mobileMenuRef}
-            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-black bg-opacity-100 backdrop-blur-none z-50 shadow-xl"
+  id="mobile-menu"
+  ref={mobileMenuRef}
+  style={{
+    backgroundColor: '#000000', // solid black
+    backdropFilter: 'none',     // disables blur
+    WebkitBackdropFilter: 'none'
+  }}
+  className="fixed top-0 right-0 bottom-0 w-full max-w-sm z-50 shadow-xl"
+  initial="closed"
+  animate="open"
+  exit="closed"
+  variants={menuVariants}
+  aria-label="Mobile navigation"
+>
 
-
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            aria-label="Mobile navigation"
-          >
             <div className="p-6 h-full flex flex-col">
               <div className="flex justify-between items-center mb-8">
                 <Link 
