@@ -268,7 +268,9 @@ export default function Navigation() {
           <motion.div
             id="mobile-menu"
             ref={mobileMenuRef}
-            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-dark-900/95 backdrop-blur-lg z-50 shadow-xl"
+            
+            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-black z-50 shadow-xl"
+
             initial="closed"
             animate="open"
             exit="closed"
