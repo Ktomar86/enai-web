@@ -4,6 +4,24 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Enai brand tokens mapped to CSS variables
+        brand: {
+          400: 'var(--brand-400)',
+          500: 'var(--brand-500)',
+          600: 'var(--brand-600)',
+          700: 'var(--brand-700)',
+          ink: 'var(--brand-ink)'
+        },
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        foreground: 'var(--foreground)',
+        muted: 'var(--muted)',
+        'muted-fg': 'var(--muted-fg)',
+        border: 'var(--border)',
+        success: 'var(--success)',
+        warning: 'var(--warning)',
+        danger: 'var(--danger)',
+        // existing palette kept for backward compatibility
         primary: {
           50: '#FFF9E6',
           100: '#FFF3CC',
@@ -32,7 +50,18 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"OpenAI Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)'],
+        sans: ['var(--font-sans)'],
+        mono: ['var(--font-mono)'],
+      },
+      boxShadow: {
+        // map to design tokens; keep Tailwind defaults intact by adding new keys
+        'brand-sm': 'var(--shadow-sm)',
+        'brand-md': 'var(--shadow-md)',
+        'brand-lg': 'var(--shadow-lg)'
+      },
+      ringColor: {
+        brand: 'var(--ring)'
       },
       animation: {
         'float': 'float 3s ease-in-out infinite',
@@ -41,6 +70,7 @@ export default {
         'slide-in-right': 'slideInRight 0.5s ease-out forwards',
         'gradient-flow': 'gradientFlow 8s linear infinite',
         'glow': 'glow 2s ease-in-out infinite',
+        'grid': 'grid 15s linear infinite',
       },
       keyframes: {
         float: {
@@ -68,9 +98,14 @@ export default {
           '0%, 100%': { boxShadow: '0 0 20px rgba(247, 183, 51, 0.2)' },
           '50%': { boxShadow: '0 0 30px rgba(247, 183, 51, 0.4)' },
         },
+        grid: {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(50%)' },
+        },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'brand-hero': 'var(--brand-hero-grad)'
       },
     },
   },

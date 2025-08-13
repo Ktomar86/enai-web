@@ -27,7 +27,9 @@ export default defineConfig({
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
+    reportCompressedSize: true,
+    cssMinify: true,
+    chunkSizeWarningLimit: 1500,
   },
   optimizeDeps: {
     exclude: ['lucide-react'],

@@ -2,13 +2,7 @@ import React, { useEffect, useState, useCallback, memo, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   ChevronRight, 
-  Building, 
-  BarChart2, 
   Briefcase, 
-  Users, 
-  Shield, 
-  Globe, 
-  Zap, 
   Layers, 
   BookOpen, 
   ShoppingBag, 
@@ -21,10 +15,13 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from '../components/Navigation';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import LazySection from '../components/LazySection';
-import LazyImage from '../components/LazyImage';
-import { throttle, debounce, isLowEndDevice, prefersReducedMotion } from '../utils/performance';
+// Removed header images for cleaner, text-first layout
+import { debounce, isLowEndDevice, prefersReducedMotion } from '../utils/performance';
+import { Button } from '../components/ui/button';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
 
 // Define interfaces for better typing
 interface IndustryApplication {
@@ -49,175 +46,7 @@ interface Industry {
   stats: IndustryStats;
 }
 
-// Mock UI components since Shadcn/UI components are not yet available
-// These components mimic the Shadcn/UI API but use native HTML
-const Button = ({ 
-  children, 
-  variant = 'default', 
-  size = 'default', 
-  asChild = false, 
-  className = '',
-  ...props 
-}: { 
-  children: React.ReactNode;
-  variant?: string;
-  size?: string;
-  asChild?: boolean;
-  className?: string;
-  [key: string]: any;
-}) => {
-  const baseClasses = "inline-flex items-center justify-center rounded-md font-medium transition-colors";
-  const sizeClasses = {
-    default: "h-10 py-2 px-4 text-sm",
-    sm: "h-8 px-3 text-xs",
-    lg: "h-12 px-6 text-base"
-  };
-  
-  const variantClasses = {
-    default: "bg-primary-500 text-white hover:bg-primary-600",
-    outline: "border border-gray-600 bg-transparent text-gray-200 hover:border-gray-400",
-    ghost: "bg-transparent text-gray-300 hover:bg-gray-800 hover:text-white"
-  };
-  
-  const classes = `${baseClasses} ${sizeClasses[size as keyof typeof sizeClasses]} ${variantClasses[variant as keyof typeof variantClasses]} ${className}`;
-  
-  if (asChild && React.isValidElement(children)) {
-    // Cast to any to avoid TypeScript errors with property spreading
-    return React.cloneElement(children as React.ReactElement<any>, {
-      ...props,
-      className: `${(children as any).props.className || ''} ${classes}`
-    });
-  }
-  
-  return <button className={classes} {...props}>{children}</button>;
-};
-
-const Card = ({ className = '', children, ...props }: { className?: string; children: React.ReactNode; [key: string]: any }) => (
-  <div className={`rounded-lg border border-gray-700 bg-dark-800 shadow ${className}`} {...props}>
-    {children}
-  </div>
-);
-
-const CardHeader = ({ className = '', children, ...props }: { className?: string; children: React.ReactNode; [key: string]: any }) => (
-  <div className={`p-6 flex flex-col space-y-1.5 ${className}`} {...props}>
-    {children}
-  </div>
-);
-
-const CardTitle = ({ className = '', children, ...props }: { className?: string; children: React.ReactNode; [key: string]: any }) => (
-  <h3 className={`font-semibold leading-none tracking-tight ${className}`} {...props}>
-    {children}
-  </h3>
-);
-
-const CardDescription = ({ className = '', children, ...props }: { className?: string; children: React.ReactNode; [key: string]: any }) => (
-  <p className={`text-sm text-gray-400 ${className}`} {...props}>
-    {children}
-  </p>
-);
-
-const CardContent = ({ className = '', children, ...props }: { className?: string; children: React.ReactNode; [key: string]: any }) => (
-  <div className={`p-6 pt-0 ${className}`} {...props}>
-    {children}
-  </div>
-);
-
-const CardFooter = ({ className = '', children, ...props }: { className?: string; children: React.ReactNode; [key: string]: any }) => (
-  <div className={`p-6 pt-0 flex items-center ${className}`} {...props}>
-    {children}
-  </div>
-);
-
-const Badge = ({ variant = 'default', className = '', children, ...props }: { variant?: string; className?: string; children: React.ReactNode; [key: string]: any }) => {
-  const variantClasses = {
-    default: "bg-primary-500/10 text-primary-500 border-primary-500/20",
-    outline: "border border-gray-600 bg-transparent text-gray-300",
-    secondary: "bg-gray-700 text-gray-200"
-  };
-  
-  return (
-    <span 
-      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${variantClasses[variant as keyof typeof variantClasses]} ${className}`} 
-      {...props}
-    >
-      {children}
-    </span>
-  );
-};
-
-const Input = ({ className = '', ...props }: { className?: string; [key: string]: any }) => (
-  <input 
-    className={`flex h-10 w-full rounded-md border border-gray-700 bg-dark-900 px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary-500 ${className}`} 
-    {...props} 
-  />
-);
-
-const Tabs = ({ defaultValue, className = '', children, onValueChange, ...props }: { defaultValue?: string; className?: string; children: React.ReactNode; onValueChange?: (value: string) => void; [key: string]: any }) => {
-  const [value, setValue] = useState(defaultValue);
-  
-  const handleValueChange = (newValue: string) => {
-    setValue(newValue);
-    if (onValueChange) onValueChange(newValue);
-  };
-  
-  return (
-    <div className={`data-value-${value} ${className}`} data-value={value} {...props}>
-      {React.Children.map(children, child => {
-        if (React.isValidElement(child)) {
-          // Cast to any to avoid TypeScript errors with property spreading
-          return React.cloneElement(child as React.ReactElement<any>, { 
-            'data-value': value, 
-            onValueChange: handleValueChange 
-          });
-        }
-        return child;
-      })}
-    </div>
-  );
-};
-
-const TabsList = ({ className = '', children, ...props }: { className?: string; children: React.ReactNode; [key: string]: any }) => (
-  <div className={`inline-flex items-center justify-center rounded-md bg-gray-800 p-1 ${className}`} role="tablist" {...props}>
-    {children}
-  </div>
-);
-
-const TabsTrigger = ({ value, className = '', children, onValueChange, ...props }: { value: string; className?: string; children: React.ReactNode; onValueChange?: (value: string) => void; [key: string]: any }) => {
-  const handleClick = () => {
-    if (onValueChange) onValueChange(value);
-  };
-  
-  const dataState = value === props['data-value'] ? 'active' : 'inactive';
-  
-  return (
-    <button 
-      className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium transition-all data-[state=active]:bg-gray-700 data-[state=active]:text-white ${className}`}
-      role="tab"
-      data-state={dataState}
-      onClick={handleClick}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
-
-const TabsContent = ({ value, className = '', children, ...props }: { value: string; className?: string; children: React.ReactNode; [key: string]: any }) => {
-  const isActive = value === props['data-value'];
-  
-  if (!isActive) return null;
-  
-  return (
-    <div 
-      className={`mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 ${className}`}
-      role="tabpanel"
-      data-state={isActive ? 'active' : 'inactive'}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-};
+// Replaced local UI mocks with shared UI components
 
 // Updated industries with startup-appropriate positioning
 const industries: Industry[] = [
@@ -439,10 +268,7 @@ const industries: Industry[] = [
   }
 ];
 
-// Helper function to limit re-renders - throttle search input
-const throttleSearch = throttle((callback: Function, value: string) => {
-  callback(value);
-}, 300);
+// Helper function to limit re-renders - throttle search input (unused for now)
 
 // Memoized Card component to avoid unnecessary re-renders
 const IndustryCard = memo(({ 
@@ -453,48 +279,40 @@ const IndustryCard = memo(({
   onIndustryClick: (industry: Industry) => void;
 }) => {
   return (
-    <Card className="h-full bg-dark-800/80 backdrop-blur-sm border-dark-700 hover:border-primary-400/50 transition-all overflow-hidden rounded-xl flex flex-col">
-      <div className="relative h-48 overflow-hidden">
-        <LazyImage 
-          src={industry.image}
-          alt={`AI Solutions for ${industry.title}`}
-          className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-          loadingPriority="auto"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark-800 to-transparent opacity-60"></div>
-        
-        {/* Industry icon */}
-        <div className="absolute top-4 right-4 w-14 h-14 rounded-full bg-dark-800/80 backdrop-blur-sm flex items-center justify-center border border-primary-400/30">
-          {industry.icon}
+    <Card className="h-full bg-dark-800/80 backdrop-blur-sm border-dark-700 hover:border-primary-400/50 transition-all rounded-xl flex flex-col">
+      <div className="p-6 pb-0">
+        <div className="flex items-center justify-between">
+          <h3 className="text-xl font-semibold text-white">{industry.title}</h3>
+          <div className="w-10 h-10 rounded-full bg-dark-700/60 flex items-center justify-center border border-dark-600/50">
+            {industry.icon}
+          </div>
         </div>
-        
-        <h3 className="absolute bottom-4 left-4 text-2xl font-semibold text-white">{industry.title}</h3>
       </div>
       
       <CardContent className="p-6 flex-grow">
         <p className="text-gray-300 mb-6">{industry.description}</p>
         
         {/* Stats row */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-dark-900/50 rounded-lg p-4 text-center">
-            <div className="text-3xl font-bold text-primary-400">{industry.stats.impactPercent}</div>
-            <div className="text-xs text-gray-300 mt-1">{industry.stats.impactText}</div>
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="bg-dark-900/60 rounded-md p-3 text-center">
+            <div className="text-2xl font-bold text-primary-400">{industry.stats.impactPercent}</div>
+            <div className="text-[11px] text-gray-300 mt-0.5">{industry.stats.impactText}</div>
           </div>
-          <div className="bg-dark-900/50 rounded-lg p-4 text-center">
-            <div className="text-sm font-medium text-white">{industry.stats.clientText}</div>
+          <div className="bg-dark-900/60 rounded-md p-3 text-center">
+            <div className="text-xs font-medium text-white">{industry.stats.clientText}</div>
           </div>
         </div>
         
         <div className="mb-6">
-          <h4 className="text-lg font-semibold text-white mb-3">Key Applications</h4>
-          <div className="space-y-4">
+          <h4 className="text-sm font-semibold text-white mb-2">Plays</h4>
+          <ul className="space-y-2">
             {industry.applications.slice(0, 2).map((app, idx) => (
-              <div key={idx} className="space-y-2">
-                <h5 className="text-primary-400 font-medium">{app.title}</h5>
-                <p className="text-gray-300 text-sm">{app.description}</p>
-              </div>
+              <li key={idx} className="flex items-start gap-2 text-sm">
+                <span className="mt-1 inline-block w-2 h-2 rounded-full bg-primary-400" />
+                <span className="text-gray-300">{app.title}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </CardContent>
 
@@ -683,11 +501,12 @@ export default function Industries() {
             transition={{ duration: 0.5 }}
           >
             {/* Hero Section with motion effects */}
-            <section className="relative pt-32 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
               {/* Background decorative elements */}
-              <div className="absolute inset-0 bg-gradient-to-b from-dark to-dark-800 pointer-events-none"></div>
-              <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary-400/5 rounded-full blur-[100px]"></div>
-              <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-500/5 rounded-full blur-[80px]"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-900 to-dark pointer-events-none"></div>
+              <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern pointer-events-none"></div>
+              <div className="absolute -top-20 right-0 w-1/3 h-1/3 bg-primary-400/5 rounded-full blur-[120px]"></div>
+              <div className="absolute -bottom-24 left-0 w-1/3 h-1/3 bg-yellow-400/5 rounded-full blur-[100px]"></div>
               
               <motion.div 
                 className="max-w-7xl mx-auto text-center relative z-10"
@@ -699,17 +518,17 @@ export default function Industries() {
                   Industry Solutions
                 </Badge>
                 
-                <h1 className="text-5xl md:text-7xl font-bold mb-8">
-                  <span className="gradient-text">AI Solutions for Every Industry</span>
+                <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight [text-wrap:balance]">
+                  <span className="gradient-text">AI, tailored to your industry</span>
                 </h1>
                 
                 <motion.p 
-                  className="text-xl text-gray-300 max-w-3xl mx-auto"
+                  className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  Our innovative AI platform can revolutionize how businesses operate across sectors, delivering intelligent automation, personalized engagement, and data-driven insights.
+                  Purpose‑built automations for your motion. Research, outreach, booking and sync—fully controlled, fully compliant, built for outcomes.
                 </motion.p>
                 
                 {/* Search and filter container */}
@@ -721,51 +540,54 @@ export default function Industries() {
                 >
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                    <Input
+                    <input
                       type="search"
                       placeholder="Search industry solutions..."
-                      className="pl-10 bg-dark-800/70 border-dark-700 focus:border-primary-400 h-12 w-full"
+                      className="pl-10 bg-dark-800/70 border border-dark-700 focus:border-primary-400 h-12 w-full rounded-md text-white"
                       value={searchTerm}
                       onChange={handleSearchChange}
                     />
                   </div>
                 </motion.div>
                 
-                {/* Industry tabs */}
+                {/* Category chips */}
                 <motion.div 
                   className="mt-10"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                  <Tabs defaultValue="all" onValueChange={setActiveTab} className="w-full">
-                    <TabsList className="mb-8 p-1 bg-dark-800/50 backdrop-blur-sm border border-dark-700 rounded-full grid grid-flow-col auto-cols-fr w-full max-w-3xl mx-auto overflow-x-auto">
-                      <TabsTrigger value="all" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
-                        All Industries
-                      </TabsTrigger>
-                      <TabsTrigger value="saas" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
-                        Technology
-                      </TabsTrigger>
-                      <TabsTrigger value="financial-services" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
-                        Finance
-                      </TabsTrigger>
-                      <TabsTrigger value="healthcare" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
-                        Healthcare
-                      </TabsTrigger>
-                      <TabsTrigger value="real-estate" className="rounded-full data-[state=active]:bg-primary-400/20 data-[state=active]:text-primary-400">
-                        Real Estate
-                      </TabsTrigger>
-                    </TabsList>
-                  </Tabs>
+                  <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+                    {[
+                      { slug: 'all', label: 'All Industries' },
+                      { slug: 'saas', label: 'Technology' },
+                      { slug: 'financial-services', label: 'Finance' },
+                      { slug: 'healthcare', label: 'Healthcare' },
+                      { slug: 'real-estate', label: 'Real Estate' },
+                      { slug: 'ecommerce', label: 'E‑commerce' },
+                      { slug: 'manufacturing', label: 'Manufacturing' },
+                      { slug: 'education', label: 'Education' },
+                      { slug: 'logistics', label: 'Logistics' }
+                    ].map(cat => (
+                      <Button
+                        key={cat.slug}
+                        variant="outline"
+                        className={`rounded-full px-4 py-1 border ${activeTab === cat.slug ? 'border-primary-400 bg-primary-400/10 text-primary-400' : 'border-dark-700 text-gray-300 hover:border-gray-500'}`}
+                        onClick={() => setActiveTab(cat.slug)}
+                      >
+                        {cat.label}
+                      </Button>
+                    ))}
+                  </div>
                 </motion.div>
               </motion.div>
             </section>
 
-            {/* Glowing Effect Demo Section */}
+            {/* Capabilities Section */}
             <section className="py-16 bg-dark relative overflow-hidden">
               <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern"></div>
               <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary-400/5 rounded-full blur-[100px] pointer-events-none"></div>
-              <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-500/5 rounded-full blur-[80px] pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-yellow-400/5 rounded-full blur-[80px] pointer-events-none"></div>
               
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <motion.div
@@ -775,11 +597,11 @@ export default function Industries() {
                   viewport={{ once: true, margin: "-100px" }}
                   className="text-center mb-12"
                 >
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                    <span className="gradient-text">Explore Our AI Capabilities</span>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+                    <span className="gradient-text">What our AI does for you</span>
                   </h2>
-                  <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-                    Our AI solutions adapt to multiple industries, providing tailored automation and insights for your specific needs.
+                  <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                    Fast deployment. Human‑approved messaging. Real outcomes.
                   </p>
                 </motion.div>
                 
@@ -809,29 +631,29 @@ export default function Industries() {
                     variants={itemVariants}
                     className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
                   >
-                    <div className="text-4xl font-bold text-primary-400 mb-2">8+</div>
-                    <div className="text-xs text-gray-300">Industries We Can Serve</div>
+                    <div className="text-4xl font-bold text-primary-400 mb-2">9+</div>
+                    <div className="text-xs text-gray-300">Industries served</div>
                   </motion.div>
                   <motion.div 
                     variants={itemVariants}
                     className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
                   >
                     <div className="text-4xl font-bold text-primary-400 mb-2">24/7</div>
-                    <div className="text-xs text-gray-300">AI Automation</div>
+                    <div className="text-xs text-gray-300">AI automation</div>
                   </motion.div>
                   <motion.div 
                     variants={itemVariants}
                     className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
                   >
                     <div className="text-4xl font-bold text-primary-400 mb-2">60%+</div>
-                    <div className="text-xs text-gray-300">Potential Efficiency Gain</div>
+                    <div className="text-xs text-gray-300">Efficiency gain potential</div>
                   </motion.div>
                   <motion.div 
                     variants={itemVariants}
                     className="text-center p-6 border border-dark-700 rounded-xl bg-dark-900/50 backdrop-blur-sm hover:border-primary-400/50 transition-all duration-300"
                   >
                     <div className="text-4xl font-bold text-primary-400 mb-2">100%</div>
-                    <div className="text-xs text-gray-300">Dedicated Support</div>
+                    <div className="text-xs text-gray-300">Dedicated support</div>
                   </motion.div>
                 </motion.div>
               </div>
@@ -869,7 +691,7 @@ export default function Industries() {
                     whileInView="visible"
                     viewport={{ once: true, margin: "-50px" }}
                   >
-                    {filteredIndustries.map((industry, index) => (
+                    {filteredIndustries.map((industry) => (
                       <motion.div 
                         key={industry.slug}
                         variants={itemVariants}
@@ -1003,13 +825,6 @@ export default function Industries() {
                     className="relative"
                   >
                     <div className="rounded-2xl overflow-hidden border border-dark-700 shadow-xl">
-                      <LazyImage
-                        src={selectedIndustry.image}
-                        alt={`AI Solutions for ${selectedIndustry.title}`}
-                        className="w-full h-64 object-cover"
-                        loadingPriority="auto"
-                      />
-                      
                       <div className="p-8 bg-dark-800">
                         <div className="flex justify-between items-center mb-6">
                           <div className="flex items-center gap-4">

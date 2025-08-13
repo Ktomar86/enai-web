@@ -1,4 +1,5 @@
 import { StrictMode, lazy, Suspense } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
@@ -28,6 +29,8 @@ const IndustryDetail = lazy(() => import('./pages/IndustryDetail.tsx'));
 const PrivacyPolicy = lazy(() => import('./PrivacyPolicy.tsx').then(module => ({ default: module.PrivacyPolicy })));
 const TermsOfService = lazy(() => import('./TermsOfService.tsx').then(module => ({ default: module.TermsOfService })));
 const AboutUs = lazy(() => import('./AboutUs.tsx'));
+const Contact = lazy(() => import('./pages/Contact.tsx'));
+const StyleGuide = lazy(() => import('./pages/StyleGuide'));
 
 // Add prefetch for primary routes
 const prefetchRoutes = () => {
@@ -35,7 +38,8 @@ const prefetchRoutes = () => {
   setTimeout(() => {
     const links = [
       './pages/Industries.tsx',
-      './AboutUs.tsx'
+      './AboutUs.tsx',
+      './pages/Contact.tsx'
     ];
     
     links.forEach(link => {
@@ -55,17 +59,21 @@ if (typeof window !== 'undefined') {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Router>
-      <Suspense fallback={<LoadingFallback />}>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/industries" element={<Industries />} />
-          <Route path="/industries/:slug" element={<IndustryDetail />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/about-us" element={<AboutUs />} />
-        </Routes>
-      </Suspense>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/industries" element={<Industries />} />
+            <Route path="/industries/:slug" element={<IndustryDetail />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/style" element={<StyleGuide />} />
+          </Routes>
+        </Suspense>
+      </Router>
+    </HelmetProvider>
   </StrictMode>
 );

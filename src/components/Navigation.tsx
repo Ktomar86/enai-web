@@ -74,10 +74,7 @@ export default function Navigation() {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const scrollToContact = () => {
-    window.open('https://login.enai.ai', '_blank', 'noopener,noreferrer');
-    setIsMobileMenuOpen(false);
-  };
+  // reserved for future quick-contact action
 
   const handleNavClick = (item: string) => {
     const sectionMap: { [key: string]: string } = {
@@ -110,7 +107,7 @@ export default function Navigation() {
     setIsMobileMenuOpen(false);
   };
 
-  const navItems = ['Features', 'Solutions', 'Team', 'Industries', 'About Us'];
+  const navItems = ['Features', 'Industries', 'About Us', 'Contact'];
 
   // Check if an item is active
   const isActive = (item: string) => {
@@ -127,6 +124,9 @@ export default function Navigation() {
     
     if (item === 'About Us') {
       return location.pathname === '/about-us';
+    }
+    if (item === 'Contact') {
+      return location.pathname === '/contact';
     }
     
     return activeSection === sectionMap[item];
@@ -180,7 +180,6 @@ export default function Navigation() {
               alt="ENAI Logo" 
               className="h-8 w-8 transition-transform duration-300 group-hover:scale-110 filter brightness-0 invert" 
               loading="eager"
-              fetchPriority="high"
               width="42"
               height="32"
             />
@@ -192,7 +191,7 @@ export default function Navigation() {
             {navItems.map((item) => (
               <button
                 key={item}
-                onClick={() => (item === 'Industries' || item === 'About Us') ? null : handleNavClick(item)}
+                onClick={() => (item === 'Industries' || item === 'About Us' || item === 'Contact') ? null : handleNavClick(item)}
                 className={`relative px-3 py-2 rounded-md transition-colors hover:bg-dark-800/40 ${
                   isActive(item) 
                     ? 'text-primary-400 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-3/4 after:h-0.5 after:bg-primary-400 after:rounded-full' 
@@ -212,6 +211,14 @@ export default function Navigation() {
                 ) : item === 'About Us' ? (
                   <Link 
                     to="/about-us" 
+                    className="inline-flex items-center w-full h-full"
+                    aria-current={isActive(item) ? 'page' : undefined}
+                  >
+                    {item}
+                  </Link>
+                ) : item === 'Contact' ? (
+                  <Link 
+                    to="/contact" 
                     className="inline-flex items-center w-full h-full"
                     aria-current={isActive(item) ? 'page' : undefined}
                   >
@@ -319,7 +326,7 @@ export default function Navigation() {
                   {navItems.map((item) => (
                     <motion.li key={item} variants={itemVariants}>
                       <button
-                        onClick={() => (item === 'Industries' || item === 'About Us') ? null : handleNavClick(item)}
+                        onClick={() => (item === 'Industries' || item === 'About Us' || item === 'Contact') ? null : handleNavClick(item)}
                         className={`group flex items-center w-full text-left py-2 text-lg font-medium transition-colors ${
                           isActive(item) ? 'text-primary-400' : 'text-gray-300 hover:text-white'
                         }`}
@@ -343,6 +350,15 @@ export default function Navigation() {
                         ) : item === 'About Us' ? (
                           <Link 
                             to="/about-us" 
+                            className="flex items-center w-full"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            <span className="relative pl-4">{item}</span>
+                            <ChevronRight className="ml-auto w-5 h-5 opacity-70 group-hover:translate-x-1 transition-transform" />
+                          </Link>
+                        ) : item === 'Contact' ? (
+                          <Link 
+                            to="/contact" 
                             className="flex items-center w-full"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
