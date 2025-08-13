@@ -702,8 +702,8 @@ function AboutUs() {
           {/* Faded background dashboard image */}
           <div className="absolute inset-0 flex items-center justify-center opacity-5">
             <img 
-              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3" 
-              alt="AI Dashboard" 
+              src="/enai-product-image.jpg" 
+              alt="ENAI dashboard" 
               className="w-full h-full object-cover"
             />
           </div>
@@ -778,8 +778,8 @@ function AboutUs() {
               <div className="bg-gradient-to-br from-orange-400/20 to-red-400/20 rounded-2xl p-1">
                 <div className="bg-white rounded-xl overflow-hidden shadow-2xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3" 
-                    alt="Enai AI Dashboard" 
+                    src="/enai-dashboard.png" 
+                    alt="ENAI AI Dashboard" 
                     className="w-full h-auto"
                   />
                   <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
@@ -1095,7 +1095,9 @@ function AboutUs() {
               whileTap={{ scale: 0.98 }}
             >
               <a 
-                href="#contact"
+                href="https://calendly.com/enai-ai2024/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-dark-800 text-white border border-gray-700 hover:border-orange-400 px-10 py-5 rounded-lg text-xl font-semibold inline-flex items-center group transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/10"
               >
                 Book a Demo
@@ -1328,24 +1330,12 @@ function AboutUs() {
                 AI-powered sales automation platform helping teams prospect, qualify, and convert leads 24/7
               </p>
             </div>
-            
-            <div className="flex space-x-4">
-              <Button variant="ghost" size="sm">
-                Privacy
-              </Button>
-              <Button variant="ghost" size="sm">
-                Terms
-              </Button>
-              <Button variant="ghost" size="sm">
-                Contact
-              </Button>
-            </div>
           </div>
           
           <Separator className="my-8" />
           
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-            <p>© {new Date().getFullYear()} Enai. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} ENAI. All rights reserved.</p>
             <div className="flex space-x-4 mt-4 md:mt-0">
               <a href="#" className="hover:text-orange-400 transition-colors">
                 LinkedIn

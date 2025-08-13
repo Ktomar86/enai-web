@@ -78,9 +78,6 @@ export default function Navigation() {
 
   const handleNavClick = (item: string) => {
     const sectionMap: { [key: string]: string } = {
-      'Features': 'features',
-      'Solutions': 'solutions',
-      'Team': 'team',
       'Contact': 'contact',
       'About Us': 'about-us'
     };
@@ -107,14 +104,11 @@ export default function Navigation() {
     setIsMobileMenuOpen(false);
   };
 
-  const navItems = ['Features', 'Industries', 'About Us', 'Contact'];
+  const navItems = ['Industries', 'About Us', 'Contact'];
 
   // Check if an item is active
   const isActive = (item: string) => {
     const sectionMap: { [key: string]: string } = {
-      'Features': 'features',
-      'Solutions': 'solutions',
-      'Team': 'team',
       'Contact': 'contact'
     };
     

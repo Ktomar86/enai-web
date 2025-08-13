@@ -30,6 +30,11 @@ import {
 
 import { Link } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import ProductGIFShowcase from './components/ProductGIFShowcase';
+import WorkflowIllustration from './components/WorkflowIllustration';
+import ResultsWorkflow from './components/ResultsWorkflow';
+import BookingIllustration from './components/BookingIllustration';
+import ScrollySteps from './components/ScrollySteps';
 import ElevenLabsOrb from './components/ElevenLabsOrb';
 // import AIWorkflowVisualizer from './components/AIWorkflowVisualizer';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -101,62 +106,7 @@ const featureShowcases = [
   }
 ];
 
-const pipelinePlays = [
-  {
-    id: 'prospecting',
-    label: 'Prospecting',
-    description: 'AI identifies and qualifies new prospects from your ICP criteria.',
-    details: 'Automatically research and score prospects, then initiate outreach sequences.',
-    icon: <Target className="w-5 h-5" />,
-    category: 'Lead Gen',
-    industry: 'B2B SaaS'
-  },
-  {
-    id: 'warm-followups',
-    label: 'Warm follow-ups',
-    description: 'Re-engage previous contacts with personalized, timely touchpoints.',
-    details: 'Trigger follow-ups based on specific events or time intervals.',
-    icon: <MessageSquare className="w-5 h-5" />,
-    category: 'Nurture',
-    industry: 'Enterprise'
-  },
-  {
-    id: 'reactivation',
-    label: 'Reactivation',
-    description: 'Bring back dormant leads with targeted re-engagement campaigns.',
-    details: 'Identify win-back opportunities and execute reactivation sequences.',
-    icon: <ArrowRight className="w-5 h-5" />,
-    category: 'Retention',
-    industry: 'E-commerce'
-  },
-  {
-    id: 'event-leads',
-    label: 'Event leads',
-    description: 'Process and nurture leads captured from events and webinars.',
-    details: 'Instant follow-up with event-specific messaging and content.',
-    icon: <UserCheck className="w-5 h-5" />,
-    category: 'Events',
-    industry: 'Tech'
-  },
-  {
-    id: 'hand-raiser-slas',
-    label: 'Hand-raiser SLAs',
-    description: 'Respond to inbound leads within minutes, not hours.',
-    details: 'Automatic qualification and routing based on lead characteristics.',
-    icon: <Clock className="w-5 h-5" />,
-    category: 'Inbound',
-    industry: 'Financial Services'
-  },
-  {
-    id: 'pipeline-cleanup',
-    label: 'Pipeline cleanup',
-    description: 'Automatically qualify or disqualify stale opportunities.',
-    details: 'Regular pipeline health checks with automated next-step recommendations.',
-    icon: <Activity className="w-5 h-5" />,
-    category: 'Operations',
-    industry: 'Healthcare'
-  }
-];
+// Removed pipelinePlays in favor of tighter narrative
 
 const controlFeatures = [
   {
@@ -185,23 +135,7 @@ const controlFeatures = [
   }
 ];
 
-const resultMetrics = [
-  {
-    metric: 'More replies vs. previous templates',
-    range: '+8–20%',
-    description: 'Increased response rates from personalized, contextual outreach'
-  },
-  {
-    metric: 'Time saved on research per lead',
-    range: '~2–4 min',
-    description: 'Automated prospect research and data gathering'
-  },
-  {
-    metric: 'Cleaner CRM updates',
-    range: 'fewer manual steps',
-    description: 'Automatic data sync and activity logging'
-  }
-];
+// Removed granular result metrics in favor of a single combined workflow visual
 
 const caseStudies = [
   {
@@ -547,7 +481,33 @@ function App() {
         contentPaddingY="py-24"
       />
 
-      
+      {/* Product GIFs / Visual Storytelling */}
+      <ProductGIFShowcase
+        items={[
+          {
+            id: 'research-loop',
+            title: 'Prospect research loop',
+            caption: 'Enai analyzes profiles, sites, and signals to prep outreach in seconds.',
+            media: <div className="w-full h-full flex items-center justify-center bg-dark-900/50"><WorkflowIllustration className="aspect-video w-full" /></div>,
+          },
+          {
+            id: 'orchestrate',
+            title: 'Channel‑aware sequences',
+            caption: 'Email, LinkedIn, and voice—coordinated with your brand guardrails.',
+            mediaSrc: '/enai-dashboard.png',
+            alt: 'Sequence orchestration visualization'
+          },
+          {
+            id: 'book-sync',
+            title: 'Auto book & sync',
+            caption: 'Calendar holds, confirmations, and CRM updates—handled for you.',
+            media: <div className="w-full h-full flex items-center justify-center bg-dark-900/50"><BookingIllustration className="aspect-video w-full" /></div>,
+          }
+        ]}
+      />
+
+      {/* 3-step scrollytelling cards */}
+      <ScrollySteps />
 
       {/* Use Cases */}
       <section className="py-24 bg-gradient-to-b from-dark-900 to-dark scroll-fade" aria-labelledby="use-cases-heading">
@@ -606,35 +566,32 @@ function App() {
                 >
                   <CardHeader className="pb-4">
                     <CardTitle className="text-lg text-white">
-                      {activeUseCase === 'sdr' ? 'Outbound SDR Flow' : activeUseCase === 'ae' ? 'AE Closing Flow' : 'RevOps Ops Flow'}
+                      {activeUseCase === 'sdr' ? 'Outbound SDR Highlights' : activeUseCase === 'ae' ? 'AE Closing Highlights' : 'RevOps Highlights'}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="p-6">
                     <div className="grid sm:grid-cols-3 gap-4">
-                      {['Discover','Engage','Book'].map((label, i) => (
+                      {(activeUseCase === 'sdr'
+                        ? ['ICP discovery', 'First‑touch at scale', 'Warm pipeline']
+                        : activeUseCase === 'ae'
+                        ? ['Auto prep briefs', 'Faster responses', 'Calendar assist']
+                        : ['Data hygiene', 'Guardrails', 'Live reporting']
+                      ).map((point, i) => (
                         <motion.div
-                          key={`uc-step-${i}`}
+                          key={`uc-point-${i}`}
                           className="rounded-lg bg-dark-800/60 border border-dark-700 p-4"
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.3, delay: i * 0.1 }}
                         >
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm text-white">{label}</span>
-                            <span className="text-xs text-gray-500">Step {i + 1}</span>
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="w-2 h-2 rounded-full bg-gradient-to-r from-primary-400 to-yellow-400" />
+                            <span className="text-sm text-white">{point}</span>
                           </div>
-                          <div className="h-2 bg-dark-700 rounded-full overflow-hidden">
-                            <motion.div
-                              className="h-full bg-gradient-to-r from-primary-400 to-yellow-400"
-                              initial={{ width: '0%' }}
-                              animate={{ width: ['25%','80%','100%'] }}
-                              transition={{ duration: 1.2, delay: i * 0.15 }}
-                            />
-                          </div>
-                          <p className="text-xs text-gray-400 mt-3">
-                            {activeUseCase === 'sdr' && (i === 0 ? 'Identify ICP leads' : i === 1 ? 'Personalize outreach' : 'Auto‑book meeting')}
-                            {activeUseCase === 'ae' && (i === 0 ? 'Auto‑prep briefs' : i === 1 ? 'Respond faster' : 'Calendar coordination')}
-                            {activeUseCase === 'revops' && (i === 0 ? 'Enrich & validate' : i === 1 ? 'Enforce guardrails' : 'Sync & report')}
+                          <p className="text-xs text-gray-400 mt-1">
+                            {activeUseCase === 'sdr' && (i === 0 ? 'Find accounts matching your ICP' : i === 1 ? 'Human‑quality personalization' : 'Keep leads engaged')}
+                            {activeUseCase === 'ae' && (i === 0 ? 'Briefs from CRM + web signals' : i === 1 ? 'Turn replies into meetings' : 'Auto holds and invites')}
+                            {activeUseCase === 'revops' && (i === 0 ? 'Enrich, dedupe, and validate' : i === 1 ? 'Approval + compliance rules' : 'Insights without spreadsheets')}
                           </p>
                         </motion.div>
                       ))}
@@ -756,7 +713,7 @@ function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="text-center mb-12 md:mb-14"
           >
             <div className="inline-flex items-center justify-center mb-6">
               <div className="relative">
@@ -1130,75 +1087,7 @@ function App() {
         </div>
       </section>
 
-      {/* Pipeline Plays Use-Case Section */}
-      <section className="py-24 bg-dark/50 scroll-fade section-enhanced" aria-labelledby="pipeline-plays-heading">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 id="pipeline-plays-heading" className="text-5xl font-bold gradient-text mb-6">
-              Pipeline Plays
-            </h2>
-            <Separator className="mb-8 max-w-md mx-auto" />
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Common sales motions automated and optimized by AI
-            </p>
-          </motion.div>
-
-          {/* Compact 3-step strip (concise workflow) */}
-          <div className="relative mb-10">
-            <div className="rounded-2xl border border-dark-700/60 bg-dark-900/50 p-4">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  { label: 'Prospect → Score', hint: 'Find ICP, rank by fit' },
-                  { label: 'Personalize → Send', hint: 'Multi‑channel outreach' },
-                  { label: 'Reply → Book', hint: 'Auto‑hold and sync' }
-                ].map((item, i) => (
-                  <div key={`mini-${i}`} className="rounded-lg bg-dark-800/60 border border-dark-700 p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-white">Step {i + 1}</span>
-                      <Badge variant="secondary" className="text-[10px] bg-dark-700/60 border-dark-600/60">{item.label}</Badge>
-                    </div>
-                    <div className="h-2 w-full bg-dark-700 rounded-full overflow-hidden">
-                      <motion.div className="h-full bg-gradient-to-r from-primary-400 to-yellow-400" initial={{ width: '0%' }} whileInView={{ width: '100%' }} viewport={{ once: true }} transition={{ duration: 0.9, delay: i * 0.1 }} />
-                    </div>
-                    <p className="text-xs text-gray-400 mt-3">{item.hint}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Compact Play Cards (short and to the point) */}
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {pipelinePlays.slice(0, 6).map((play, index) => (
-              <motion.div
-                key={play.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.05 }}
-                className="glass-card p-4 hover-lift transition-all duration-300"
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-9 h-9 rounded-lg bg-primary-400/10 flex items-center justify-center text-primary-400">
-                        {play.icon}
-                      </div>
-                  <div>
-                    <div className="text-white text-sm font-medium">{play.label}</div>
-                    <div className="text-[10px] text-gray-500">{play.category}</div>
-                    </div>
-                    </div>
-                <div className="text-xs text-gray-300 line-clamp-2">{play.description}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Pipeline Plays removed for a tighter flow */}
 
       {/* Control & Visibility Grid */}
       <section className="py-24 bg-gradient-to-b from-dark-800 to-dark scroll-fade section-enhanced" aria-labelledby="control-heading">
@@ -1411,55 +1300,14 @@ function App() {
             </p>
           </motion.div>
           
-          <div className="max-w-5xl mx-auto">
-            <div className="space-y-8">
-              {resultMetrics.map((result, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="glass-card p-8 hover-lift transition-all duration-500 group cursor-pointer border border-dark-700/50 hover:border-primary-400/40 relative overflow-hidden bg-dark-800/50 backdrop-blur-sm rounded-2xl"
-                >
-                  {/* Background gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-400/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
-                  <div className="relative z-10">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                      <div className="flex-1">
-                        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors duration-300">{result.metric}</h3>
-                        <p className="text-gray-300 text-lg leading-relaxed">{result.description}</p>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-4xl md:text-5xl font-bold gradient-text mb-1">{result.range}</div>
-                        <div className="text-base text-gray-400">{result.description}</div>
-                      </div>
-                    </div>
-                    
-                    {/* Enhanced progress bar with animated gradient */}
-                    <div className="mt-6 pt-6 border-t border-dark-700/50">
-                      <div className="flex justify-between text-sm text-gray-400 mb-2">
-                        <span>0%</span>
-                        <span>100%</span>
-                      </div>
-                      <div className="h-3 bg-dark-700 rounded-full overflow-hidden relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-purple-500/20 rounded-full"></div>
-                        <motion.div 
-                          className="h-full bg-gradient-to-r from-primary-400 to-purple-500 rounded-full relative overflow-hidden"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: '100%' }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-                        >
-                          {/* Animated shine effect */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine"></div>
-                        </motion.div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+          <div className="max-w-6xl mx-auto">
+            {/* Combined workflow illustration for 30‑day results */}
+            <div className="mb-10 rounded-2xl overflow-hidden border border-dark-700/50 bg-dark-800/60 product-mockup glass-accent">
+              <div className="aspect-[16/6]">
+                <ResultsWorkflow className="w-full h-full" />
+              </div>
             </div>
+            {/* Metrics removed; single visual conveys the story concisely */}
             
             {/* Enhanced Review Schema */}
             <script type="application/ld+json">
@@ -1540,8 +1388,8 @@ function App() {
             <h2 id="case-studies-heading" className="text-4xl md:text-5xl font-bold gradient-text mb-6">
               See How Teams Are Solving Real Problems with AI Automation
             </h2>
-            <Separator className="mb-8 max-w-md mx-auto bg-gradient-to-r from-primary-400/50 to-purple-500/50" />
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <Separator className="mb-6 max-w-md mx-auto bg-gradient-to-r from-primary-400/50 to-purple-500/50" />
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Discover how industry leaders are leveraging our platform to transform their sales processes and achieve remarkable results.
             </p>
           </motion.div>
@@ -1619,105 +1467,7 @@ function App() {
         </div>
       </section>  
 
-      {/* Mini Case Studies with Visuals */}
-      <section className="py-24 bg-gradient-to-b from-dark to-dark-800 scroll-fade" aria-labelledby="case-studies-heading">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 id="case-studies-heading" className="text-5xl font-bold gradient-text mb-6 tracking-tight [text-wrap:balance]">Success Stories</h2>
-            <Separator className="mb-8 max-w-md mx-auto" />
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">See how teams are solving real problems with AI automation</p>
-            <div className="mt-6 inline-flex items-center gap-4 text-sm text-gray-400">
-              <span className="inline-flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-400"></span> Higher replies</span>
-              <span className="inline-flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-yellow-400"></span> Faster booking</span>
-              <span className="inline-flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-blue-400"></span> Cleaner CRM</span>
-            </div>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group cursor-pointer"
-              >
-                <Card className="glass-card glass-accent h-full hover-lift transition-all duration-300 overflow-hidden relative">
-                  {/* Company Logo */}
-                  <div className="absolute top-4 right-4 w-10 h-10 rounded-lg bg-dark-700/50 flex items-center justify-center border border-dark-600/50">
-                    <div className="w-6 h-6 rounded bg-gradient-to-br from-primary-400 to-purple-500"></div>
-                  </div>
-                  
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center gap-3 mb-3">
-                      {/* Profile Image */}
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-400/20 to-purple-500/20 flex items-center justify-center border border-primary-400/30">
-                        <UserCheck className="w-5 h-5 text-primary-400" />
-                      </div>
-                      <div>
-                        <CardTitle className="text-lg text-white group-hover:text-primary-400 transition-colors duration-300">{study.title}</CardTitle>
-                        <p className="text-xs text-gray-400">Case Study #{index + 1}</p>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-4">
-                    {/* Animated KPI ticker */}
-                    <div className="grid grid-cols-3 gap-2 bg-dark-900/50 p-3 rounded-lg border border-dark-700/50 mb-4">
-                      {[{label:'Reply Rate',from: index===0?23:15,to:index===0?42:35,color:'text-green-400'},{label:'Time Saved',from: 0,to: index===1?2.5:1.8,color:'text-yellow-400'},{label:'CRM Accuracy',from: 80,to: 100,color:'text-blue-400'}].map((kpi,k)=> (
-                        <div key={`kpi-${k}`} className="text-center">
-                          <div className="text-xs text-gray-400 mb-1">{kpi.label}</div>
-                          <motion.div initial={{ scale: 0.9, opacity: 0.6 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className={`text-sm font-medium ${kpi.color}`}>
-                            {kpi.to}{k===0||k===2?'%':''}
-                          </motion.div>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-400 mb-1 flex items-center gap-1">
-                        <AlertCircle className="w-3 h-3" />
-                        Problem
-                      </h4>
-                      <p className="text-gray-300 text-sm">{study.problem}</p>
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-400 mb-1 flex items-center gap-1">
-                        <Zap className="w-3 h-3" />
-                        What Enai Did
-                      </h4>
-                      <p className="text-gray-300 text-sm">{study.solution}</p>
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-sm font-medium text-gray-400 mb-1 flex items-center gap-1">
-                        <Target className="w-3 h-3" />
-                        Outcome
-                      </h4>
-                      <p className="text-primary-400 text-sm font-medium">{study.outcome}</p>
-                    </div>
-                    
-                    {/* Metrics Badge */}
-                    <div className="pt-2 border-t border-dark-700/50">
-                      <Badge variant="secondary" className="text-xs bg-green-500/20 text-green-400 border border-green-500/30">
-                        {index === 0 ? '+83% improvement' : index === 1 ? '+133% efficiency' : '+250% productivity'}
-                      </Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Removed secondary Success Stories to avoid duplication with Real Results */}
 
       {/* Integrations with Categorization */}
       <section className="py-16 bg-dark/50 scroll-fade" aria-labelledby="integrations-heading">
@@ -1811,7 +1561,7 @@ function App() {
               Proven Outcomes
             </h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              Teams use ENAI to move faster, book more, and keep CRMs clean—without adding headcount.
+              Typical outcomes reported by teams within the first month. Actual results vary by baseline and implementation.
             </p>
           </motion.div>
 
@@ -1824,6 +1574,7 @@ function App() {
                 </div>
                 <div className="text-3xl font-bold text-primary-400">+8–20%</div>
                 <p className="text-sm text-gray-400 mt-1">Context‑aware messaging boosts response rates</p>
+                <p className="text-[11px] text-gray-500 mt-1">Typical range reported; not guaranteed</p>
               </CardContent>
             </Card>
             <Card className="glass-card glass-accent">
@@ -1832,7 +1583,7 @@ function App() {
                   <Target className="w-5 h-5 text-primary-400" />
                   <h3 className="text-white font-semibold">More qualified meetings</h3>
                 </div>
-                <div className="text-3xl font-bold text-primary-400">2.5×</div>
+                <div className="text-3xl font-bold text-primary-400">Up to 2.5×</div>
                 <p className="text-sm text-gray-400 mt-1">Better targeting and prioritization</p>
               </CardContent>
             </Card>
@@ -1842,8 +1593,8 @@ function App() {
                   <CheckCircle className="w-5 h-5 text-primary-400" />
                   <h3 className="text-white font-semibold">Cleaner CRM</h3>
                 </div>
-                <div className="text-3xl font-bold text-primary-400">100%</div>
-                <p className="text-sm text-gray-400 mt-1">Automatic activity logging and sync</p>
+                <div className="text-3xl font-bold text-primary-400">Automated</div>
+                <p className="text-sm text-gray-400 mt-1">Activity logging and sync; coverage depends on integrations</p>
               </CardContent>
             </Card>
           </div>
@@ -2171,8 +1922,8 @@ function App() {
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-orange-400/40 via-yellow-400/40 to-orange-400/40"></div>
             </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-12 items-start gap-12">
+            <div className="md:col-span-4">
               <div className="flex items-center mb-4">
                 <img 
                   src="/enai-logo.png" 
@@ -2184,24 +1935,24 @@ function App() {
                 <span className="ml-2 text-xl font-bold gradient-text">ENAI</span>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed">
-                AI workers that research, outreach, book and sync — with your guardrails and full visibility.
+                AI workers that research, engage, book, and sync—always within your guardrails and full visibility.
               </p>
             </div>
 
-            <div>
+            <div className="md:col-span-2">
               <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Company</h4>
               <ul className="space-y-3 text-sm">
                 <li>
-                  <a href="/about" className="text-gray-400 hover:text-white transition-colors">About</a>
+                  <Link to="/about-us" className="text-gray-400 hover:text-white transition-colors">About</Link>
                 </li>
                 <li>
-                  <a href="/careers" className="text-gray-400 hover:text-white transition-colors">Careers</a>
+                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Careers</button>
                 </li>
                 <li>
-                  <a href="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</a>
+                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Blog</button>
                 </li>
                 <li>
-                  <a href="/press" className="text-gray-400 hover:text-white transition-colors">Press</a>
+                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Press</button>
                 </li>
                 <li>
                   <Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
@@ -2212,25 +1963,25 @@ function App() {
               </ul>
             </div>
 
-            <div>
+            <div className="md:col-span-2">
               <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Platform</h4>
               <ul className="space-y-3 text-sm">
                 <li>
-                  <a href="/features" className="text-gray-400 hover:text-white transition-colors">Features</a>
+                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Features</button>
                 </li>
                 <li>
-                  <a href="/integrations" className="text-gray-400 hover:text-white transition-colors">Integrations</a>
+                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Integrations</button>
                 </li>
                 <li>
-                  <a href="/pricing" className="text-gray-400 hover:text-white transition-colors">Pricing</a>
+                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Pricing</button>
                 </li>
                 <li>
-                  <a href="/roadmap" className="text-gray-400 hover:text-white transition-colors">Roadmap</a>
+                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Roadmap</button>
                 </li>
               </ul>
             </div>
 
-            <div>
+            <div className="md:col-span-2">
               <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Contact</h4>
               <address className="not-italic text-sm text-gray-300 leading-relaxed">
                 Unit 3, Bradbury's Court<br />
@@ -2239,7 +1990,7 @@ function App() {
               </address>
             </div>
 
-            <div>
+            <div className="md:col-span-2">
               <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Connect</h4>
               <ul className="space-y-3 text-sm">
                 <li>
@@ -2251,13 +2002,41 @@ function App() {
             </div>
           </div>
 
-          <Separator className="my-8 bg-dark-700/30" />
-          <div className="flex flex-col md:flex-row items-center justify-between text-sm text-gray-500">
-            <p>© {new Date().getFullYear()} ENAI. All rights reserved.</p>
-            <div className="flex items-center gap-4 mt-4 md:mt-0">
-              <Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy</Link>
-              <Link to="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms</Link>
+          <div className="mt-6 flex flex-col items-start gap-3 text-sm text-gray-400" role="status" aria-live="polite">
+            <div className="inline-flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" aria-hidden="true"></span>
+              <span className="text-gray-300">System status: All systems operational</span>
             </div>
+            {/* Compliance badges with names and status */}
+            <div className="flex items-center flex-wrap gap-3">
+              {[
+                { label: 'SOC 2 Type I', logo: '🛡️', status: 'Underway' },
+                { label: 'SOC 2 Type II', logo: '🛡️', status: 'Underway' },
+                { label: 'ISO 27001', logo: '🔒', status: 'Underway' },
+                { label: 'GDPR', logo: '🇪🇺', status: 'Compliant' },
+                { label: 'CCPA', logo: '🇺🇸', status: 'Underway' },
+                { label: 'HIPAA', logo: '🏥', status: 'Underway' },
+              ].map((item, i) => (
+                <div
+                  key={`cmp-badge-${i}`}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-dark-800/80 border border-dark-700/60 text-xs"
+                >
+                  <span className="text-sm" aria-hidden="true">{item.logo}</span>
+                  <span className="text-gray-200 font-medium">{item.label}</span>
+                  <span className={`font-semibold ${item.status === 'Compliant' ? 'text-green-400' : 'text-yellow-400'}`}>
+                    {item.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="text-xs text-gray-500">
+              *In observation period for SOC 2 Type II compliance.
+            </div>
+          </div>
+
+          {/* Bottom legal row simplified and centered */}
+          <div className="mt-10 flex items-center justify-center text-xs md:text-sm text-gray-500">
+            <p>© {new Date().getFullYear()} ENAI. All rights reserved.</p>
           </div>
         </div>
       </footer>
