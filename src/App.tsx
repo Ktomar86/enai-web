@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { 
   Brain, 
   Zap, 
@@ -27,23 +27,30 @@ import {
   TrendingUp
 } from 'lucide-react';
 
-
 import { Link } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import ProductGIFShowcase from './components/ProductGIFShowcase';
-import WorkflowIllustration from './components/WorkflowIllustration';
-import ResultsWorkflow from './components/ResultsWorkflow';
-import BookingIllustration from './components/BookingIllustration';
-import ScrollySteps from './components/ScrollySteps';
-import ElevenLabsOrb from './components/ElevenLabsOrb';
-// import AIWorkflowVisualizer from './components/AIWorkflowVisualizer';
 import { motion, AnimatePresence } from 'framer-motion';
-import * as simpleIcons from 'simple-icons';
 import { Button } from './components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card';
 import { Badge } from './components/ui/badge';
 import { Separator } from './components/ui/separator';
 import { HeroSection } from './components/ui/hero-section';
+
+// Lazy load heavy components to improve initial load performance
+const ProductGIFShowcase = lazy(() => import('./components/ProductGIFShowcase'));
+const WorkflowIllustration = lazy(() => import('./components/WorkflowIllustration'));
+const ResultsWorkflow = lazy(() => import('./components/ResultsWorkflow'));
+const BookingIllustration = lazy(() => import('./components/BookingIllustration'));
+const ScrollySteps = lazy(() => import('./components/ScrollySteps'));
+const ElevenLabsOrb = lazy(() => import('./components/ElevenLabsOrb'));
+const OptimizedIntegrations = lazy(() => import('./components/OptimizedIntegrations'));
+
+// Loading fallback component
+const ComponentLoader = ({ className = "w-full h-48" }: { className?: string }) => (
+  <div className={`${className} bg-dark-light animate-pulse rounded-lg flex items-center justify-center`}>
+    <div className="text-gray-400">Loading...</div>
+  </div>
+);
 
 // Defer heavy sections until near viewport (removed storyboard per request)
 
@@ -185,11 +192,12 @@ const pricingPlans = [
   },
   {
     name: 'Starter',
-    price: '$59',
+    price: '$100',
     period: 'per agent/month',
     description: 'Essential automation for small teams',
     features: [
       '2,000 emails/month',
+      '~400 leads/month included',
       'Email sequences',
       'Basic reporting',
       'CRM integration',
@@ -202,11 +210,12 @@ const pricingPlans = [
   },
   {
     name: 'Pro',
-    price: '$149',
+    price: '$200',
     period: 'per agent/month',
     description: 'Full automation with voice and advanced features',
     features: [
       '10,000 emails/month',
+      '~2,000 leads/month included',
       'Email + voice sequences',
       'Domain warmup',
       'A/B testing',
@@ -454,7 +463,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-dark text-white">
+    <div className="min-h-screen bg-surface-0 text-white">
       <Navigation />
 
       {/* Hero Section */}
@@ -481,8 +490,33 @@ function App() {
         contentPaddingY="py-24"
       />
 
+      {/* Trust Bar */}
+      <section className="py-8 bg-surface-1" aria-label="trust-indicators">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
+            <div className="flex items-center gap-2 text-text-2 text-sm">
+              <Shield className="w-4 h-4 text-brand" />
+              <span>Enterprise Security</span>
+            </div>
+            <div className="flex items-center gap-2 text-text-2 text-sm">
+              <Eye className="w-4 h-4 text-brand" />
+              <span>Approval Guardrails</span>
+            </div>
+            <div className="flex items-center gap-2 text-text-2 text-sm">
+              <Activity className="w-4 h-4 text-brand" />
+              <span>Audit Trail</span>
+            </div>
+            <div className="flex items-center gap-2 text-text-2 text-sm font-medium">
+              <Award className="w-4 h-4 text-brand" />
+              <span className="text-text-1">Built for B2B Teams</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Product GIFs / Visual Storytelling */}
-      <ProductGIFShowcase
+      <Suspense fallback={<ComponentLoader className="w-full h-96" />}>
+        <ProductGIFShowcase
         items={[
           {
             id: 'research-loop',
@@ -504,13 +538,16 @@ function App() {
             media: <div className="w-full h-full flex items-center justify-center bg-dark-900/50"><BookingIllustration className="aspect-video w-full" /></div>,
           }
         ]}
-      />
+        />
+      </Suspense>
 
       {/* 3-step scrollytelling cards */}
-      <ScrollySteps />
+      <Suspense fallback={<ComponentLoader className="w-full h-64" />}>
+        <ScrollySteps />
+      </Suspense>
 
       {/* Use Cases */}
-      <section className="py-24 bg-gradient-to-b from-dark-900 to-dark scroll-fade" aria-labelledby="use-cases-heading">
+      <section className="py-24 bg-surface-0 scroll-fade" aria-labelledby="use-cases-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* state for interactive plays */}
           {/* @ts-expect-error - used in JSX below via setActivePipelinePlay */}
@@ -522,11 +559,11 @@ function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-14"
           >
-            <h2 id="use-cases-heading" className="text-5xl font-bold gradient-text mb-6 tracking-tight [text-wrap:balance]">
-              Built for modern B2B teams
+            <h2 id="use-cases-heading" className="text-h2 md:text-6xl font-bold gradient-text mb-6 tracking-tight [text-wrap:balance]">
+              See how AI workers research, write, and book—within your guardrails
             </h2>
             <Separator className="mb-8 max-w-md mx-auto" />
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-body-lg text-text-2 max-w-3xl mx-auto leading-relaxed">
               From startups to enterprise sales orgs—spin up AI workers that match your motion.
             </p>
           </motion.div>
@@ -602,20 +639,21 @@ function App() {
             </div>
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-16">
             <Button 
-              onClick={() => window.location.assign('/industries')}
-              className="bg-primary-400 hover:bg-primary-500 text-white px-8 py-3 rounded-lg font-medium"
+              size="lg" 
+              className="animate-pulse-subtle"
+              onClick={() => window.open('https://calendly.com/enai-ai2024/30min', '_blank')}
             >
-              Explore industries
-              <ArrowRight className="w-4 h-4 ml-2" />
+              Schedule Live Demo
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
       </section>
 
       {/* Services Overview */}
-      <section id="services" className="py-24 bg-dark scroll-fade" aria-labelledby="services-heading">
+      <section id="services" className="py-24 bg-surface-1 scroll-fade" aria-labelledby="services-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -624,13 +662,13 @@ function App() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 id="services-heading" className="text-5xl font-bold gradient-text mb-6 tracking-tight [text-wrap:balance]">
-              What We Offer
+            <h2 id="services-heading" className="text-h2 md:text-6xl font-bold gradient-text mb-6 tracking-tight [text-wrap:balance]">
+              Services
             </h2>
             <Separator className="mb-8 max-w-md mx-auto" />
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Dedicated AI workers that handle research, outreach, booking, and CRM hygiene—with approval flows and full visibility.
-              </p>
+            <p className="text-body-lg text-text-2 max-w-3xl mx-auto leading-relaxed">
+              Research, write, and book—with approval guardrails. Average teams see +8-20% reply lift in 30 days.*
+            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -685,12 +723,13 @@ function App() {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Button 
-              onClick={() => document.getElementById('feature-showcase-heading')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-primary-400 hover:bg-primary-500 text-white px-8 py-3 rounded-lg font-medium"
+              size="lg"
+              className="animate-pulse-subtle"
+              onClick={() => window.open('https://calendly.com/enai-ai2024/30min', '_blank')}
             >
-              Explore Capabilities
+              Schedule Live Demo
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
@@ -698,7 +737,7 @@ function App() {
       </section>
 
       {/* Interactive Product Demo Section */}
-      <section className="py-32 bg-gradient-to-b from-dark to-dark-900 relative overflow-hidden scroll-fade section-enhanced" aria-labelledby="demo-heading">
+      <section className="py-32 bg-surface-0 relative overflow-hidden scroll-fade section-enhanced" aria-labelledby="demo-heading">
         {/* Enhanced floating background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="floating-element absolute top-10 left-5 w-24 h-24 bg-primary-400/10 rounded-full blur-2xl"></div>
@@ -915,7 +954,7 @@ function App() {
       </section>
 
       {/* Dashboard Preview (centered) */}
-      <section className="py-16 bg-transparent scroll-fade" aria-labelledby="dashboard-preview-heading">
+      <section className="py-16 bg-surface-1 scroll-fade" aria-labelledby="dashboard-preview-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 id="dashboard-preview-heading" className="sr-only">ENAI Dashboard Preview</h2>
           <div className="product-mockup dashboard-frame p-2 sm:p-6">
@@ -961,7 +1000,7 @@ function App() {
       {/* ENHANCED: Visual Sales Process Storyboard - removed per request */}
 
       {/* Feature Showcase Sections */}
-      <section className="py-24 bg-gradient-to-b from-dark to-dark-800 scroll-fade section-enhanced" aria-labelledby="feature-showcase-heading">
+      <section className="py-24 bg-surface-0 scroll-fade section-enhanced" aria-labelledby="feature-showcase-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -1090,7 +1129,7 @@ function App() {
       {/* Pipeline Plays removed for a tighter flow */}
 
       {/* Control & Visibility Grid */}
-      <section className="py-24 bg-gradient-to-b from-dark-800 to-dark scroll-fade section-enhanced" aria-labelledby="control-heading">
+      <section className="py-24 bg-surface-1 scroll-fade section-enhanced" aria-labelledby="control-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1266,7 +1305,7 @@ function App() {
       </section>
       
       {/* Enhanced Results & Proof with Advanced Visual Indicators */}
-      <section className="py-32 bg-gradient-to-b from-dark to-dark-900 relative overflow-hidden scroll-fade" aria-labelledby="results-heading">
+      <section className="py-32 bg-surface-0 relative overflow-hidden scroll-fade" aria-labelledby="results-heading">
         {/* Floating background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="floating-element absolute top-10 right-10 w-32 h-32 bg-primary-400/10 rounded-full blur-2xl"></div>
@@ -1304,7 +1343,9 @@ function App() {
             {/* Combined workflow illustration for 30‑day results */}
             <div className="mb-10 rounded-2xl overflow-hidden border border-dark-700/50 bg-dark-800/60 product-mockup glass-accent">
               <div className="aspect-[16/6]">
-                <ResultsWorkflow className="w-full h-full" />
+                <Suspense fallback={<ComponentLoader className="w-full h-full" />}>
+                  <ResultsWorkflow className="w-full h-full" />
+                </Suspense>
               </div>
             </div>
             {/* Metrics removed; single visual conveys the story concisely */}
@@ -1361,7 +1402,7 @@ function App() {
       </section>
 
       {/* Enhanced Case Studies Section with Advanced Visuals */}
-      <section className="py-32 bg-gradient-to-b from-dark-900 to-dark relative overflow-hidden scroll-fade" aria-labelledby="case-studies-heading">
+      <section className="py-32 bg-surface-1 relative overflow-hidden scroll-fade" aria-labelledby="case-studies-heading">
         {/* Floating background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="floating-element absolute top-20 left-10 w-48 h-48 bg-primary-400/5 rounded-full blur-3xl"></div>
@@ -1470,7 +1511,7 @@ function App() {
       {/* Removed secondary Success Stories to avoid duplication with Real Results */}
 
       {/* Integrations with Categorization */}
-      <section className="py-16 bg-dark/50 scroll-fade" aria-labelledby="integrations-heading">
+      <section className="py-16 bg-surface-0 scroll-fade" aria-labelledby="integrations-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1504,51 +1545,20 @@ function App() {
             ))}
           </div>
           
-          <div className="flex items-center justify-center gap-10 flex-wrap">
-            {integrations
-              .filter(integration => 
+          <Suspense fallback={<ComponentLoader className="w-full h-32" />}>
+            <OptimizedIntegrations 
+              integrations={integrations.filter(integration => 
                 integrationFilter === '' || 
                 integration.category === integrationFilter ||
                 integrationFilter === 'All'
-              )
-              .map((integration, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="flex flex-col items-center group cursor-pointer"
-                >
-                  <div className="flex items-center justify-center h-14 w-32 rounded-lg bg-dark-800/60 border border-dark-700 hover:border-primary-400/30 transition-all duration-300">
-                    {(() => {
-                      const icon = (simpleIcons as any)[integration.key];
-                      if (!icon) {
-                        return <span className="text-gray-400 text-sm">{integration.name}</span>;
-                      }
-                      return (
-                        <svg
-                          role="img"
-                          viewBox="0 0 24 24"
-                          width="100"
-                          height="24"
-                          aria-label={`${integration.name} logo`}
-                          className="opacity-90 group-hover:opacity-100"
-                        >
-                          <path fill={integration.color} d={icon.path} />
-                        </svg>
-                      );
-                    })()}
-                    <span className="sr-only">{integration.name}</span>
-                  </div>
-                </motion.div>
-              ))}
-          </div>
+              )} 
+            />
+          </Suspense>
         </div>
       </section>
 
       {/* Outcomes stripe */}
-      <section id="outcomes" className="py-16 bg-dark/60 scroll-fade" aria-labelledby="outcomes-heading">
+      <section id="outcomes" className="py-16 bg-surface-1 scroll-fade" aria-labelledby="outcomes-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1602,7 +1612,7 @@ function App() {
       </section>
 
       {/* Pricing Preview with Toggle */}
-      <section className="py-24 bg-gradient-to-b from-dark-800 to-dark scroll-fade" aria-labelledby="pricing-heading">
+      <section className="py-24 bg-surface-0 scroll-fade" aria-labelledby="pricing-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1818,7 +1828,7 @@ function App() {
       </section>
 
       {/* FAQ Accordion with Search */}
-      <section className="py-24 bg-dark scroll-fade" aria-labelledby="faq-heading">
+      <section className="py-24 bg-surface-1 scroll-fade" aria-labelledby="faq-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1914,7 +1924,7 @@ function App() {
 
 
       {/* Footer */}
-      <footer className="relative overflow-hidden bg-dark/60 backdrop-blur-xl text-white py-16 border-t border-dark-700/50" role="contentinfo">
+      <footer className="relative overflow-hidden bg-dark backdrop-blur-xl text-white py-16 border-t border-dark-700/50" role="contentinfo">
         {/* Decorative accents */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute -top-24 left-1/3 w-72 h-72 rounded-full bg-orange-400/5 blur-3xl"></div>
@@ -2014,7 +2024,6 @@ function App() {
                 { label: 'SOC 2 Type II', logo: '🛡️', status: 'Underway' },
                 { label: 'ISO 27001', logo: '🔒', status: 'Underway' },
                 { label: 'GDPR', logo: '🇪🇺', status: 'Compliant' },
-                { label: 'CCPA', logo: '🇺🇸', status: 'Underway' },
                 { label: 'HIPAA', logo: '🏥', status: 'Underway' },
               ].map((item, i) => (
                 <div
@@ -2042,7 +2051,9 @@ function App() {
       </footer>
 
       <div className="fixed bottom-4 right-4 z-50">
-        <ElevenLabsOrb agentId="FeDHh9EmNfMMKCvrYZyn" className="w-80 h-80" aria-label="AI Assistant Chat" />
+        <Suspense fallback={<div className="w-12 h-12 bg-primary-500 rounded-full animate-pulse"></div>}>
+          <ElevenLabsOrb agentId="FeDHh9EmNfMMKCvrYZyn" className="w-80 h-80" aria-label="AI Assistant Chat" />
+        </Suspense>
       </div>
     </div>
   );

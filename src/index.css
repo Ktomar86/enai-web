@@ -109,6 +109,27 @@ html, #root {
   animation: textGlow 3s ease-in-out infinite alternate;
 }
 
+/* Smooth section transitions */
+section {
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Enhanced section borders for consistent theming */
+.section-border {
+  position: relative;
+}
+
+.section-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(247, 183, 51, 0.3), transparent);
+  transform: translateX(-50%);
+}
+
 /* AI Workers text styling with rich gradient and emboss effect */
 .ai-workers-text {
   background: linear-gradient(135deg, #f97316 0%, #facc15 60%, #f59e0b 100%);
@@ -196,6 +217,30 @@ html, #root {
 
 .animate-ping-slow {
   animation: ping-slow 3s ease-in-out infinite;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .scroll-fade,
+  .animate-float,
+  .animate-glow,
+  .animate-pulse-subtle {
+    animation: none !important;
+  }
+  
+  .hover:transform,
+  .hover:scale-105 {
+    transform: none !important;
+  }
 }
 
 /* New styled text with corrected CSS syntax error */

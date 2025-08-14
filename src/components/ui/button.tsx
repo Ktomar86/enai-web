@@ -4,16 +4,16 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../../lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 shadow-lg shadow-orange-500/20",
-        destructive: "bg-red-500 text-white hover:bg-red-600",
-        outline: "border border-dark-700 bg-transparent hover:bg-dark-800 hover:border-orange-500/50 text-white",
-        secondary: "bg-dark-800 text-white hover:bg-dark-700",
-        ghost: "hover:bg-dark-800 text-white",
-        link: "text-orange-400 underline-offset-4 hover:underline",
+        default: "bg-gradient-to-r from-brand to-brand-strong text-white hover:shadow-brand-hover hover:scale-105 shadow-brand-glow",
+        destructive: "bg-red-500 text-white hover:bg-red-600 shadow-elevated",
+        outline: "border border-line-weak bg-transparent hover:bg-surface-1 hover:border-line-strong text-text-1 shadow-sm",
+        secondary: "bg-surface-1 text-text-1 hover:bg-surface-2 shadow-elevated",
+        ghost: "hover:bg-surface-1 text-text-2 hover:text-text-1",
+        link: "text-brand underline-offset-4 hover:underline hover:text-brand-strong",
       },
       size: {
         default: "h-10 px-4 py-2",
