@@ -47,8 +47,8 @@ const OptimizedIntegrations = lazy(() => import('./components/OptimizedIntegrati
 
 // Loading fallback component
 const ComponentLoader = ({ className = "w-full h-48" }: { className?: string }) => (
-  <div className={`${className} bg-dark-light animate-pulse rounded-lg flex items-center justify-center`}>
-    <div className="text-gray-400">Loading...</div>
+  <div className={`${className} bg-surface-1 animate-pulse rounded-lg flex items-center justify-center`}>
+    <div className="text-text-3">Loading...</div>
   </div>
 );
 
