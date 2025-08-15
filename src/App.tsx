@@ -298,12 +298,12 @@ function App() {
         const researchData = mockup.data as any;
         return (
           <div className="feature-mockup p-6">
-            <div className="bg-dark-900/80 rounded-lg p-4 border border-dark-700/50">
+            <div className="bg-surface-1/80 rounded-lg p-4 border border-line-weak/50">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-3 h-3 rounded-full bg-red-400"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
                 <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                <span className="text-gray-400 text-sm ml-4">AI Research</span>
+                <span className="text-text-3 text-sm ml-4">AI Research</span>
               </div>
               
               <div className="space-y-4">
@@ -313,19 +313,19 @@ function App() {
                 </div>
                 
                 <div className="space-y-2">
-                  <h5 className="text-sm font-medium text-gray-300">Key Triggers:</h5>
+                  <h5 className="text-sm font-medium text-text-2">Key Triggers:</h5>
                   {researchData.triggers.map((trigger: string, i: number) => (
                     <div key={i} className="flex items-start gap-2">
                       <Activity className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-300 text-sm">{trigger}</span>
+                      <span className="text-text-2 text-sm">{trigger}</span>
                     </div>
                   ))}
                 </div>
                 
                 <div className="space-y-1">
-                  <h5 className="text-sm font-medium text-gray-300">AI Notes:</h5>
+                  <h5 className="text-sm font-medium text-text-2">AI Notes:</h5>
                   {researchData.notes.map((note: string, i: number) => (
-                    <div key={i} className="text-gray-400 text-sm">• {note}</div>
+                    <div key={i} className="text-text-3 text-sm">• {note}</div>
                   ))}
                 </div>
               </div>
@@ -338,7 +338,7 @@ function App() {
         return (
           <div className="feature-mockup p-6">
             <div className="space-y-4">
-              <div className="bg-dark-900/80 rounded-lg p-4 border border-dark-700/50">
+              <div className="bg-surface-1/80 rounded-lg p-4 border border-line-weak/50">
                 <div className="flex items-center gap-2 mb-3">
                   <Mail className="w-4 h-4 text-primary-400" />
                   <span className="text-white font-medium">Email Draft</span>
@@ -347,28 +347,28 @@ function App() {
                   </Badge>
                 </div>
                 <div className="text-sm">
-                  <div className="text-gray-400">Subject:</div>
+                  <div className="text-text-3">Subject:</div>
                   <div className="text-white">{sequenceData.email.subject}</div>
-                  <div className="text-gray-400 mt-2">Preview:</div>
-                  <div className="text-gray-300">{sequenceData.email.preview}</div>
+                  <div className="text-text-3 mt-2">Preview:</div>
+                  <div className="text-text-2">{sequenceData.email.preview}</div>
                 </div>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-dark-900/80 rounded-lg p-3 border border-dark-700/50">
+                <div className="bg-surface-1/80 rounded-lg p-3 border border-line-weak/50">
                   <div className="flex items-center gap-2 mb-2">
                     <Phone className="w-4 h-4 text-primary-400" />
                     <span className="text-white text-sm font-medium">Call Script</span>
                   </div>
-                  <div className="text-xs text-gray-300">{sequenceData.callScript}</div>
+                  <div className="text-xs text-text-2">{sequenceData.callScript}</div>
                 </div>
                 
-                <div className="bg-dark-900/80 rounded-lg p-3 border border-dark-700/50">
+                <div className="bg-surface-1/80 rounded-lg p-3 border border-line-weak/50">
                   <div className="flex items-center gap-2 mb-2">
                     <Play className="w-4 h-4 text-primary-400" />
                     <span className="text-white text-sm font-medium">Voicemail</span>
                   </div>
-                  <div className="text-xs text-gray-300">{sequenceData.voicemail}</div>
+                  <div className="text-xs text-text-2">{sequenceData.voicemail}</div>
                 </div>
               </div>
             </div>
@@ -380,7 +380,7 @@ function App() {
         return (
           <div className="feature-mockup p-6">
             <div className="space-y-4">
-              <div className="bg-dark-900/80 rounded-lg p-4 border border-dark-700/50">
+              <div className="bg-surface-1/80 rounded-lg p-4 border border-line-weak/50">
                 <div className="flex items-center gap-2 mb-3">
                   <Calendar className="w-4 h-4 text-primary-400" />
                   <span className="text-white font-medium">Meeting Scheduled</span>
@@ -388,27 +388,27 @@ function App() {
                 </div>
                 <div className="space-y-2">
                   <div className="text-white">{bookingData.meeting.title}</div>
-                  <div className="text-gray-300 text-sm">{bookingData.meeting.time}</div>
-                  <div className="text-gray-400 text-xs">{bookingData.meeting.duration}</div>
+                  <div className="text-text-2 text-sm">{bookingData.meeting.time}</div>
+                  <div className="text-text-3 text-xs">{bookingData.meeting.duration}</div>
                 </div>
               </div>
               
-              <div className="bg-dark-900/80 rounded-lg p-4 border border-dark-700/50">
+              <div className="bg-surface-1/80 rounded-lg p-4 border border-line-weak/50">
                 <div className="flex items-center gap-2 mb-3">
                   <Database className="w-4 h-4 text-primary-400" />
                   <span className="text-white font-medium">CRM Sync</span>
                 </div>
                 <div className="space-y-1">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-300">Contact Created</span>
+                    <span className="text-text-2">Contact Created</span>
                     <CheckCircle className="w-4 h-4 text-green-400" />
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-300">Activity Logged</span>
+                    <span className="text-text-2">Activity Logged</span>
                     <CheckCircle className="w-4 h-4 text-green-400" />
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-300">Deal Stage</span>
+                    <span className="text-text-2">Deal Stage</span>
                     <span className="text-primary-400">{bookingData.crmUpdate.dealStage}</span>
                   </div>
                 </div>
@@ -491,7 +491,7 @@ function App() {
       />
 
       {/* Trust Bar */}
-      <section className="py-8 bg-surface-1" aria-label="trust-indicators">
+      <section className="py-8 bg-surface-0" aria-label="trust-indicators">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
             <div className="flex items-center gap-2 text-text-2 text-sm">
@@ -522,7 +522,7 @@ function App() {
             id: 'research-loop',
             title: 'Prospect research loop',
             caption: 'Enai analyzes profiles, sites, and signals to prep outreach in seconds.',
-            media: <div className="w-full h-full flex items-center justify-center bg-dark-900/50"><WorkflowIllustration className="aspect-video w-full" /></div>,
+            media: <div className="w-full h-full flex items-center justify-center bg-surface-1/50"><WorkflowIllustration className="aspect-video w-full" /></div>,
           },
           {
             id: 'orchestrate',
@@ -535,7 +535,7 @@ function App() {
             id: 'book-sync',
             title: 'Auto book & sync',
             caption: 'Calendar holds, confirmations, and CRM updates—handled for you.',
-            media: <div className="w-full h-full flex items-center justify-center bg-dark-900/50"><BookingIllustration className="aspect-video w-full" /></div>,
+            media: <div className="w-full h-full flex items-center justify-center bg-surface-1/50"><BookingIllustration className="aspect-video w-full" /></div>,
           }
         ]}
         />
@@ -581,11 +581,11 @@ function App() {
                   key={uc.key}
                   onClick={() => setActiveUseCase(uc.key)}
                   className={`w-full text-left px-4 py-3 rounded-lg border transition-all duration-300 ${
-                    activeUseCase === uc.key ? 'border-primary-400/40 bg-primary-400/10' : 'border-dark-700 bg-dark-800/40 hover:bg-dark-800'
+                    activeUseCase === uc.key ? 'border-primary-400/40 bg-primary-400/10' : 'border-line-weak bg-surface-2/40 hover:bg-surface-2'
                   }`}
                 >
                   <div className="text-white font-medium text-sm">{uc.title}</div>
-                  <div className="text-xs text-gray-500">{uc.desc}</div>
+                  <div className="text-xs text-text-3">{uc.desc}</div>
                 </button>
               ))}
             </div>
@@ -599,7 +599,7 @@ function App() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="glass-card glass-accent overflow-hidden border border-dark-700/50"
+                  className="glass-card glass-accent overflow-hidden border border-line-weak/50"
                 >
                   <CardHeader className="pb-4">
                     <CardTitle className="text-lg text-white">
@@ -616,7 +616,7 @@ function App() {
                       ).map((point, i) => (
                         <motion.div
                           key={`uc-point-${i}`}
-                          className="rounded-lg bg-dark-800/60 border border-dark-700 p-4"
+                          className="rounded-lg bg-surface-2/60 border border-line-weak p-4"
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.3, delay: i * 0.1 }}
@@ -625,7 +625,7 @@ function App() {
                             <span className="w-2 h-2 rounded-full bg-gradient-to-r from-primary-400 to-yellow-400" />
                             <span className="text-sm text-white">{point}</span>
                           </div>
-                          <p className="text-xs text-gray-400 mt-1">
+                          <p className="text-xs text-text-3 mt-1">
                             {activeUseCase === 'sdr' && (i === 0 ? 'Find accounts matching your ICP' : i === 1 ? 'Human‑quality personalization' : 'Keep leads engaged')}
                             {activeUseCase === 'ae' && (i === 0 ? 'Briefs from CRM + web signals' : i === 1 ? 'Turn replies into meetings' : 'Auto holds and invites')}
                             {activeUseCase === 'revops' && (i === 0 ? 'Enrich, dedupe, and validate' : i === 1 ? 'Approval + compliance rules' : 'Insights without spreadsheets')}
@@ -653,7 +653,7 @@ function App() {
       </section>
 
       {/* Services Overview */}
-      <section id="services" className="py-24 bg-surface-1 scroll-fade" aria-labelledby="services-heading">
+      <section id="services" className="py-24 bg-surface-0 scroll-fade" aria-labelledby="services-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -711,7 +711,7 @@ function App() {
                   <CardContent className="pt-0">
                     <ul className="space-y-2">
                       {svc.points.map((p, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-gray-300">
+                        <li key={idx} className="flex items-start gap-2 text-sm text-text-2">
                           <Check className="w-4 h-4 text-green-400 mt-0.5" />
                           <span>{p}</span>
                         </li>
@@ -757,7 +757,7 @@ function App() {
             <div className="inline-flex items-center justify-center mb-6">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-purple-500/20 rounded-full blur-xl"></div>
-                <span className="relative inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-dark-800/50 border border-primary-400/30 text-primary-400">
+                <span className="relative inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-surface-2/50 border border-primary-400/30 text-primary-400">
                   <Zap className="w-4 h-4 mr-2" />
                   Live Demo
                 </span>
@@ -767,7 +767,7 @@ function App() {
               See AI Workers in Action
             </h2>
             <Separator className="mb-8 max-w-md mx-auto bg-gradient-to-r from-primary-400/50 to-primary-500/50" />
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-text-2 max-w-3xl mx-auto leading-relaxed">
               Watch how our AI agents transform complex business processes into seamless, intelligent workflows
             </p>
           </motion.div>
@@ -784,7 +784,7 @@ function App() {
               <div className="product-mockup p-10 relative">
                 {/* Glowing border effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-purple-500/20 rounded-2xl blur-xl opacity-70"></div>
-                <div className="relative bg-dark-900/90 rounded-2xl p-8 border border-dark-700/50 backdrop-blur-sm">
+                <div className="relative bg-surface-1/90 rounded-2xl p-8 border border-line-weak/50 backdrop-blur-sm">
                   {/* Decorative elements */}
                   <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary-400/5 rounded-full blur-3xl"></div>
                   <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
@@ -795,7 +795,7 @@ function App() {
                       <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
                       <div className="w-4 h-4 rounded-full bg-green-400"></div>
                     </div>
-                    <span className="text-gray-300 text-lg ml-4 font-medium">AI Agent Dashboard</span>
+                    <span className="text-text-2 text-lg ml-4 font-medium">AI Agent Dashboard</span>
                     <div className="ml-auto flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
                       <span className="text-xs text-green-400 font-medium">LIVE</span>
@@ -804,7 +804,7 @@ function App() {
                   
                   <div className="space-y-8 relative z-10">
                     {/* Enhanced Real-time simulation */}
-                    <div className="data-viz rounded-xl p-6 border border-primary-400/30 bg-dark-800/60 backdrop-blur-sm relative overflow-hidden">
+                    <div className="data-viz rounded-xl p-6 border border-primary-400/30 bg-surface-2/60 backdrop-blur-sm relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-r from-primary-400/5 to-purple-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                       <div className="relative z-10">
                         <div className="flex items-center justify-between mb-6">
@@ -817,13 +817,13 @@ function App() {
                         
                         <div className="space-y-4">
                           <div className="flex items-center justify-between text-base">
-                            <span className="text-gray-300 flex items-center">
+                            <span className="text-text-2 flex items-center">
                               <Target className="w-4 h-4 mr-2 text-primary-400" />
                               Processing Prospects
                             </span>
                             <span className="text-primary-400 font-bold text-lg">847/1,200</span>
                           </div>
-                          <div className="w-full bg-dark-700 rounded-full h-3 overflow-hidden">
+                          <div className="w-full bg-surface-2 rounded-full h-3 overflow-hidden">
                             <motion.div 
                               className="bg-gradient-to-r from-primary-400 to-purple-500 h-3 rounded-full"
                               initial={{ width: 0 }}
@@ -835,56 +835,56 @@ function App() {
                         </div>
                         
                         <div className="mt-6 grid grid-cols-3 gap-4 text-center">
-                          <div className="p-4 rounded-xl bg-dark-700/50 border border-dark-600/30 hover:border-primary-400/30 transition-all duration-300 group">
+                          <div className="p-4 rounded-xl bg-surface-2/50 border border-line-weak/30 hover:border-primary-400/30 transition-all duration-300 group">
                             <div className="text-2xl font-bold text-primary-400 group-hover:text-primary-300 transition-colors duration-300">2,847</div>
-                            <div className="text-gray-400 text-sm mt-1">Qualified</div>
+                            <div className="text-text-3 text-sm mt-1">Qualified</div>
                           </div>
-                          <div className="p-4 rounded-xl bg-dark-700/50 border border-dark-600/30 hover:border-green-400/30 transition-all duration-300 group">
+                          <div className="p-4 rounded-xl bg-surface-2/50 border border-line-weak/30 hover:border-green-400/30 transition-all duration-300 group">
                             <div className="text-2xl font-bold text-green-400 group-hover:text-green-300 transition-colors duration-300">94%</div>
-                            <div className="text-gray-400 text-sm mt-1">Accuracy</div>
+                            <div className="text-text-3 text-sm mt-1">Accuracy</div>
                           </div>
-                          <div className="p-4 rounded-xl bg-dark-700/50 border border-dark-600/30 hover:border-purple-400/30 transition-all duration-300 group">
+                          <div className="p-4 rounded-xl bg-surface-2/50 border border-line-weak/30 hover:border-purple-400/30 transition-all duration-300 group">
                             <div className="text-2xl font-bold text-purple-400 group-hover:text-purple-300 transition-colors duration-300">4.2s</div>
-                            <div className="text-gray-400 text-sm mt-1">Avg Speed</div>
+                            <div className="text-text-3 text-sm mt-1">Avg Speed</div>
                           </div>
                         </div>
                       </div>
                     </div>
                     
                     {/* Enhanced Interactive workflow visualization */}
-                    <div className="bg-dark-800/70 rounded-xl p-6 border border-dark-700/50 backdrop-blur-sm relative overflow-hidden">
+                    <div className="bg-surface-2/70 rounded-xl p-6 border border-line-weak/50 backdrop-blur-sm relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-r from-primary-400/5 to-purple-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                       <div className="relative z-10">
                         <h4 className="text-xl font-bold text-white mb-6">Workflow Execution</h4>
                         <div className="space-y-4">
-                          <div className="flex items-center justify-between p-4 rounded-lg bg-dark-700/30 border border-dark-600/20 hover:border-primary-400/30 transition-all duration-300 group">
+                          <div className="flex items-center justify-between p-4 rounded-lg bg-surface-2/30 border border-line-weak/20 hover:border-primary-400/30 transition-all duration-300 group">
                             <div className="flex items-center gap-3">
                               <div className="w-4 h-4 rounded-full bg-primary-400 flex items-center justify-center">
                                 <Check className="w-3 h-3 text-dark" />
                               </div>
-                              <span className="text-gray-300 text-base group-hover:text-white transition-colors duration-300">Data Analysis</span>
+                              <span className="text-text-2 text-base group-hover:text-white transition-colors duration-300">Data Analysis</span>
                             </div>
                             <span className="text-sm text-green-400 font-medium flex items-center">
                               Completed
                               <CheckCircle className="w-4 h-4 ml-1" />
                             </span>
                           </div>
-                          <div className="flex items-center justify-between p-4 rounded-lg bg-dark-700/30 border border-dark-600/20 hover:border-yellow-400/30 transition-all duration-300 group">
+                          <div className="flex items-center justify-between p-4 rounded-lg bg-surface-2/30 border border-line-weak/20 hover:border-yellow-400/30 transition-all duration-300 group">
                             <div className="flex items-center gap-3">
                               <div className="w-4 h-4 rounded-full bg-yellow-400 animate-pulse flex items-center justify-center"></div>
-                              <span className="text-gray-300 text-base group-hover:text-white transition-colors duration-300">Pattern Recognition</span>
+                              <span className="text-text-2 text-base group-hover:text-white transition-colors duration-300">Pattern Recognition</span>
                             </div>
                             <span className="text-sm text-yellow-400 font-medium flex items-center">
                               In Progress
                               <Activity className="w-4 h-4 ml-1 animate-pulse" />
                             </span>
                           </div>
-                          <div className="flex items-center justify-between p-4 rounded-lg bg-dark-700/30 border border-dark-600/20 hover:border-gray-400/30 transition-all duration-300 group">
+                          <div className="flex items-center justify-between p-4 rounded-lg bg-surface-2/30 border border-line-weak/20 hover:border-line-strong transition-all duration-300 group">
                             <div className="flex items-center gap-3">
-                              <div className="w-4 h-4 rounded-full bg-gray-500 flex items-center justify-center"></div>
-                              <span className="text-gray-300 text-base group-hover:text-white transition-colors duration-300">Action Execution</span>
+                              <div className="w-4 h-4 rounded-full bg-text-3 flex items-center justify-center"></div>
+                              <span className="text-text-2 text-base group-hover:text-white transition-colors duration-300">Action Execution</span>
                             </div>
-                            <span className="text-sm text-gray-500 font-medium flex items-center">
+                            <span className="text-sm text-text-3 font-medium flex items-center">
                               Pending
                               <Clock className="w-4 h-4 ml-1" />
                             </span>
@@ -906,36 +906,36 @@ function App() {
               className="space-y-10"
             >
               <div className="space-y-8">
-                <div className="flex items-start gap-6 group cursor-pointer p-6 rounded-2xl bg-dark-800/30 border border-dark-700/50 hover:border-primary-400/30 transition-all duration-500 relative overflow-hidden">
+                <div className="flex items-start gap-6 group cursor-pointer p-6 rounded-2xl bg-surface-2/30 border border-line-weak/50 hover:border-primary-400/30 transition-all duration-500 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary-400/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
                   <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-primary-400/10 flex items-center justify-center group-hover:bg-primary-400/20 transition-all duration-300 relative z-10">
                     <Zap className="w-8 h-8 text-primary-400" />
                   </div>
                   <div className="relative z-10">
                     <h3 className="text-2xl font-bold text-white group-hover:text-primary-400 transition-colors duration-300">Real-time Processing</h3>
-                    <p className="text-gray-300 mt-3 text-lg leading-relaxed">Our AI agents process thousands of data points simultaneously, delivering insights in milliseconds with zero latency.</p>
+                    <p className="text-text-2 mt-3 text-lg leading-relaxed">Our AI agents process thousands of data points simultaneously, delivering insights in milliseconds with zero latency.</p>
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-6 group cursor-pointer p-6 rounded-2xl bg-dark-800/30 border border-dark-700/50 hover:border-primary-400/30 transition-all duration-500 relative overflow-hidden">
+                <div className="flex items-start gap-6 group cursor-pointer p-6 rounded-2xl bg-surface-2/30 border border-line-weak/50 hover:border-primary-400/30 transition-all duration-500 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary-400/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
                   <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-primary-400/10 flex items-center justify-center group-hover:bg-primary-400/20 transition-all duration-300 relative z-10">
                     <Brain className="w-8 h-8 text-primary-400" />
                   </div>
                   <div className="relative z-10">
                     <h3 className="text-2xl font-bold text-white group-hover:text-primary-400 transition-colors duration-300">Intelligent Automation</h3>
-                    <p className="text-gray-300 mt-3 text-lg leading-relaxed">Self-learning algorithms adapt to your business patterns, continuously improving performance and ROI.</p>
+                    <p className="text-text-2 mt-3 text-lg leading-relaxed">Self-learning algorithms adapt to your business patterns, continuously improving performance and ROI.</p>
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-6 group cursor-pointer p-6 rounded-2xl bg-dark-800/30 border border-dark-700/50 hover:border-primary-400/30 transition-all duration-500 relative overflow-hidden">
+                <div className="flex items-start gap-6 group cursor-pointer p-6 rounded-2xl bg-surface-2/30 border border-line-weak/50 hover:border-primary-400/30 transition-all duration-500 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary-400/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
                   <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-primary-400/10 flex items-center justify-center group-hover:bg-primary-400/20 transition-all duration-300 relative z-10">
                     <Shield className="w-8 h-8 text-primary-400" />
                   </div>
                   <div className="relative z-10">
                     <h3 className="text-2xl font-bold text-white group-hover:text-primary-400 transition-colors duration-300">Enterprise Security</h3>
-                    <p className="text-gray-300 mt-3 text-lg leading-relaxed">Bank-grade encryption and compliance frameworks protect your sensitive business data with zero compromise.</p>
+                    <p className="text-text-2 mt-3 text-lg leading-relaxed">Bank-grade encryption and compliance frameworks protect your sensitive business data with zero compromise.</p>
                   </div>
                 </div>
               </div>
@@ -954,7 +954,7 @@ function App() {
       </section>
 
       {/* Dashboard Preview (centered) */}
-      <section className="py-16 bg-surface-1 scroll-fade" aria-labelledby="dashboard-preview-heading">
+      <section className="py-16 bg-surface-0 scroll-fade" aria-labelledby="dashboard-preview-heading">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 id="dashboard-preview-heading" className="sr-only">ENAI Dashboard Preview</h2>
           <div className="product-mockup dashboard-frame p-2 sm:p-6">
@@ -962,36 +962,36 @@ function App() {
               src="/enai-dashboard.png"
               alt="ENAI dashboard"
               loading="lazy"
-              className="w-full rounded-2xl border border-dark-700 shadow-lg"
+              className="w-full rounded-2xl border border-line-weak shadow-lg"
             />
           </div>
           <div className="grid sm:grid-cols-3 gap-4 mt-6">
-            <div className="rounded-xl border border-dark-700/60 bg-dark-900/60 p-4">
+            <div className="rounded-xl border border-line-weak/60 bg-surface-2/60 p-4">
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-6 h-6 rounded-md bg-primary-400/10 text-primary-400 inline-flex items-center justify-center">
                   <Activity className="w-3.5 h-3.5" />
                 </span>
-                <div className="text-white font-semibold">AI Insights</div>
+                <span className="text-sm font-medium text-text-2">AI Insights</span>
               </div>
-              <p className="text-sm text-gray-300">Instant quality analysis and <span className="gradient-text">engagement trends</span> surfaced automatically.</p>
+              <p className="text-sm text-text-2">Instant quality analysis and <span className="gradient-text">engagement trends</span> surfaced automatically.</p>
             </div>
-            <div className="rounded-xl border border-dark-700/60 bg-dark-900/60 p-4">
+            <div className="rounded-xl border border-line-weak/60 bg-surface-2/60 p-4">
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-6 h-6 rounded-md bg-primary-400/10 text-primary-400 inline-flex items-center justify-center">
                   <Target className="w-3.5 h-3.5" />
                 </span>
-                <div className="text-white font-semibold">Lead Scoring</div>
+                <span className="text-sm font-medium text-text-2">Lead Scoring</span>
               </div>
-              <p className="text-sm text-gray-300">Score accounts by <span className="gradient-text">40+ buying signals</span> to focus effort where it counts.</p>
+              <p className="text-sm text-text-2">Score accounts by <span className="gradient-text">40+ buying signals</span> to focus effort where it counts.</p>
             </div>
-            <div className="rounded-xl border border-dark-700/60 bg-dark-900/60 p-4">
+            <div className="rounded-xl border border-line-weak/60 bg-surface-2/60 p-4">
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-6 h-6 rounded-md bg-primary-400/10 text-primary-400 inline-flex items-center justify-center">
                   <TrendingUp className="w-3.5 h-3.5" />
                 </span>
-                <div className="text-white font-semibold">Predicted Revenue</div>
+                <span className="text-sm font-medium text-text-2">Predicted Revenue</span>
               </div>
-              <p className="text-sm text-gray-300">Reliable forecasts and <span className="gradient-text">live conversions</span> in one place.</p>
+              <p className="text-sm text-text-2">Reliable forecasts and <span className="gradient-text">live conversions</span> in one place.</p>
             </div>
           </div>
         </div>
@@ -1013,19 +1013,19 @@ function App() {
               Core Features in Action
             </h2>
             <Separator className="mb-8 max-w-md mx-auto" />
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-text-2 max-w-3xl mx-auto">
               See how our AI handles the entire sales process from research to booking
             </p>
           </motion.div>
 
           {/* Tab Navigation with Micro-interactions */}
           <div className="flex justify-center mb-12">
-            <div className="tab-nav max-w-md bg-dark-800/50 p-1 rounded-xl border border-dark-700/50">
+            <div className="tab-nav max-w-md bg-surface-2/50 p-1 rounded-xl border border-line-weak/50">
               {featureShowcases.map((showcase) => (
                 <button
                   key={showcase.id}
                   onClick={() => setActiveTab(showcase.id)}
-                  className={`tab-nav-item ${activeTab === showcase.id ? 'active' : ''} transition-all duration-300 hover:bg-dark-700/50`}
+                  className={`tab-nav-item ${activeTab === showcase.id ? 'active' : ''} transition-all duration-300 hover:bg-surface-2/50`}
                 >
                   <div className="flex items-center gap-2">
                     {showcase.icon}
@@ -1057,7 +1057,7 @@ function App() {
                     <h3 className="text-3xl font-bold text-white group-hover:text-primary-400 transition-colors duration-300">{showcase.title}</h3>
                   </div>
                   
-                  <p className="text-xl text-gray-300 leading-relaxed">
+                  <p className="text-xl text-text-2 leading-relaxed">
                     {showcase.description}
                   </p>
                   
@@ -1069,7 +1069,7 @@ function App() {
                       See Full Demo
                       <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>
-                    <div className="text-sm text-gray-400">
+                    <div className="text-sm text-text-3">
                       Watch in real-time
                     </div>
                   </div>
@@ -1129,7 +1129,7 @@ function App() {
       {/* Pipeline Plays removed for a tighter flow */}
 
       {/* Control & Visibility Grid */}
-      <section className="py-24 bg-surface-1 scroll-fade section-enhanced" aria-labelledby="control-heading">
+      <section className="py-24 bg-surface-0 scroll-fade section-enhanced" aria-labelledby="control-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1142,7 +1142,7 @@ function App() {
               Control & Visibility
             </h2>
             <Separator className="mb-8 max-w-md mx-auto" />
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-text-2 max-w-3xl mx-auto">
               Build trust with complete transparency and control over your AI automation
             </p>
           </motion.div>
@@ -1165,7 +1165,7 @@ function App() {
                       className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                         !showApprovalAfter 
                           ? 'bg-primary-400 text-white' 
-                          : 'bg-dark-700 text-gray-300 hover:bg-dark-600'
+                          : 'bg-surface-2 text-text-2 hover:bg-surface-1'
                       }`}
                     >
                       Before
@@ -1175,7 +1175,7 @@ function App() {
                       className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                         showApprovalAfter 
                           ? 'bg-green-500 text-white' 
-                          : 'bg-dark-700 text-gray-300 hover:bg-dark-600'
+                          : 'bg-surface-2 text-text-2 hover:bg-surface-1'
                       }`}
                     >
                       After
@@ -1186,28 +1186,28 @@ function App() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-4">
                     {!showApprovalAfter ? (
-                      <div className="bg-dark-900/80 rounded-lg p-4 border border-yellow-400/20">
+                      <div className="bg-surface-1/80 rounded-lg p-4 border border-yellow-400/20">
                         <div className="flex items-center gap-2 mb-3">
                           <Clock className="w-4 h-4 text-yellow-400" />
                           <span className="text-yellow-400 font-medium">Pending Approval</span>
                   </div>
-                        <div className="text-sm text-gray-300">
-                          <div className="text-gray-400">Subject:</div>
+                        <div className="text-sm text-text-2">
+                          <div className="text-text-3">Subject:</div>
                           <div className="text-white">Quick question about your sales process</div>
-                          <div className="text-gray-400 mt-2">Template:</div>
-                          <div className="text-gray-300">Hi [Name], I noticed [Company] is...</div>
+                          <div className="text-text-3 mt-2">Template:</div>
+                          <div className="text-text-2">Hi [Name], I noticed [Company] is...</div>
                 </div>
                   </div>
                     ) : (
-                      <div className="bg-dark-900/80 rounded-lg p-4 border border-green-400/20">
+                      <div className="bg-surface-1/80 rounded-lg p-4 border border-green-400/20">
                         <div className="flex items-center gap-2 mb-3">
                           <CheckCircle className="w-4 h-4 text-green-400" />
                           <span className="text-green-400 font-medium">Approved & Scheduled</span>
                 </div>
-                        <div className="text-sm text-gray-300">
-                          <div className="text-gray-400">Subject:</div>
+                        <div className="text-sm text-text-2">
+                          <div className="text-text-3">Subject:</div>
                           <div className="text-white">Quick question about your sales process</div>
-                          <div className="text-gray-400 mt-2">Schedule:</div>
+                          <div className="text-text-3 mt-2">Schedule:</div>
                           <div className="text-green-300">Sequence starts in 2 hours</div>
           </div>
                   </div>
@@ -1223,7 +1223,7 @@ function App() {
                           <CheckCircle className="w-8 h-8 text-green-400" />
                         )}
                   </div>
-                      <p className="text-gray-300">
+                      <p className="text-text-2">
                         {!showApprovalAfter 
                           ? 'Awaiting manager approval' 
                           : 'Auto-executing approved sequence'
@@ -1247,7 +1247,7 @@ function App() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="group cursor-pointer"
               >
-                <Card className="glass-card glass-accent h-full hover-lift transition-all duration-500 group relative overflow-hidden border border-dark-700/50 hover:border-primary-400/40 shadow-lg hover:shadow-xl hover:shadow-primary-400/10 bg-dark-800/60 backdrop-blur-sm rounded-2xl">
+                <Card className="glass-card glass-accent h-full hover-lift transition-all duration-500 group relative overflow-hidden border border-line-weak/50 hover:border-primary-400/40 shadow-lg hover:shadow-xl hover:shadow-primary-400/10 bg-surface-2/60 backdrop-blur-sm rounded-2xl">
                   {/* Background gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-r from-primary-400/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
                   <CardHeader className="pb-4 relative z-10">
@@ -1274,12 +1274,12 @@ function App() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="relative z-10">
-                    <p className="text-gray-300 mb-4 text-lg leading-relaxed">{feature.description}</p>
-                    <p className="text-gray-400 text-base leading-relaxed">{feature.details}</p>
+                    <p className="text-text-2 mb-4 text-lg leading-relaxed">{feature.description}</p>
+                    <p className="text-text-3 text-base leading-relaxed">{feature.details}</p>
                     
                     {/* Enhanced Tooltip on hover */}
                     <div className="absolute inset-0 bg-gradient-to-t from-dark-900/95 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 pointer-events-none rounded-2xl">
-                      <div className="text-sm text-gray-200 bg-dark-800/90 p-4 rounded-xl border border-dark-700/50 backdrop-blur-sm shadow-lg">
+                      <div className="text-sm text-text-2 bg-surface-2/90 p-4 rounded-xl border border-line-weak/50 backdrop-blur-sm shadow-lg">
                         <div className="flex items-center gap-2 mb-2">
                           <div className={`w-2 h-2 rounded-full ${
                             index % 3 === 0 ? 'bg-green-400' : 
@@ -1287,7 +1287,7 @@ function App() {
                           }`}></div>
                           <span className="font-medium">Status Details</span>
                         </div>
-                        <p className="text-gray-300 text-sm mt-3">
+                        <p className="text-text-2 text-sm mt-3">
                           {index % 3 === 0 
                             ? 'Fully operational and monitoring in real-time with live analytics' 
                             : index % 3 === 1 
@@ -1324,7 +1324,7 @@ function App() {
             <div className="inline-flex items-center justify-center mb-6">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-purple-500/20 rounded-full blur-xl"></div>
-                <span className="relative inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-dark-800/50 border border-primary-400/30 text-primary-400">
+                <span className="relative inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-surface-2/50 border border-primary-400/30 text-primary-400">
                   <TrendingUp className="w-4 h-4 mr-2" />
                   Proven Results
                 </span>
@@ -1334,14 +1334,14 @@ function App() {
               <span>What Teams Report After 30 Days</span>
             </h2>
             <Separator className="mb-8 max-w-md mx-auto bg-gradient-to-r from-primary-400/50 to-purple-500/50" />
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-text-2 max-w-3xl mx-auto leading-relaxed">
               Honest outcomes with real ranges, not fake promises
             </p>
           </motion.div>
           
           <div className="max-w-6xl mx-auto">
             {/* Combined workflow illustration for 30‑day results */}
-            <div className="mb-10 rounded-2xl overflow-hidden border border-dark-700/50 bg-dark-800/60 product-mockup glass-accent">
+            <div className="mb-10 rounded-2xl overflow-hidden border border-line-weak/50 bg-surface-2/60 product-mockup glass-accent">
               <div className="aspect-[16/6]">
                 <Suspense fallback={<ComponentLoader className="w-full h-full" />}>
                   <ResultsWorkflow className="w-full h-full" />
@@ -1402,7 +1402,7 @@ function App() {
       </section>
 
       {/* Enhanced Case Studies Section with Advanced Visuals */}
-      <section className="py-32 bg-surface-1 relative overflow-hidden scroll-fade" aria-labelledby="case-studies-heading">
+      <section className="py-32 bg-surface-0 relative overflow-hidden scroll-fade" aria-labelledby="case-studies-heading">
         {/* Floating background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="floating-element absolute top-20 left-10 w-48 h-48 bg-primary-400/5 rounded-full blur-3xl"></div>
@@ -1420,7 +1420,7 @@ function App() {
             <div className="inline-flex items-center justify-center mb-6">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-purple-500/20 rounded-full blur-xl"></div>
-                <span className="relative inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-dark-800/50 border border-primary-400/30 text-primary-400">
+                <span className="relative inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-surface-2/50 border border-primary-400/30 text-primary-400">
                   <Award className="w-4 h-4 mr-2" />
                   Real Results
                 </span>
@@ -1430,7 +1430,7 @@ function App() {
               See How Teams Are Solving Real Problems with AI Automation
             </h2>
             <Separator className="mb-6 max-w-md mx-auto bg-gradient-to-r from-primary-400/50 to-purple-500/50" />
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-text-2 max-w-3xl mx-auto leading-relaxed">
               Discover how industry leaders are leveraging our platform to transform their sales processes and achieve remarkable results.
             </p>
           </motion.div>
@@ -1444,7 +1444,7 @@ function App() {
                   key={`cs-${i}`}
                   onClick={() => setActiveCaseStudy(i)}
                   className={`w-full text-left px-4 py-3 rounded-lg border transition-all duration-300 ${
-                    activeCaseStudy === i ? 'border-primary-400/40 bg-primary-400/10' : 'border-dark-700 bg-dark-800/40 hover:bg-dark-800'
+                    activeCaseStudy === i ? 'border-primary-400/40 bg-primary-400/10' : 'border-line-weak bg-surface-2/40 hover:bg-surface-2'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -1453,7 +1453,7 @@ function App() {
                       </div>
                       <div>
                       <div className="text-white font-medium text-sm">{study.title}</div>
-                      <div className="text-xs text-gray-500">2024 Results</div>
+                      <div className="text-xs text-text-3">2024 Results</div>
                       </div>
                     </div>
                 </button>
@@ -1469,7 +1469,7 @@ function App() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="glass-card glass-accent overflow-hidden border border-dark-700/50"
+                  className="glass-card glass-accent overflow-hidden border border-line-weak/50"
                 >
                   <CardHeader className="pb-4 flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-primary-400/10 flex items-center justify-center">
@@ -1482,17 +1482,17 @@ function App() {
                   <CardContent className="space-y-5">
                     <div className="grid sm:grid-cols-3 gap-4">
                       {[{label:'Problem',icon:Calendar,text:caseStudies[activeCaseStudy].problem},{label:'What Enai Did',icon:Zap,text:caseStudies[activeCaseStudy].solution},{label:'Outcome',icon:Target,text:caseStudies[activeCaseStudy].outcome}].map((b,i)=> (
-                        <div key={`cs-block-${i}`} className="p-4 rounded-xl bg-dark-800/50 border border-dark-700">
+                        <div key={`cs-block-${i}`} className="p-4 rounded-xl bg-surface-2/50 border border-line-weak">
                           <div className="flex items-center gap-2 text-sm mb-2">
                             <b.icon className="w-4 h-4 text-primary-400" />
-                            <span className="text-gray-300">{b.label}</span>
+                            <span className="text-text-2">{b.label}</span>
                       </div>
-                          <p className="text-xs text-gray-400 leading-relaxed">{b.text}</p>
+                          <p className="text-xs text-text-3 leading-relaxed">{b.text}</p>
                         </div>
                       ))}
                     </div>
                     {/* Animated progress strip */}
-                    <div className="h-2 bg-dark-700 rounded-full overflow-hidden">
+                    <div className="h-2 bg-surface-2 rounded-full overflow-hidden">
                           <motion.div 
                         className="h-full bg-gradient-to-r from-primary-400 to-yellow-400"
                         initial={{ width: '0%' }}
@@ -1523,7 +1523,7 @@ function App() {
             <h3 id="integrations-heading" className="text-2xl font-bold text-white mb-4 tracking-tight [text-wrap:balance]">
               Integrates with your existing tools
             </h3>
-            <p className="text-gray-300">
+            <p className="text-text-2">
               Connect seamlessly with the platforms you already use
             </p>
           </motion.div>
@@ -1537,7 +1537,7 @@ function App() {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   integrationFilter === category || (category === 'All' && !integrationFilter)
                     ? 'bg-primary-400 text-white'
-                    : 'bg-dark-700 text-gray-300 hover:bg-dark-600'
+                    : 'bg-surface-2 text-text-2 hover:bg-surface-1'
                 }`}
               >
                 {category}
@@ -1558,7 +1558,7 @@ function App() {
       </section>
 
       {/* Outcomes stripe */}
-      <section id="outcomes" className="py-16 bg-surface-1 scroll-fade" aria-labelledby="outcomes-heading">
+      <section id="outcomes" className="py-16 bg-surface-0 scroll-fade" aria-labelledby="outcomes-heading">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1570,7 +1570,7 @@ function App() {
             <h2 id="outcomes-heading" className="text-4xl md:text-5xl font-bold gradient-text mb-6 tracking-tight [text-wrap:balance]">
               Proven Outcomes
             </h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+            <p className="text-lg text-text-2 max-w-3xl mx-auto">
               Typical outcomes reported by teams within the first month. Actual results vary by baseline and implementation.
             </p>
           </motion.div>
@@ -1583,8 +1583,8 @@ function App() {
                   <h3 className="text-white font-semibold">More replies</h3>
                 </div>
                 <div className="text-3xl font-bold text-primary-400">+8–20%</div>
-                <p className="text-sm text-gray-400 mt-1">Context‑aware messaging boosts response rates</p>
-                <p className="text-[11px] text-gray-500 mt-1">Typical range reported; not guaranteed</p>
+                <p className="text-sm text-text-3 mt-1">Context‑aware messaging boosts response rates</p>
+                <p className="text-[11px] text-text-3 mt-1">Typical range reported; not guaranteed</p>
               </CardContent>
             </Card>
             <Card className="glass-card glass-accent">
@@ -1594,7 +1594,7 @@ function App() {
                   <h3 className="text-white font-semibold">More qualified meetings</h3>
                 </div>
                 <div className="text-3xl font-bold text-primary-400">Up to 2.5×</div>
-                <p className="text-sm text-gray-400 mt-1">Better targeting and prioritization</p>
+                <p className="text-sm text-text-3 mt-1">Better targeting and prioritization</p>
               </CardContent>
             </Card>
             <Card className="glass-card glass-accent">
@@ -1604,7 +1604,7 @@ function App() {
                   <h3 className="text-white font-semibold">Cleaner CRM</h3>
                 </div>
                 <div className="text-3xl font-bold text-primary-400">Automated</div>
-                <p className="text-sm text-gray-400 mt-1">Activity logging and sync; coverage depends on integrations</p>
+                <p className="text-sm text-text-3 mt-1">Activity logging and sync; coverage depends on integrations</p>
               </CardContent>
             </Card>
           </div>
@@ -1625,22 +1625,22 @@ function App() {
               Simple, Transparent Pricing
             </h2>
             <Separator className="mb-8 max-w-md mx-auto" />
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-text-2 max-w-3xl mx-auto">
               No hidden fees, no unlimited promises. Clear limits, fair pricing.
             </p>
             
             {/* Pricing Toggle */}
             <div className="flex items-center justify-center gap-4 mt-8">
-              <span className={`text-sm font-medium ${!annualBilling ? 'text-primary-400' : 'text-gray-400'}`}>
+              <span className={`text-sm font-medium ${!annualBilling ? 'text-primary-400' : 'text-text-3'}`}>
                 Monthly
               </span>
               <button 
                 onClick={() => setAnnualBilling(!annualBilling)}
-                className="relative inline-flex h-6 w-11 items-center rounded-full bg-dark-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+                className="relative inline-flex h-6 w-11 items-center rounded-full bg-surface-2 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
               >
-                <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${annualBilling ? 'translate-x-6' : 'translate-x-1'}`} />
+                <span className={`inline-block h-4 w-4 transform rounded-full bg-text-1 transition-transform duration-300 ${annualBilling ? 'translate-x-6' : 'translate-x-1'}`} />
               </button>
-              <span className={`text-sm font-medium ${annualBilling ? 'text-primary-400' : 'text-gray-400'}`}>
+              <span className={`text-sm font-medium ${annualBilling ? 'text-primary-400' : 'text-text-3'}`}>
                 Annual <Badge className="ml-1 text-xs bg-green-500/20 text-green-400 border border-green-500/30">Save 20%</Badge>
               </span>
             </div>
@@ -1678,11 +1678,11 @@ function App() {
                           ? `$${Math.round(parseInt(plan.price.replace('$', '')) * 0.8)}` 
                           : plan.price}
                       </span>
-                      <span className="text-gray-400 text-sm">
+                      <span className="text-text-3 text-sm">
                         {plan.period ? `/${annualBilling && plan.name !== 'Free Trial' ? 'year' : plan.period}` : ''}
                       </span>
                     </div>
-                    <p className="text-gray-300 text-sm">{plan.description}</p>
+                    <p className="text-text-2 text-sm">{plan.description}</p>
                   </CardHeader>
                   
                   <CardContent className="flex-1 flex flex-col gap-6">
@@ -1691,19 +1691,19 @@ function App() {
                       {plan.features.map((feature, i) => (
                         <li key={i} className="flex items-start gap-2">
                           <Check className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-300 text-sm">{feature}</span>
+                          <span className="text-text-2 text-sm">{feature}</span>
                         </li>
                       ))}
                     </ul>
                     
                     {plan.limitations.length > 0 && (
-                      <div className="border-t border-gray-700 pt-4">
-                        <p className="text-gray-400 text-xs mb-2">Limitations:</p>
+                      <div className="border-t border-line-weak pt-4">
+                        <p className="text-text-3 text-xs mb-2">Limitations:</p>
                         <ul className="space-y-1">
                           {plan.limitations.map((limitation, i) => (
                             <li key={i} className="flex items-start gap-2">
-                              <Minus className="w-3 h-3 text-gray-500 mt-1 flex-shrink-0" />
-                              <span className="text-gray-400 text-xs">{limitation}</span>
+                              <Minus className="w-3 h-3 text-text-3 mt-1 flex-shrink-0" />
+                              <span className="text-text-3 text-xs">{limitation}</span>
                             </li>
                           ))}
                         </ul>
@@ -1715,7 +1715,7 @@ function App() {
                       className={`w-full font-medium py-2 px-4 rounded-lg transition-all duration-300 mt-auto ${
                         plan.popular 
                           ? 'cta-button text-white shadow-lg' 
-                          : 'bg-dark-700 text-gray-300 hover:bg-dark-600'
+                          : 'bg-surface-2 text-text-2 hover:bg-surface-1'
                       }`}
                       onClick={() => {
                         if (plan.name === 'Free Trial') {
@@ -1743,21 +1743,21 @@ function App() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mt-20 max-w-5xl mx-auto"
           >
-            <Card className="glass-card glass-accent overflow-hidden border border-dark-700/50">
+            <Card className="glass-card glass-accent overflow-hidden border border-line-weak/50">
               <CardHeader className="pb-6">
                 <CardTitle className="text-2xl text-white text-center">Plan Comparison</CardTitle>
-                <p className="text-gray-400 text-center mt-2">See what's included in each plan</p>
+                <p className="text-text-3 text-center mt-2">See what's included in each plan</p>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-dark-700">
-                        <th className="text-left p-4 font-medium text-gray-400">Feature</th>
-                        <th className="text-center p-4 font-medium text-gray-300">Free Trial</th>
-                        <th className="text-center p-4 font-medium text-gray-300">Starter</th>
+                      <tr className="border-b border-line-weak">
+                        <th className="text-left p-4 font-medium text-text-3">Feature</th>
+                        <th className="text-center p-4 font-medium text-text-2">Free Trial</th>
+                        <th className="text-center p-4 font-medium text-text-2">Starter</th>
                         <th className="text-center p-4 font-medium text-primary-400">Pro</th>
-                        <th className="text-center p-4 font-medium text-gray-300">Team</th>
+                        <th className="text-center p-4 font-medium text-text-2">Team</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1774,27 +1774,27 @@ function App() {
                         'SLA guarantees',
                         'Custom workflows'
                       ].map((feature, index) => (
-                        <tr key={index} className="border-b border-dark-800/50 hover:bg-dark-800/30 transition-colors">
-                          <td className="p-4 text-gray-300">{feature}</td>
+                        <tr key={index} className="border-b border-line-weak hover:bg-surface-2/30 transition-colors">
+                          <td className="p-4 text-text-2">{feature}</td>
                           <td className="p-4 text-center">
                             {index < 3 ? (
                               <Check className="w-5 h-5 text-green-400 mx-auto" />
                             ) : (
-                              <Minus className="w-4 h-4 text-gray-600 mx-auto" />
+                              <Minus className="w-4 h-4 text-text-3 mx-auto" />
                             )}
                           </td>
                           <td className="p-4 text-center">
                             {index < 6 ? (
                               <Check className="w-5 h-5 text-green-400 mx-auto" />
                             ) : (
-                              <Minus className="w-4 h-4 text-gray-600 mx-auto" />
+                              <Minus className="w-4 h-4 text-text-3 mx-auto" />
                             )}
                           </td>
                           <td className="p-4 text-center">
                             {index < 9 ? (
                               <Check className="w-5 h-5 text-primary-400 mx-auto" />
                             ) : (
-                              <Minus className="w-4 h-4 text-gray-600 mx-auto" />
+                              <Minus className="w-4 h-4 text-text-3 mx-auto" />
                             )}
                           </td>
                           <td className="p-4 text-center">
@@ -1828,7 +1828,7 @@ function App() {
       </section>
 
       {/* FAQ Accordion with Search */}
-      <section className="py-24 bg-surface-1 scroll-fade" aria-labelledby="faq-heading">
+      <section className="py-24 bg-surface-0 scroll-fade" aria-labelledby="faq-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1841,18 +1841,18 @@ function App() {
               Frequently Asked Questions
             </h2>
             <Separator className="mb-8 max-w-md mx-auto" />
-            <p className="text-xl text-gray-300">
+            <p className="text-xl text-text-2">
               Everything you need to know about our AI automation platform
             </p>
             
             {/* FAQ Search */}
             <div className="mt-8 max-w-2xl mx-auto relative">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-text-3" />
                 <input
                   type="text"
                   placeholder="Search FAQs..."
-                  className="w-full pl-12 pr-4 py-3 bg-dark-800/50 border border-dark-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 bg-surface-2/50 border border-line-weak rounded-lg text-white placeholder-text-3 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"
                   value={faqSearchTerm}
                   onChange={(e) => setFaqSearchTerm(e.target.value)}
                 />
@@ -1894,7 +1894,7 @@ function App() {
                       transition={{ duration: 0.3 }}
                       className="px-6 pb-6"
                     >
-                      <p className="text-gray-300 leading-relaxed">{item.answer}</p>
+                      <p className="text-text-2 leading-relaxed">{item.answer}</p>
                     </motion.div>
                   )}
                       </div>
@@ -1924,7 +1924,7 @@ function App() {
 
 
       {/* Footer */}
-      <footer className="relative overflow-hidden bg-dark backdrop-blur-xl text-white py-16 border-t border-dark-700/50" role="contentinfo">
+      <footer className="relative overflow-hidden bg-dark backdrop-blur-xl text-white py-16 border-t border-line-weak/50" role="contentinfo">
         {/* Decorative accents */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute -top-24 left-1/3 w-72 h-72 rounded-full bg-orange-400/5 blur-3xl"></div>
@@ -1944,56 +1944,56 @@ function App() {
                 />
                 <span className="ml-2 text-xl font-bold gradient-text">ENAI</span>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-text-3 text-sm leading-relaxed">
                 AI workers that research, engage, book, and sync—always within your guardrails and full visibility.
               </p>
             </div>
 
             <div className="md:col-span-2">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Company</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-text-3 mb-4">Company</h4>
               <ul className="space-y-3 text-sm">
                 <li>
-                  <Link to="/about-us" className="text-gray-400 hover:text-white transition-colors">About</Link>
+                  <Link to="/about-us" className="text-text-3 hover:text-white transition-colors">About</Link>
                 </li>
                 <li>
-                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Careers</button>
+                  <button type="button" disabled className="text-text-3 cursor-not-allowed" title="Coming soon">Careers</button>
                 </li>
                 <li>
-                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Blog</button>
+                  <button type="button" disabled className="text-text-3 cursor-not-allowed" title="Coming soon">Blog</button>
                 </li>
                 <li>
-                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Press</button>
+                  <button type="button" disabled className="text-text-3 cursor-not-allowed" title="Coming soon">Press</button>
                 </li>
                 <li>
-                  <Link to="/privacy-policy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
+                  <Link to="/privacy-policy" className="text-text-3 hover:text-white transition-colors">Privacy Policy</Link>
                 </li>
                 <li>
-                  <Link to="/terms-of-service" className="text-gray-400 hover:text-white transition-colors">Terms & Conditions</Link>
+                  <Link to="/terms-of-service" className="text-text-3 hover:text-white transition-colors">Terms & Conditions</Link>
                 </li>
               </ul>
             </div>
 
             <div className="md:col-span-2">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Platform</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-text-3 mb-4">Platform</h4>
               <ul className="space-y-3 text-sm">
                 <li>
-                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Features</button>
+                  <button type="button" disabled className="text-text-3 cursor-not-allowed" title="Coming soon">Features</button>
                 </li>
                 <li>
-                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Integrations</button>
+                  <button type="button" disabled className="text-text-3 cursor-not-allowed" title="Coming soon">Integrations</button>
                 </li>
                 <li>
-                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Pricing</button>
+                  <button type="button" disabled className="text-text-3 cursor-not-allowed" title="Coming soon">Pricing</button>
                 </li>
                 <li>
-                  <button type="button" disabled className="text-gray-500 cursor-not-allowed" title="Coming soon">Roadmap</button>
+                  <button type="button" disabled className="text-text-3 cursor-not-allowed" title="Coming soon">Roadmap</button>
                 </li>
               </ul>
             </div>
 
             <div className="md:col-span-2">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Contact</h4>
-              <address className="not-italic text-sm text-gray-300 leading-relaxed">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-text-3 mb-4">Contact</h4>
+              <address className="not-italic text-sm text-text-2 leading-relaxed">
                 Unit 3, Bradbury's Court<br />
                 Lyon Rd, London HA1 2BY<br />
                 United Kingdom
@@ -2001,10 +2001,10 @@ function App() {
             </div>
 
             <div className="md:col-span-2">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-4">Connect</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-text-3 mb-4">Connect</h4>
               <ul className="space-y-3 text-sm">
                 <li>
-                  <a href="https://www.linkedin.com/company/enai-ai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors" aria-label="Visit Enai on LinkedIn">
+                  <a href="https://www.linkedin.com/company/enai-ai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-text-3 hover:text-white transition-colors" aria-label="Visit Enai on LinkedIn">
                     <Linkedin className="w-5 h-5" aria-hidden="true" /> LinkedIn
                   </a>
                 </li>
@@ -2012,10 +2012,10 @@ function App() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col items-start gap-3 text-sm text-gray-400" role="status" aria-live="polite">
+          <div className="mt-6 flex flex-col items-start gap-3 text-sm text-text-3" role="status" aria-live="polite">
             <div className="inline-flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" aria-hidden="true"></span>
-              <span className="text-gray-300">System status: All systems operational</span>
+              <span className="text-text-2">System status: All systems operational</span>
             </div>
             {/* Compliance badges with names and status */}
             <div className="flex items-center flex-wrap gap-3">
@@ -2028,23 +2028,23 @@ function App() {
               ].map((item, i) => (
                 <div
                   key={`cmp-badge-${i}`}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-dark-800/80 border border-dark-700/60 text-xs"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-2/80 border border-line-weak/60 text-xs"
                 >
                   <span className="text-sm" aria-hidden="true">{item.logo}</span>
-                  <span className="text-gray-200 font-medium">{item.label}</span>
+                  <span className="text-text-2 font-medium">{item.label}</span>
                   <span className={`font-semibold ${item.status === 'Compliant' ? 'text-green-400' : 'text-yellow-400'}`}>
                     {item.status}
                   </span>
                 </div>
               ))}
             </div>
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-text-3">
               *In observation period for SOC 2 Type II compliance.
             </div>
           </div>
 
           {/* Bottom legal row simplified and centered */}
-          <div className="mt-10 flex items-center justify-center text-xs md:text-sm text-gray-500">
+          <div className="mt-10 flex items-center justify-center text-xs md:text-sm text-text-3">
             <p>© {new Date().getFullYear()} ENAI. All rights reserved.</p>
           </div>
         </div>
