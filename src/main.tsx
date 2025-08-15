@@ -5,12 +5,42 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import { initPerformanceMonitoring } from './utils/performanceMonitor';
 
-// Initialize performance monitoring in development mode
+// Initialize performance monitoring
 if (import.meta.env.DEV) {
-  initPerformanceMonitoring(true); // Enable console reporting
+  initPerformanceMonitoring(true); // Enable console reporting in dev
 } else {
   initPerformanceMonitoring(false); // Disable console reporting in production
 }
+
+// Optimize for performance
+const optimizePerformance = () => {
+  // Enable aggressive garbage collection
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      // Cleanup unused resources during idle time
+      if ('gc' in window) {
+        (window as any).gc();
+      }
+    });
+  }
+
+  // Prefetch critical routes based on user behavior
+  const prefetchCriticalRoutes = () => {
+    const criticalRoutes = ['/about-us', '/contact', '/industries'];
+    criticalRoutes.forEach(route => {
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = route;
+      document.head.appendChild(link);
+    });
+  };
+
+  // Prefetch after initial load
+  setTimeout(prefetchCriticalRoutes, 3000);
+};
+
+// Run performance optimizations
+optimizePerformance();
 
 // Loading component
 const LoadingFallback = () => (
@@ -30,6 +60,7 @@ const PrivacyPolicy = lazy(() => import('./PrivacyPolicy.tsx').then(module => ({
 const TermsOfService = lazy(() => import('./TermsOfService.tsx').then(module => ({ default: module.TermsOfService })));
 const AboutUs = lazy(() => import('./AboutUs.tsx'));
 const Contact = lazy(() => import('./pages/Contact.tsx'));
+const London = lazy(() => import('./pages/London.tsx'));
 const StyleGuide = lazy(() => import('./pages/StyleGuide'));
 
 // Add prefetch for primary routes
@@ -70,6 +101,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/london" element={<London />} />
             <Route path="/style" element={<StyleGuide />} />
           </Routes>
         </Suspense>

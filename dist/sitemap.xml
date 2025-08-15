@@ -1,56 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+                           http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
   <!-- Main Pages -->
   <url>
     <loc>https://www.enai.ai/</loc>
-    <lastmod>2024-03-23T12:00:00+00:00</lastmod>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
     <priority>1.00</priority>
     <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en-gb" href="https://www.enai.ai/" />
+    <xhtml:link rel="alternate" hreflang="en-us" href="https://www.enai.ai/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.enai.ai/" />
   </url>
+  
   <url>
     <loc>https://www.enai.ai/about-us</loc>
-    <lastmod>2024-03-23T12:00:00+00:00</lastmod>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
     <priority>0.80</priority>
     <changefreq>monthly</changefreq>
   </url>
+  
+  <url>
+    <loc>https://www.enai.ai/contact</loc>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
   <url>
     <loc>https://www.enai.ai/industries</loc>
-    <lastmod>2024-03-23T12:00:00+00:00</lastmod>
-    <priority>0.80</priority>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.90</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <!-- Industry Specific Pages -->
+  <url>
+    <loc>https://www.enai.ai/industries/technology</loc>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://www.enai.ai/industries/financial-services</loc>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://www.enai.ai/industries/healthcare</loc>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://www.enai.ai/industries/ecommerce</loc>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://www.enai.ai/industries/real-estate</loc>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.85</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://www.enai.ai/industries/manufacturing</loc>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.85</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <!-- Feature Pages -->
   <url>
     <loc>https://www.enai.ai/features/lead-qualification</loc>
-    <lastmod>2024-03-23T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.75</priority>
     <changefreq>monthly</changefreq>
   </url>
+  
   <url>
-    <loc>https://www.enai.ai/features/email-response</loc>
-    <lastmod>2024-03-23T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
+    <loc>https://www.enai.ai/features/email-automation</loc>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.75</priority>
     <changefreq>monthly</changefreq>
   </url>
+  
   <url>
     <loc>https://www.enai.ai/features/market-analysis</loc>
-    <lastmod>2024-03-23T12:00:00+00:00</lastmod>
-    <priority>0.70</priority>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.75</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  
+  <url>
+    <loc>https://www.enai.ai/features/crm-integration</loc>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.75</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <!-- Legal Pages -->
   <url>
     <loc>https://www.enai.ai/privacy-policy</loc>
-    <lastmod>2024-03-23T12:00:00+00:00</lastmod>
-    <priority>0.40</priority>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.30</priority>
     <changefreq>monthly</changefreq>
   </url>
+  
   <url>
     <loc>https://www.enai.ai/terms-of-service</loc>
-    <lastmod>2024-03-23T12:00:00+00:00</lastmod>
-    <priority>0.40</priority>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.30</priority>
     <changefreq>monthly</changefreq>
   </url>
+  
+  <!-- Blog Pages (Future) -->
+  <url>
+    <loc>https://www.enai.ai/blog</loc>
+    <lastmod>2024-12-15T12:00:00+00:00</lastmod>
+    <priority>0.70</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
 </urlset>

@@ -43,7 +43,7 @@ const ResultsWorkflow = lazy(() => import('./components/ResultsWorkflow'));
 const BookingIllustration = lazy(() => import('./components/BookingIllustration'));
 const ScrollySteps = lazy(() => import('./components/ScrollySteps'));
 const ElevenLabsOrb = lazy(() => import('./components/ElevenLabsOrb'));
-const OptimizedIntegrations = lazy(() => import('./components/OptimizedIntegrations'));
+const OptimizedIntegrations = lazy(() => import('./components/OptimizedIntegrations.tsx'));
 
 // Loading fallback component
 const ComponentLoader = ({ className = "w-full h-48" }: { className?: string }) => (
@@ -197,7 +197,7 @@ const pricingPlans = [
     description: 'Essential automation for small teams',
     features: [
       '2,000 emails/month',
-      '~400 leads/month included',
+      '400 leads/month included',
       'Email sequences',
       'Basic reporting',
       'CRM integration',
@@ -215,7 +215,7 @@ const pricingPlans = [
     description: 'Full automation with voice and advanced features',
     features: [
       '10,000 emails/month',
-      '~2,000 leads/month included',
+      '2,000 leads/month included',
       'Email + voice sequences',
       'Domain warmup',
       'A/B testing',

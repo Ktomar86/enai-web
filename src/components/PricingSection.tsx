@@ -5,11 +5,12 @@ import { Badge } from './ui/badge';
 const pricingPlans = [
   {
     name: "Starter",
-    price: "Free",
+    price: "$100/month",
     subtitle: "For early-stage founders or teams exploring AI-driven outbound.",
     features: [
       "One outbound campaign",
-      "Outreach to up to 100 leads per month",
+      "2,000 emails/month",
+      "~400 leads/month included",
       "Automated initial email touchpoint",
       "Basic performance insights",
       "No credit card required"
@@ -19,12 +20,13 @@ const pricingPlans = [
     link: "https://calendly.com/enai-ai2024/30min"
   },
   {
-    name: "Growth",
-    price: "$59/month",
+    name: "Pro",
+    price: "$200/month",
     subtitle: "For growing teams ready to scale outreach and drive consistent engagement.",
     features: [
       "Everything in Starter, plus:",
-      "Outreach to up to 500 leads per month",
+      "10,000 emails/month",
+      "~2,000 leads/month included",
       "Domain search for verified lead targeting",
       "Initial email plus one follow-up per lead",
       "Two AI-powered voice calls per week to qualified leads",
