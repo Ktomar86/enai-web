@@ -42,22 +42,38 @@ const ScrollySteps: React.FC<ScrollyStepsProps> = ({ steps = DEFAULT_STEPS }) =>
     const container = containerRef.current
     if (!container) return
 
+    // Set initial state
+    setActiveIndex(0)
+
     const cards = Array.from(container.querySelectorAll('[data-step-card="true"]'))
+    
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const idxAttr = (entry.target as HTMLElement).dataset.index
           if (!idxAttr) return
           const idx = parseInt(idxAttr, 10)
-          if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
-            setActiveIndex(idx)
+          
+          // More reliable intersection detection
+          if (entry.isIntersecting) {
+            if (entry.intersectionRatio > 0.3 || entry.boundingClientRect.top < window.innerHeight * 0.5) {
+              setActiveIndex(idx)
+            }
           }
         })
       },
-      { root: null, threshold: [0, 0.25, 0.6, 0.9] }
+      { 
+        root: null, 
+        threshold: [0, 0.1, 0.3, 0.5, 0.7, 0.9],
+        rootMargin: '-10% 0px -20% 0px'
+      }
     )
 
-    cards.forEach((el) => observer.observe(el))
+    // Ensure observer starts working immediately
+    setTimeout(() => {
+      cards.forEach((el) => observer.observe(el))
+    }, 100)
+    
     return () => observer.disconnect()
   }, [])
 

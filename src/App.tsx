@@ -474,7 +474,7 @@ function App() {
           regular: "",
           gradient: "AI WORKERS"
         }}
-        description="Empower your business with our AI workers. Get a dedicated team of AI agents that understand your business and help you scale efficiently."
+        description="Stop losing leads to manual prospecting. Our AI workers handle research, outreach, and booking - so your team can focus on closing deals."
         ctaText="Get Demo"
         ctaHref="https://calendly.com/enai-ai2024/30min"
         secondaryCtaText="Learn More"
@@ -490,7 +490,7 @@ function App() {
         contentPaddingY="py-24"
       />
 
-      {/* Trust Bar */}
+      {/* Trust Bar - Authentic Feature Highlights */}
       <section className="py-8 bg-surface-0" aria-label="trust-indicators">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
@@ -500,11 +500,11 @@ function App() {
             </div>
             <div className="flex items-center gap-2 text-text-2 text-sm">
               <Eye className="w-4 h-4 text-brand" />
-              <span>Approval Guardrails</span>
+              <span>Full Transparency</span>
             </div>
             <div className="flex items-center gap-2 text-text-2 text-sm">
               <Activity className="w-4 h-4 text-brand" />
-              <span>Audit Trail</span>
+              <span>Complete Audit Trail</span>
             </div>
             <div className="flex items-center gap-2 text-text-2 text-sm font-medium">
               <Award className="w-4 h-4 text-brand" />
@@ -737,38 +737,38 @@ function App() {
       </section>
 
       {/* Interactive Product Demo Section */}
-      <section className="py-32 bg-surface-0 relative overflow-hidden scroll-fade section-enhanced" aria-labelledby="demo-heading">
-        {/* Enhanced floating background elements */}
+      <section className="py-24 bg-surface-0 relative overflow-hidden scroll-fade" aria-labelledby="demo-heading">
+        {/* Subtle background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div className="floating-element absolute top-10 left-5 w-24 h-24 bg-primary-400/10 rounded-full blur-2xl"></div>
-          <div className="floating-element absolute top-32 right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl"></div>
-          <div className="floating-element absolute bottom-20 left-1/3 w-28 h-28 bg-primary-400/5 rounded-full blur-2xl"></div>
-          <div className="floating-element absolute bottom-10 right-1/4 w-20 h-20 bg-purple-500/5 rounded-full blur-2xl"></div>
+          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary-400/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12 md:mb-14"
+            className="text-center mb-16"
           >
-            <div className="inline-flex items-center justify-center mb-6">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-purple-500/20 rounded-full blur-xl"></div>
-                <span className="relative inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-surface-2/50 border border-primary-400/30 text-primary-400">
-                  <Zap className="w-4 h-4 mr-2" />
-                  Live Demo
-                </span>
-              </div>
+            {/* Compact badge */}
+            <div className="inline-flex items-center justify-center px-3 py-1 bg-primary-400/10 border border-primary-400/20 rounded-full mb-6">
+              <Zap className="w-3 h-3 mr-2 text-primary-400" />
+              <span className="text-xs sm:text-sm font-medium text-primary-400">Live Demo</span>
             </div>
-            <h2 id="demo-heading" className="text-5xl md:text-6xl font-bold gradient-text mb-6 tracking-tight [text-wrap:balance]">
-              See AI Workers in Action
+            
+            {/* Mobile-optimized heading */}
+            <h2 id="demo-heading" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4 tracking-tight leading-tight px-4">
+              <span className="block sm:inline">See AI Workers</span>
+              <span className="block sm:inline"> in Action</span>
             </h2>
-            <Separator className="mb-8 max-w-md mx-auto bg-gradient-to-r from-primary-400/50 to-primary-500/50" />
-            <p className="text-xl text-text-2 max-w-3xl mx-auto leading-relaxed">
-              Watch how our AI agents transform complex business processes into seamless, intelligent workflows
+            <Separator className="mb-6 max-w-md mx-auto" />
+            
+            {/* Better mobile typography */}
+            <p className="text-base sm:text-lg md:text-xl text-text-2 max-w-2xl mx-auto leading-relaxed px-4">
+              Watch our AI agents transform complex business processes into 
+              <span className="text-primary-400 font-medium"> seamless, intelligent workflows</span>
             </p>
           </motion.div>
 
@@ -1920,8 +1920,95 @@ function App() {
         </div>
       </section>
 
-      {/* Removed final CTA strip as requested */}
+      {/* Final CTA Section */}
+      <section className="py-24 bg-surface-0 scroll-fade relative overflow-hidden">
+        {/* Subtle background accents matching your style */}
+        <div className="absolute top-0 left-1/4 w-72 h-72 bg-primary-400/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-6 tracking-tight leading-tight">
+              Ready to Scale with AI?
+            </h2>
+            <Separator className="mb-8 max-w-md mx-auto" />
+            <p className="text-lg sm:text-xl text-text-2 max-w-3xl mx-auto leading-relaxed">
+              Join sales teams already transforming their processes with AI workers.
+              Book a demo to see how we can accelerate your revenue growth.
+            </p>
+          </motion.div>
 
+          <div className="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Primary CTA Card - Matches your existing card style */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Card className="relative overflow-hidden glass-card glass-accent transition-all duration-500 hover-lift group">
+                <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/5" />
+                <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-primary-400/20 via-transparent to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary-400/20 to-purple-400/20 rounded-xl mb-6 mx-auto flex items-center justify-center">
+                    <Calendar className="w-8 h-8 text-primary-400" />
+                  </div>
+                  <CardTitle className="text-lg sm:text-xl md:text-2xl text-white mb-2">Book Live Demo</CardTitle>
+                  <p className="text-text-3 text-xs sm:text-sm">See AI workers in action</p>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <Button 
+                    onClick={() => window.open("https://calendly.com/enai-ai2024/30min", "_blank")}
+                    className="w-full cta-button text-white px-8 py-4 rounded-lg font-semibold shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300 mb-4"
+                  >
+                    Schedule Demo
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                  <p className="text-xs text-text-3">30 minutes • No commitment • Live AI demo</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Secondary CTA Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Card className="relative overflow-hidden glass-card transition-all duration-500 hover-lift group">
+                <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/5" />
+                <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-white/5 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <CardHeader className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-white/10 to-white/5 rounded-xl mb-6 mx-auto flex items-center justify-center">
+                    <MessageSquare className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-lg sm:text-xl md:text-2xl text-white mb-2">Contact Sales</CardTitle>
+                  <p className="text-text-3 text-xs sm:text-sm">Get custom pricing & setup</p>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <Link to="/contact">
+                    <Button 
+                      variant="outline"
+                      className="w-full border-white/20 text-white hover:bg-white/5 px-8 py-4 rounded-lg font-semibold transition-all duration-300 mb-4"
+                    >
+                      Get in Touch
+                      <ArrowUpRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+                  <p className="text-xs text-text-3">Enterprise solutions • Custom integrations</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="relative overflow-hidden bg-dark backdrop-blur-xl text-white py-16 border-t border-line-weak/50" role="contentinfo">

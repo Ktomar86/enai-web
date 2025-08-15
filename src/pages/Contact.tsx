@@ -1,13 +1,19 @@
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
-import { Mail, Building, MessageSquare, User, Linkedin, MapPin, Send } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Mail, Building, MessageSquare, User, Linkedin, MapPin, Send, Clock, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { Separator } from '../components/ui/separator';
-import { Badge } from '../components/ui/badge';
 import Navigation from '../components/Navigation';
 import { Button } from '../components/ui/button';
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -26,11 +32,32 @@ export default function Contact() {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Create mailto URL with form data
+    const subject = `Contact inquiry from ${formData.name} - ${formData.company}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\n\nMessage:\n${formData.message}`;
+    const mailtoUrl = `mailto:contact@enai.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    window.location.href = mailtoUrl;
+    
+    setTimeout(() => {
+      setIsSubmitting(false);
+    }, 1000);
+  };
   return (
     <div className="min-h-screen bg-dark text-white">
       <Navigation />
 
-      <section className="pt-32 pb-24 bg-gradient-to-b from-dark-800 to-dark relative overflow-hidden scroll-fade" aria-labelledby="contact-heading">
+      <section className="pt-32 pb-24 bg-dark relative overflow-hidden scroll-fade" aria-labelledby="contact-heading">
         {/* LocalBusiness structured data for London GEO */}
         <script type="application/ld+json">
           {JSON.stringify({
@@ -62,250 +89,301 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 id="contact-heading" className="text-5xl font-bold gradient-text mb-4">Get in Touch</h1>
-            <Separator className="mb-4 max-w-md mx-auto" />
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Have a question or ready to explore how our AI workers can transform your business? Reach out to us today.
+            <div className="inline-flex items-center justify-center px-4 py-2 bg-dark-800/60 border border-primary-400/30 rounded-full mb-6">
+              <MessageSquare className="w-4 h-4 text-primary-400 mr-2" />
+              <span className="text-sm font-medium text-primary-400">Let's Connect</span>
+            </div>
+            <h1 id="contact-heading" className="text-6xl font-bold bg-gradient-to-r from-white via-text-1 to-text-2/80 bg-clip-text text-transparent mb-6">
+              Get in Touch
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Ready to transform your business with AI? Our team of experts is here to guide you through 
+              <span className="text-primary-400 font-medium"> every step of your automation journey</span>.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            {/* Contact Info Card */}
+          <div className="grid lg:grid-cols-3 gap-8 items-start">            
+            {/* Quick Contact Stats */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="lg:col-span-3 mb-8"
             >
-              <Card className="relative overflow-hidden glass-card glass-accent transition-all duration-500 hover-lift">
-                <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/5 [mask-image:linear-gradient(white,transparent)]" aria-hidden="true" />
-                <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-primary-400/20 via-transparent to-purple-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
-                <CardHeader>
-                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-400/20 to-purple-400/20 rounded-xl mb-6 mx-auto md:mx-0" aria-hidden="true">
-                    <Mail className="w-8 h-8 text-primary-400" />
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center p-6 bg-dark-800/60 rounded-xl border border-dark-700 hover:border-primary-400/50 transition-all duration-300">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-400/10 rounded-xl mb-4">
+                    <Clock className="w-6 h-6 text-primary-400" />
                   </div>
-                  <CardTitle className="text-2xl text-white text-center md:text-left">Contact Information</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="mb-8">
-                    <div className="flex items-start mb-4">
-                      <MapPin className="w-5 h-5 text-primary-400 mt-1 flex-shrink-0" aria-hidden="true" />
-                      <address className="text-gray-300 ml-4 not-italic">
-                        Unit 3, Bradbury's Court<br />
-                        Lyon Rd, London HA1 2BY<br />
-                        United Kingdom
-                      </address>
-                    </div>
-
-                    <div className="flex items-center mb-3">
-                      <Mail className="w-5 h-5 text-primary-400 flex-shrink-0" aria-hidden="true" />
-                      <a href="mailto:contact@enai.ai" className="ml-4 text-gray-300 hover:text-primary-400 transition-colors">
-                        contact@enai.ai
-                      </a>
-                    </div>
-
-                    <div className="flex items-center">
-                      <Linkedin className="w-5 h-5 text-primary-400 flex-shrink-0" aria-hidden="true" />
-                      <a 
-                        href="https://www.linkedin.com/company/enai-ai" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="ml-4 text-gray-300 hover:text-primary-400 transition-colors"
-                        aria-label="Enai company LinkedIn"
-                      >
-                        Company LinkedIn
-                      </a>
-                    </div>
+                  <h4 className="text-lg font-semibold text-white mb-2">Quick Response</h4>
+                  <p className="text-gray-400 text-sm">We typically respond within 2-4 business hours</p>
+                </div>
+                
+                <div className="text-center p-6 bg-dark-800/60 rounded-xl border border-dark-700 hover:border-primary-400/50 transition-all duration-300">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-green-400/10 rounded-xl mb-4">
+                    <CheckCircle className="w-6 h-6 text-green-400" />
                   </div>
-
-                  <h4 className="text-lg font-medium text-white mb-4 text-center md:text-left">Team</h4>
-                  <ul className="space-y-5">
-                    <li className="flex items-center group p-3 rounded-xl transition-all duration-300 hover:bg-dark-700/50">
-                      <div className="flex-shrink-0 mr-4">
-                        <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center" aria-hidden="true">
-                          <User className="w-6 h-6 text-primary-400" />
-                        </div>
-                      </div>
-                      <div className="flex-grow min-w-0">
-                        <div className="flex items-center justify-between">
-                          <h5 className="text-white font-medium">Madhav Mohan</h5>
-                          <a 
-                            href="https://www.linkedin.com/in/madhavmohankatarya/" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="text-gray-400 hover:text-primary-400 transition-colors"
-                            aria-label="Madhav Mohan's LinkedIn profile"
-                          >
-                            <Linkedin className="w-4 h-4" />
-                          </a>
-                        </div>
-                        <div className="flex items-center text-sm text-gray-400">
-                          <Badge variant="outline" className="mr-2 px-2 py-0 text-xs">Co-founder</Badge>
-                          <a href="mailto:madhav@enai.ai" className="truncate hover:text-primary-400 transition-colors">
-                            madhav@enai.ai
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                    
-                    <li className="flex items-center group p-3 rounded-xl transition-all duration-300 hover:bg-dark-700/50">
-                      <div className="flex-shrink-0 mr-4">
-                        <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center" aria-hidden="true">
-                          <Building className="w-6 h-6 text-primary-400" />
-                        </div>
-                      </div>
-                      <div className="flex-grow min-w-0">
-                        <div className="flex items-center justify-between">
-                          <h5 className="text-white font-medium">Nikhil Nehra</h5>
-                          <a 
-                            href="https://www.linkedin.com/in/nikhil-nehra-57716a23b/" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="text-gray-400 hover:text-primary-400 transition-colors"
-                            aria-label="Nikhil Nehra's LinkedIn profile"
-                          >
-                            <Linkedin className="w-4 h-4" />
-                          </a>
-                        </div>
-                        <div className="flex items-center text-sm text-gray-400">
-                          <Badge variant="outline" className="mr-2 px-2 py-0 text-xs">Founder & CTO</Badge>
-                          <a href="mailto:nikhil@enai.ai" className="truncate hover:text-primary-400 transition-colors">
-                            nikhil@enai.ai
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                    
-                    <li className="flex items-center group p-3 rounded-xl transition-all duration-300 hover:bg-dark-700/50">
-                      <div className="flex-shrink-0 mr-4">
-                        <div className="w-12 h-12 rounded-full bg-primary-400/10 flex items-center justify-center" aria-hidden="true">
-                          <MessageSquare className="w-6 h-6 text-primary-400" />
-                        </div>
-                      </div>
-                      <div className="flex-grow min-w-0">
-                        <div className="flex items-center justify-between">
-                          <h5 className="text-white font-medium">Zeeshan Idrees</h5>
-                          <a 
-                            href="https://www.linkedin.com/in/zidrees/" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="text-gray-400 hover:text-primary-400 transition-colors"
-                            aria-label="Zeeshan Idrees's LinkedIn profile"
-                          >
-                            <Linkedin className="w-4 h-4" />
-                          </a>
-                        </div>
-                        <div className="flex items-center text-sm text-gray-400">
-                          <Badge variant="outline" className="mr-2 px-2 py-0 text-xs">CSO</Badge>
-                          <a href="mailto:zeeshan@enai.ai" className="truncate hover:text-primary-400 transition-colors">
-                            zeeshan@enai.ai
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
+                  <h4 className="text-lg font-semibold text-white mb-2">Free Consultation</h4>
+                  <p className="text-gray-400 text-sm">30-minute strategy session to explore opportunities</p>
+                </div>
+                
+                <div className="text-center p-6 bg-dark-800/60 rounded-xl border border-dark-700 hover:border-primary-400/50 transition-all duration-300">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-400/10 rounded-xl mb-4">
+                    <Building className="w-6 h-6 text-primary-400" />
+                  </div>
+                  <h4 className="text-lg font-semibold text-white mb-2">Enterprise Ready</h4>
+                  <p className="text-gray-400 text-sm">Scalable solutions for businesses of all sizes</p>
+                </div>
+              </div>
             </motion.div>
 
-            {/* Form Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <Card className="relative overflow-hidden glass-card glass-accent transition-all duration-500 hover-lift">
-                <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/5 [mask-image:linear-gradient(white,transparent)]" aria-hidden="true" />
-                <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-primary-400/20 via-transparent to-purple-500/20 opacity-0 hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
-                <CardHeader>
-                  <CardTitle className="text-2xl text-white">Send us a message</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <form action="mailto:contact@enai.ai" method="get" className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="relative">
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
-                          Full Name <span className="text-primary-400" aria-hidden="true">*</span><span className="sr-only">(required)</span>
+            <div className="lg:col-span-2 space-y-8">
+              {/* Form Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <Card className="relative overflow-hidden bg-dark-800/80 border border-dark-700 hover:border-primary-400/50 transition-all duration-500">
+                  <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/5" aria-hidden="true" />
+                  <CardHeader className="pb-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-10 h-10 bg-primary-400/10 rounded-xl flex items-center justify-center mr-4">
+                        <Send className="w-5 h-5 text-primary-400" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-2xl text-white">Send us a message</CardTitle>
+                        <p className="text-gray-400 text-sm mt-1">We'll get back to you within 24 hours</p>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="relative group">
+                          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                            Full Name <span className="text-primary-400">*</span>
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              value={formData.name}
+                              onChange={handleInputChange}
+                              required
+                              placeholder="John Doe"
+                              className="w-full pl-12 pr-4 py-4 rounded-xl bg-dark-900/60 border border-dark-700 text-white placeholder:text-gray-500 focus:border-primary-400/50 focus:ring-2 focus:ring-primary-400/20 focus:bg-dark-900/80 transition-all duration-300 hover:border-dark-600"
+                            />
+                            <User className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-primary-400 transition-colors" />
+                          </div>
+                        </div>
+                        
+                        <div className="relative group">
+                          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                            Email Address <span className="text-primary-400">*</span>
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              value={formData.email}
+                              onChange={handleInputChange}
+                              required
+                              placeholder="you@example.com"
+                              className="w-full pl-12 pr-4 py-4 rounded-xl bg-dark-900/60 border border-dark-700 text-white placeholder:text-gray-500 focus:border-primary-400/50 focus:ring-2 focus:ring-primary-400/20 focus:bg-dark-900/80 transition-all duration-300 hover:border-dark-600"
+                            />
+                            <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-primary-400 transition-colors" />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="relative group">
+                        <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
+                          Company <span className="text-primary-400">*</span>
                         </label>
                         <div className="relative">
                           <input
                             type="text"
-                            id="name"
-                            name="name"
+                            id="company"
+                            name="company"
+                            value={formData.company}
+                            onChange={handleInputChange}
                             required
-                            placeholder="John Doe"
-                            className="w-full pl-10 pr-4 py-3 rounded-lg bg-dark-900/70 border border-dark-700 text-white input-glow focus:border-primary-400 focus-ring-soft transition-all duration-300"
-                            aria-required="true"
+                            placeholder="Your Company"
+                            className="w-full pl-12 pr-4 py-4 rounded-xl bg-dark-900/60 border border-dark-700 text-white placeholder:text-gray-500 focus:border-primary-400/50 focus:ring-2 focus:ring-primary-400/20 focus:bg-dark-900/80 transition-all duration-300 hover:border-dark-600"
                           />
-                          <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" aria-hidden="true" />
+                          <Building className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 group-focus-within:text-primary-400 transition-colors" />
                         </div>
                       </div>
                       
-                      <div className="relative">
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
-                          Email Address <span className="text-primary-400" aria-hidden="true">*</span><span className="sr-only">(required)</span>
+                      <div className="relative group">
+                        <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                          Message <span className="text-primary-400">*</span>
                         </label>
                         <div className="relative">
-                          <input
-                            type="email"
-                            id="email"
-                            name="email"
+                          <textarea
+                            id="message"
+                            name="message"
+                            rows={5}
+                            value={formData.message}
+                            onChange={handleInputChange}
                             required
-                            placeholder="you@example.com"
-                            className="w-full pl-10 pr-4 py-3 rounded-lg bg-dark-900/70 border border-dark-700 text-white input-glow focus:border-primary-400 focus-ring-soft transition-all duration-300"
-                            aria-required="true"
+                            placeholder="Tell us about your project and how we can help transform your business with AI..."
+                            className="w-full pl-12 pr-4 py-4 rounded-xl bg-dark-900/60 border border-dark-700 text-white placeholder:text-gray-500 focus:border-primary-400/50 focus:ring-2 focus:ring-primary-400/20 focus:bg-dark-900/80 transition-all duration-300 hover:border-dark-600 resize-none"
                           />
-                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" aria-hidden="true" />
+                          <MessageSquare className="absolute left-4 top-6 w-4 h-4 text-gray-500 group-focus-within:text-primary-400 transition-colors" />
                         </div>
                       </div>
+                      
+                      <Button 
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-primary-400 hover:bg-primary-500 text-black px-8 py-6 rounded-xl font-semibold text-lg shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? (
+                          <div className="flex items-center">
+                            <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin mr-2" />
+                            Sending...
+                          </div>
+                        ) : (
+                          <>
+                            <Send className="w-5 h-5 mr-2" />
+                            Send Message
+                          </>
+                        )}
+                      </Button>
+                      
+                      <p className="text-xs text-gray-500 text-center">
+                        By submitting this form, you agree to our terms of service and privacy policy.
+                      </p>
+                    </form>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+
+            {/* Contact Info Sidebar */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="space-y-6"
+            >
+              <Card className="relative overflow-hidden bg-dark-800/60 border border-dark-700">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center mb-2">
+                    <div className="w-8 h-8 bg-primary-400/10 rounded-lg flex items-center justify-center mr-3">
+                      <MapPin className="w-4 h-4 text-primary-400" />
                     </div>
-                    
-                    <div className="relative">
-                      <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-1">
-                        Company <span className="text-primary-400" aria-hidden="true">*</span><span className="sr-only">(required)</span>
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          id="company"
-                          name="company"
-                          required
-                          placeholder="Your Company"
-                          className="w-full pl-10 pr-4 py-3 rounded-lg bg-dark-900/70 border border-dark-700 text-white input-glow focus:border-primary-400 focus-ring-soft transition-all duration-300"
-                          aria-required="true"
-                        />
-                        <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" aria-hidden="true" />
-                      </div>
+                    <CardTitle className="text-lg text-white">Our Office</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <address className="text-gray-300 not-italic leading-relaxed">
+                    Unit 3, Bradbury's Court<br />
+                    Lyon Rd, London HA1 2BY<br />
+                    United Kingdom
+                  </address>
+                </CardContent>
+              </Card>
+
+              <Card className="relative overflow-hidden bg-dark-800/60 border border-dark-700">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center mb-2">
+                    <div className="w-8 h-8 bg-primary-400/10 rounded-lg flex items-center justify-center mr-3">
+                      <Mail className="w-4 h-4 text-primary-400" />
                     </div>
-                    
-                    <div className="relative">
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
-                        Message <span className="text-primary-400" aria-hidden="true">*</span><span className="sr-only">(required)</span>
-                      </label>
-                      <div className="relative">
-                        <textarea
-                          id="message"
-                          name="body"
-                          rows={4}
-                          required
-                          placeholder="Tell us about your project and how we can help..."
-                          className="w-full pl-10 pr-4 py-3 rounded-lg bg-dark-900/70 border border-dark-700 text-white input-glow focus:border-primary-400 focus-ring-soft transition-all duration-300"
-                          aria-required="true"
-                        />
-                        <MessageSquare className="absolute left-3 top-6 w-4 h-4 text-gray-500" aria-hidden="true" />
-                      </div>
+                    <CardTitle className="text-lg text-white">Email Us</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <a href="mailto:contact@enai.ai" className="text-gray-300 hover:text-primary-400 transition-colors inline-flex items-center">
+                    contact@enai.ai
+                  </a>
+                </CardContent>
+              </Card>
+
+              <Card className="relative overflow-hidden bg-dark-800/60 border border-dark-700">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center mb-2">
+                    <div className="w-8 h-8 bg-blue-400/10 rounded-lg flex items-center justify-center mr-3">
+                      <Linkedin className="w-4 h-4 text-blue-400" />
                     </div>
-                    
-                    <Button 
-                      type="submit"
-                      className="w-full cta-button text-white px-6 py-6 rounded-lg font-semibold shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300 flex items-center justify-center"
+                    <CardTitle className="text-lg text-white">Follow Us</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <a 
+                    href="https://www.linkedin.com/company/enai-ai" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-gray-300 hover:text-blue-400 transition-colors inline-flex items-center"
+                  >
+                    Company LinkedIn
+                  </a>
+                </CardContent>
+              </Card>
+
+              <Card className="relative overflow-hidden bg-dark-800/60 border border-dark-700">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center mb-2">
+                    <div className="w-8 h-8 bg-primary-400/10 rounded-lg flex items-center justify-center mr-3">
+                      <User className="w-4 h-4 text-primary-400" />
+                    </div>
+                    <CardTitle className="text-lg text-white">Leadership Team</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0 space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-dark-900/30 hover:bg-dark-900/50 transition-colors">
+                    <div>
+                      <h5 className="text-white font-medium text-sm">Madhav Mohan</h5>
+                      <p className="text-gray-400 text-xs">Co-founder</p>
+                    </div>
+                    <a 
+                      href="https://www.linkedin.com/in/madhavmohankatarya/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-gray-400 hover:text-primary-400 transition-colors"
                     >
-                      <Send className="w-4 h-4 mr-2" aria-hidden="true" />
-                      Send Message
-                    </Button>
-                  </form>
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-dark-900/30 hover:bg-dark-900/50 transition-colors">
+                    <div>
+                      <h5 className="text-white font-medium text-sm">Nikhil Nehra</h5>
+                      <p className="text-gray-400 text-xs">Founder & CTO</p>
+                    </div>
+                    <a 
+                      href="https://www.linkedin.com/in/nikhil-nehra-57716a23b/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-gray-400 hover:text-primary-400 transition-colors"
+                    >
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-dark-900/30 hover:bg-dark-900/50 transition-colors">
+                    <div>
+                      <h5 className="text-white font-medium text-sm">Zeeshan Idrees</h5>
+                      <p className="text-gray-400 text-xs">CSO</p>
+                    </div>
+                    <a 
+                      href="https://www.linkedin.com/in/zidrees/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-gray-400 hover:text-primary-400 transition-colors"
+                    >
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
+
           </div>
         </div>
       </section>

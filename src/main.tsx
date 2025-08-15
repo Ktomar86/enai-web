@@ -1,7 +1,7 @@
 import { StrictMode, lazy, Suspense } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 import { initPerformanceMonitoring } from './utils/performanceMonitor';
 
@@ -67,17 +67,12 @@ const StyleGuide = lazy(() => import('./pages/StyleGuide'));
 const prefetchRoutes = () => {
   // Prefetch the most likely next pages after a short delay when the main page loads
   setTimeout(() => {
-    const links = [
-      './pages/Industries.tsx',
-      './AboutUs.tsx',
-      './pages/Contact.tsx'
-    ];
+    const routes = ['/industries', '/about-us', '/contact'];
     
-    links.forEach(link => {
+    routes.forEach(route => {
       const prefetchLink = document.createElement('link');
       prefetchLink.rel = 'prefetch';
-      prefetchLink.as = 'script';
-      prefetchLink.href = link;
+      prefetchLink.href = route;
       document.head.appendChild(prefetchLink);
     });
   }, 2000);
@@ -88,24 +83,56 @@ if (typeof window !== 'undefined') {
   window.addEventListener('DOMContentLoaded', prefetchRoutes);
 }
 
+// Create router with future flags enabled
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />
+  },
+  {
+    path: "/industries",
+    element: <Industries />
+  },
+  {
+    path: "/industries/:slug",
+    element: <IndustryDetail />
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyPolicy />
+  },
+  {
+    path: "/terms-of-service",
+    element: <TermsOfService />
+  },
+  {
+    path: "/about-us",
+    element: <AboutUs />
+  },
+  {
+    path: "/contact",
+    element: <Contact />
+  },
+  {
+    path: "/london",
+    element: <London />
+  },
+  {
+    path: "/style",
+    element: <StyleGuide />
+  }
+], {
+  future: {
+    v7_relativeSplatPath: true
+  }
+});
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HelmetProvider>
-      <Router>
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/industries" element={<Industries />} />
-            <Route path="/industries/:slug" element={<IndustryDetail />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/london" element={<London />} />
-            <Route path="/style" element={<StyleGuide />} />
-          </Routes>
-        </Suspense>
-      </Router>
+      <Suspense fallback={<LoadingFallback />}>
+        <RouterProvider router={router} />
+      </Suspense>
     </HelmetProvider>
   </StrictMode>
 );
