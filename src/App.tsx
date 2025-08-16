@@ -41,7 +41,7 @@ const ProductGIFShowcase = lazy(() => import('./components/ProductGIFShowcase'))
 const WorkflowIllustration = lazy(() => import('./components/WorkflowIllustration'));
 const ResultsWorkflow = lazy(() => import('./components/ResultsWorkflow'));
 const BookingIllustration = lazy(() => import('./components/BookingIllustration'));
-const ScrollySteps = lazy(() => import('./components/ScrollySteps'));
+const ValueProposition = lazy(() => import('./components/ValueProposition'));
 const ElevenLabsOrb = lazy(() => import('./components/ElevenLabsOrb'));
 const OptimizedIntegrations = lazy(() => import('./components/OptimizedIntegrations.tsx'));
 
@@ -541,9 +541,9 @@ function App() {
         />
       </Suspense>
 
-      {/* 3-step scrollytelling cards */}
+      {/* Value Proposition */}
       <Suspense fallback={<ComponentLoader className="w-full h-64" />}>
-        <ScrollySteps />
+        <ValueProposition />
       </Suspense>
 
       {/* Use Cases */}
@@ -755,20 +755,21 @@ function App() {
             {/* Compact badge */}
             <div className="inline-flex items-center justify-center px-3 py-1 bg-primary-400/10 border border-primary-400/20 rounded-full mb-6">
               <Zap className="w-3 h-3 mr-2 text-primary-400" />
-              <span className="text-xs sm:text-sm font-medium text-primary-400">Live Demo</span>
+              <span className="text-xs sm:text-sm font-medium text-primary-400">See It In Action</span>
             </div>
             
             {/* Mobile-optimized heading */}
             <h2 id="demo-heading" className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4 tracking-tight leading-tight px-4">
-              <span className="block sm:inline">See AI Workers</span>
-              <span className="block sm:inline"> in Action</span>
+              <span className="block sm:inline">Watch AI Agents</span>
+              <span className="block sm:inline"> Drive Results</span>
             </h2>
             <Separator className="mb-6 max-w-md mx-auto" />
             
             {/* Better mobile typography */}
             <p className="text-base sm:text-lg md:text-xl text-text-2 max-w-2xl mx-auto leading-relaxed px-4">
-              Watch our AI agents transform complex business processes into 
-              <span className="text-primary-400 font-medium"> seamless, intelligent workflows</span>
+              See how our AI agents automatically 
+              <span className="text-primary-400 font-medium">identify prospects, craft personalized outreach, and book qualified meetings</span>
+              — all while you focus on closing deals.
             </p>
           </motion.div>
 
