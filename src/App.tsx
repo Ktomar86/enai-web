@@ -773,7 +773,7 @@ function App() {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Enhanced Interactive Demo Mockup */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -782,13 +782,13 @@ function App() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="product-mockup p-10 relative">
+              <div className="product-mockup p-6 relative">
                 {/* Glowing border effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-purple-500/20 rounded-2xl blur-xl opacity-70"></div>
-                <div className="relative bg-surface-1/90 rounded-2xl p-8 border border-line-weak/50 backdrop-blur-sm">
+                <div className="relative bg-surface-1/90 rounded-2xl p-6 border border-line-weak/50 backdrop-blur-sm">
                   {/* Decorative elements */}
-                  <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary-400/5 rounded-full blur-3xl"></div>
-                  <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+                  <div className="absolute -top-16 -right-16 w-64 h-64 bg-primary-400/5 rounded-full blur-3xl"></div>
+                  <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"></div>
                   
                   <div className="flex items-center gap-4 mb-8 relative z-10">
                     <div className="flex items-center gap-2">
@@ -803,9 +803,9 @@ function App() {
                     </div>
                   </div>
                   
-                  <div className="space-y-8 relative z-10">
+                  <div className="space-y-6 relative z-10">
                     {/* Enhanced Real-time simulation */}
-                    <div className="data-viz rounded-xl p-6 border border-primary-400/30 bg-surface-2/60 backdrop-blur-sm relative overflow-hidden">
+                    <div className="data-viz rounded-xl p-4 border border-primary-400/30 bg-surface-2/60 backdrop-blur-sm relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-r from-primary-400/5 to-purple-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                       <div className="relative z-10">
                         <div className="flex items-center justify-between mb-6">
@@ -853,7 +853,7 @@ function App() {
                     </div>
                     
                     {/* Enhanced Interactive workflow visualization */}
-                    <div className="bg-surface-2/70 rounded-xl p-6 border border-line-weak/50 backdrop-blur-sm relative overflow-hidden">
+                    <div className="bg-surface-2/70 rounded-xl p-4 border border-line-weak/50 backdrop-blur-sm relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-r from-primary-400/5 to-purple-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
                       <div className="relative z-10">
                         <h4 className="text-xl font-bold text-white mb-6">Workflow Execution</h4>

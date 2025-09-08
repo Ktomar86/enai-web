@@ -336,20 +336,6 @@ export default function Contact() {
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0 space-y-4">
-                  <div className="flex items-center justify-between p-3 rounded-lg bg-dark-900/30 hover:bg-dark-900/50 transition-colors">
-                    <div>
-                      <h5 className="text-white font-medium text-sm">Madhav Mohan</h5>
-                      <p className="text-gray-400 text-xs">Co-founder</p>
-                    </div>
-                    <a 
-                      href="https://www.linkedin.com/in/madhavmohankatarya/" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="text-gray-400 hover:text-primary-400 transition-colors"
-                    >
-                      <Linkedin className="w-4 h-4" />
-                    </a>
-                  </div>
                   
                   <div className="flex items-center justify-between p-3 rounded-lg bg-dark-900/30 hover:bg-dark-900/50 transition-colors">
                     <div>
