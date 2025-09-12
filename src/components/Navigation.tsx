@@ -274,7 +274,9 @@ export default function Navigation() {
     backdropFilter: 'none',     // disables blur
     WebkitBackdropFilter: 'none'
   }}
-  className="fixed top-0 right-0 bottom-0 w-full max-w-sm z-50 shadow-xl"
+className="fixed top-0 right-0 bottom-0 w-full max-w-sm z-50 shadow-xl bg-black text-white"
+
+
   initial="closed"
   animate="open"
   exit="closed"
